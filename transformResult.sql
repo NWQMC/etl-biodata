@@ -94,13 +94,22 @@ select biodata_effort.dw_effort_id,
        null act_current_speed,
        null act_current_speed_unit,
        null toxicity_test_type_name,
-       null sample_collect_method_id,
+       biodata_effort.method_code sample_collect_method_id,
        null sample_collect_method_ctx,
        null sample_collect_method_name,
        null act_sam_collect_meth_qual_type,
        null act_sam_collect_meth_desc,
-       nvl(biodata_effort.gear, biodata_sample.gear_used) sample_collect_equip_name,
-       null act_sam_collect_equip_comments,
+       case nvl(biodata_effort.gear, biodata_sample.gear_used)
+         when 'Backpack' then 'Backpack Electroshock'
+         when 'Towed Barge' then 'Electroshock (Other)'
+         when 'Boat' then 'Boat-Mounted Electroshock'
+         when 'Minnow Seine' then 'Minnow Seine Net'
+         when 'Bag Seine' then 'Seine Net'
+         when 'Beach Seine' then 'Beach Seine Net'
+         when 'Snorkeling' then 'Visual Sighting'
+         else null
+       end sample_collect_equip_name,
+       nvl(biodata_effort.gear, biodata_sample.gear_used) || '+' || biodata_effort.pass act_sam_collect_equip_comments,
        null act_sam_prep_meth_id,
        null act_sam_prep_meth_context,
        null act_sam_prep_meth_name,
@@ -164,7 +173,7 @@ select 4 data_source_id,
 	           biodata_activity.analytical_method,
                biodata_activity.activity,
                result.characteristic characteristic_name,
-               '???' characteristic_type,
+               'Biological' characteristic_type,
                biodata_activity.sample_media,
                biodata_activity.organization,
                biodata_activity.site_type,
@@ -329,8 +338,8 @@ select 4 data_source_id,
                                     biodata_taxonomic_result.data_release_category = 'Public')
                              unpivot (result_value for characteristic
                                          in (raw_count as 'Count',
-                                             total_length as 'Length',
-                                             standard_length as 'Total (Fish)',
+                                             total_length as 'Length, Total (Fish)',
+                                             standard_length as 'Fish, standard length',
                                              weight as 'Weight')
                             ) a
                     ) result
