@@ -41,7 +41,7 @@ select effort.dw_effort_id,
        null activity_media_subdiv_name,
        case
          when sample.data_source = 'BioTDB' then null
-         else to_charsample.collection_start, 'hh24:mi:ss')
+         else to_char(sample.collection_start, 'hh24:mi:ss')
        end  activity_start_time,
        case
          when sample.data_source = 'BioTDB' then null
