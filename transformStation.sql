@@ -69,7 +69,7 @@ select /*+ parallel(4) */
        station.well_depth_unit,
        station.hole_depth_value,
        station.hole_depth_unit
-  from biodata_site
+  from biodata.biodata_site
        left join (select station.*, sitefile.nwis_host, sitefile.db_no, sitefile.agency_cd, sitefile.site_no
                     from nwis_ws_star.sitefile,
                          station partition (station_nwis)
@@ -81,13 +81,13 @@ select /*+ parallel(4) */
  where biodata_site.site_web_cd = 'Y' and
        biodata_site.data_release_category = 'Public' and
        exists (select null
-                 from biodata_sample
-                      join biodata_sample_type
-                        on biodata_sample.dw_sample_type_id = biodata_sample_type.dw_sample_type_id
-                where biodata_sample.biodata_site_id = biodata_site.biodata_site_id and
-                      biodata_sample_type.data_category_code = 'FSH' and
-                      biodata_site.data_release_category = 'Public' and
-                      biodata_sample.data_release_category = 'Public') ;
+                 from biodata.sample
+                      join biodata.sample_type
+                        on sample.dw_sample_type_id = sample_type.dw_sample_type_id
+                where sample.biodata_site_id = site.biodata_site_id and
+                      sample_type.data_category_code = 'FSH' and
+                      site.data_release_category = 'Public' and
+                      sample.data_release_category = 'Public') ;
 
 commit;
 

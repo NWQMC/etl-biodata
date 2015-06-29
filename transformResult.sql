@@ -25,12 +25,12 @@ insert /*+ append parallel(4) */
                          act_sam_prep_meth_id, act_sam_prep_meth_context, act_sam_prep_meth_name, act_sam_prep_meth_qual_type,
                          act_sam_prep_meth_desc, sample_container_type, sample_container_color, act_sam_chemical_preservative,
                          thermal_preservative_name, act_sam_transport_storage_desc)
-select biodata_effort.dw_effort_id,
+select effort.dw_effort_id,
        station.station_id, 
        station.site_id,
-       trunc(biodata_sample.collection_start) event_date,
-       biodata_sample.sampling_method_ref_citation analytical_method,
-       biodata_sample.sidno || '-' || biodata_effort.method_code activity,
+       trunc(sample.collection_start) event_date,
+       sample.sampling_method_ref_citation analytical_method,
+       sample.sidno || '-' || effort.method_code activity,
        'Biological' sample_media,
        station.organization,
        station.site_type,
@@ -40,12 +40,12 @@ select biodata_effort.dw_effort_id,
        'Field Msr/Obs' activity_type_code,
        null activity_media_subdiv_name,
        case
-         when biodata_sample.data_source = 'BioTDB' then null
-         else to_char(biodata_sample.collection_start, 'hh24:mi:ss')
+         when sample.data_source = 'BioTDB' then null
+         else to_charsample.collection_start, 'hh24:mi:ss')
        end  activity_start_time,
        case
-         when biodata_sample.data_source = 'BioTDB' then null
-         else biodata_sample.time_datum
+         when sample.data_source = 'BioTDB' then null
+         else sample.time_datum
        end act_start_time_zone,
        null activity_stop_date,
        null activity_stop_time,
@@ -58,9 +58,9 @@ select biodata_effort.dw_effort_id,
        null activity_upper_depth_unit,
        null activity_lower_depth,
        null activity_lower_depth_unit,
-       biodata_project.project_label project_id,
+       project.project_label project_id,
        null activity_conducting_org,
-       biodata_effort.comments activity_comment,
+       effort.comments activity_comment,
        null activity_latitude,
        null activity_longitude,
        null activity_source_map_scale,
@@ -73,15 +73,15 @@ select biodata_effort.dw_effort_id,
        null act_collection_duration_unit,
        null act_sam_compnt_name,
        null act_sam_compnt_place_in_series,
-       biodata_sample.reach_length_fished act_reach_length,
+       sample.reach_length_fished act_reach_length,
        case
-         when biodata_sample.reach_length_fished is null then null
+         when sample.reach_length_fished is null then null
          else 'm'
        end act_reach_length_unit,
        null act_reach_width,
        null act_reach_width_unit,
        case
-         when biodata_effort.pass = 'Pass 1 & 2 combined' then '2'
+         when effort.pass = 'Pass 1 & 2 combined' then '2'
          else '1'
        end act_pass_count,
        null net_type_name,
@@ -94,22 +94,27 @@ select biodata_effort.dw_effort_id,
        null act_current_speed,
        null act_current_speed_unit,
        null toxicity_test_type_name,
-       biodata_effort.method_code sample_collect_method_id,
+       effort.method_code sample_collect_method_id,
        null sample_collect_method_ctx,
        null sample_collect_method_name,
        null act_sam_collect_meth_qual_type,
        null act_sam_collect_meth_desc,
-       case nvl(biodata_effort.gear, biodata_sample.gear_used)
-         when 'Backpack' then 'Backpack Electroshock'
-         when 'Towed Barge' then 'Electroshock (Other)'
-         when 'Boat' then 'Boat-Mounted Electroshock'
-         when 'Minnow Seine' then 'Minnow Seine Net'
-         when 'Bag Seine' then 'Seine Net'
-         when 'Beach Seine' then 'Beach Seine Net'
-         when 'Snorkeling' then 'Visual Sighting'
+       case lower(nvl(effort.gear, sample.gear_used))
+         when 'backpack' then 'Backpack Electroshock'
+         when 'towed barge' then 'Electroshock (Other)'
+         when 'boat' then 'Boat-Mounted Electroshock'
+         when 'minnow seine' then 'Minnow Seine Net'
+         when 'bag seine' then 'Seine Net'
+         when 'beach seine' then 'Beach Seine Net'
+         when 'snorkeling' then 'Visual Sighting'
          else null
        end sample_collect_equip_name,
-       nvl(biodata_effort.gear, biodata_sample.gear_used) || '+' || biodata_effort.pass act_sam_collect_equip_comments,
+       nvl(effort.gear, sample.gear_used) || 
+          case 
+            when effort.pass is not null
+              then '+' || effort.pass
+            else null
+          end act_sam_collect_equip_comments,
        null act_sam_prep_meth_id,
        null act_sam_prep_meth_context,
        null act_sam_prep_meth_name,
@@ -120,16 +125,16 @@ select biodata_effort.dw_effort_id,
        null act_sam_chemical_preservative,
        null thermal_preservative_name,
        null act_sam_transport_storage_desc
-  from biodata_effort
-       join biodata_sample
-         on biodata_effort.dw_sample_id = biodata_sample.dw_sample_id
+  from biodata.effort
+       join biodata.sample
+         on effort.dw_sample_id = sample.dw_sample_id
        join station_swap_biodata station
-         on biodata_sample.biodata_site_id = station.station_id
-       join biodata_project
-         on biodata_sample.dw_project_id = biodata_project.dw_project_id
- where biodata_sample.data_release_category = 'Public' and
-       biodata_project.data_release_category = 'Public' and
-       biodata_sample.dw_sample_type_id in (7, 15, 16, 24);
+         on sample.biodata_site_id = station.station_id
+       join biodata.project
+         on sample.dw_project_id = project.dw_project_id
+ where sample.data_release_category = 'Public' and
+       project.data_release_category = 'Public' and
+       sample.dw_sample_type_id in (7, 15, 16, 24);
 commit;
        
 prompt dropping biodata result indexes
@@ -250,8 +255,8 @@ select 4 data_source_id,
                result.result_value result_measure_value,
                case result.characteristic
                  when 'Weight' then 'g'
-                 when 'Length' then 'mm'
-                 when 'Total (Fish)' then 'mm'
+                 when 'Fish standard length' then 'mm'
+                 when 'Length, Total (Fish)' then 'mm'
                  else null
                end result_unit,
                null result_meas_qual_code,
@@ -319,27 +324,27 @@ select 4 data_source_id,
                null res_taxonomist_accred_authorty
           from biodata_activity
                join (select a.*, rownum result_id
-                       from (select biodata_taxonomic_result.dw_effort_id,
-                                    biodata_taxon_wide.published_taxon_name,
+                       from (select taxonomic_result.dw_effort_id,
+                                    taxon_wide.published_taxon_name,
                                     case
-                                      when biodata_taxonomic_result.raw_count > 1 and
-                                           biodata_taxonomic_result.weight > 0
+                                      when taxonomic_result.raw_count > 1 and
+                                           taxonomic_result.weight > 0
                                         then weight
                                       else null
                                     end group_weight,
-                                    biodata_taxonomic_result.raw_count,
-                                    biodata_taxonomic_result.total_length,
-                                    biodata_taxonomic_result.standard_length,
-                                    biodata_taxonomic_result.weight
-                               from biodata_taxonomic_result
-                                    join biodata_taxon_wide
-                                      on biodata_taxonomic_result.taxon_id = biodata_taxon_wide.bench_taxon_id
-                              where biodata_taxonomic_result.biological_community = 'Fish' and
-                                    biodata_taxonomic_result.data_release_category = 'Public')
+                                    taxonomic_result.raw_count,
+                                    taxonomic_result.total_length,
+                                    taxonomic_result.standard_length,
+                                    taxonomic_result.weight
+                               from biodata.taxonomic_result
+                                    join biodata.taxon_wide
+                                      on taxonomic_result.taxon_id = taxon_wide.bench_taxon_id
+                              where taxonomic_result.biological_community = 'Fish' and
+                                    taxonomic_result.data_release_category = 'Public')
                              unpivot (result_value for characteristic
                                          in (raw_count as 'Count',
                                              total_length as 'Length, Total (Fish)',
-                                             standard_length as 'Fish, standard length',
+                                             standard_length as 'Fish standard length',
                                              weight as 'Weight')
                             ) a
                     ) result

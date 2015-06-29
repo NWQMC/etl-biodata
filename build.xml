@@ -7,8 +7,8 @@
     <target name="copyFromDw">
         <echo>Copy BioData (BioShare) data from DBDW</echo>
         <exec executable="sqlplus" failonerror="true">
-            <arg value="wqp_core/${wqp_core_password}@${instance}"/>
-            <arg value="@${basedir}/copyFromStage.sql"/>
+            <arg value="biodata/${wqp_biodata_password}@${instance}"/>
+            <arg value="@${basedir}/copyFromDw.sql"/>
         </exec>
     </target>
 
