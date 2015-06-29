@@ -84,7 +84,7 @@ select /*+ parallel(4) */
                  from biodata.sample
                       join biodata.sample_type
                         on sample.dw_sample_type_id = sample_type.dw_sample_type_id
-                where sample.biodata_site_id = site.biodata_site_id and
+                where sample.biodata_site_id = biodata_site.biodata_site_id and
                       sample_type.data_category_code = 'FSH' and
                       biodata_site.data_release_category = 'Public' and
                       sample.data_release_category = 'Public') ;
