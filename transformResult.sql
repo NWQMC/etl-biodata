@@ -114,7 +114,7 @@ select effort.dw_effort_id,
             when sample.dw_sample_type_id = 16
               then case 
                      when effort.subreach is not null
-                       then '+' effort.subreach
+                       then '+' || effort.subreach
                      else null
                    end
             when effort.pass is not null
