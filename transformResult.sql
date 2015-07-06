@@ -98,7 +98,7 @@ select effort.dw_effort_id,
        sample.sampling_method_reference || ' ' || effort.method_code sample_collect_method_ctx,
        sample.sampling_method_reference sample_collect_method_name,
        null act_sam_collect_meth_qual_type,
-        act_sam_collect_meth_desc,
+       sample.sampling_method_ref_citation act_sam_collect_meth_desc,
        case lower(nvl(effort.gear, sample.gear_used))
          when 'backpack' then 'Backpack Electroshock'
          when 'towed barge' then 'Electroshock (Other)'
