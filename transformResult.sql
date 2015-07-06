@@ -95,10 +95,10 @@ select effort.dw_effort_id,
        null act_current_speed_unit,
        null toxicity_test_type_name,
        effort.method_code sample_collect_method_id,
-       null sample_collect_method_ctx,
-       null sample_collect_method_name,
+       sample.sampling_method_reference || ' ' || effort.method_code sample_collect_method_ctx,
+       sample.sampling_method_reference sample_collect_method_name,
        null act_sam_collect_meth_qual_type,
-       null act_sam_collect_meth_desc,
+        act_sam_collect_meth_desc,
        case lower(nvl(effort.gear, sample.gear_used))
          when 'backpack' then 'Backpack Electroshock'
          when 'towed barge' then 'Electroshock (Other)'
@@ -111,6 +111,12 @@ select effort.dw_effort_id,
        end sample_collect_equip_name,
        nvl(effort.gear, sample.gear_used) || 
           case 
+            when sample.dw_sample_type_id = 16
+              then case 
+                     when effort.subreach is not null
+                       then '+' effort.subreach
+                     else null
+                   end
             when effort.pass is not null
               then '+' || effort.pass
             else null
