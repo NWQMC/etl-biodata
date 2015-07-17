@@ -284,9 +284,9 @@ select 4 data_source_id,
                null result_depth_alt_ref_pt_txt,
                null res_sampling_point_name,
                'Population Census' biological_intent,
-               null res_bio_individual_id,
+               result.res_bio_individual_id,
                result.published_taxon_name sample_tissue_taxonomic_name,
-               null UnidentifiedSpeciesIdentifier,
+               result.UnidentifiedSpeciesIdentifier,
                null sample_tissue_anatomy_name,
                result.group_weight res_group_summary_ct_wt,
                case
@@ -341,7 +341,16 @@ select 4 data_source_id,
                                     taxonomic_result.raw_count,
                                     taxonomic_result.total_length,
                                     taxonomic_result.standard_length,
-                                    taxonomic_result.weight
+                                    taxonomic_result.weight,
+                                    taxonomic_result.field_sheet_page ||
+                                       nvl2(taxonomic_result.field_sheet_line,
+                                            '-' || taxonomic_result.field_sheet_line,
+                                            null) res_bio_individual_id,
+                                    case
+                                      when taxon_wide.biodata_taxon_name = taxon_wide.published_taxon_name
+                                        then null
+                                      else taxon_wide.biodata_taxon_name
+                                    end UnidentifiedSpeciesIdentifier
                                from biodata.taxonomic_result
                                     join biodata.taxon_wide
                                       on taxonomic_result.taxon_id = taxon_wide.bench_taxon_id
