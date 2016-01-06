@@ -70,14 +70,8 @@ select /*+ parallel(4) */
        station.hole_depth_value,
        station.hole_depth_unit
   from biodata.biodata_site
-       left join (select station.*, sitefile.nwis_host, sitefile.db_no, sitefile.agency_cd, sitefile.site_no
-                    from nwis_ws_star.sitefile,
-                         station partition (station_nwis)
-                   where sitefile.site_id = station.station_id) station
-         on biodata_site.agency_cd = station.agency_cd and
-            biodata_site.site_no = station.site_no and
-            biodata_site.nwis_host = station.nwis_host and
-            biodata_site.db_no = station.db_no
+       left join station partition (station_nwis)
+         on biodata_site.agency_cd || '-' || biodata_site.site_no = station.site_id
  where biodata_site.site_web_cd = 'Y' and
        biodata_site.data_release_category = 'Public' and
        exists (select null
