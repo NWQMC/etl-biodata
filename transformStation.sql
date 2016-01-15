@@ -14,7 +14,7 @@ truncate table station_swap_biodata;
 
 insert /*+ append parallel(4) */
   into station_swap_biodata (data_source_id, data_source, station_id, site_id, organization, site_type, huc, governmental_unit_code,
-                             geom, station_name, organization_name, description_text, station_type_name, latitude, longitude, map_scale,
+                             geom, station_name, organization_name, station_type_name, latitude, longitude, map_scale,
                              geopositioning_method, hdatum_id_code, elevation_value, elevation_unit, elevation_method, vdatum_id_code,
                              drain_area_value, drain_area_unit, contrib_drain_area_value, contrib_drain_area_unit,
                              geoposition_accy_value, geoposition_accy_unit, vertical_accuracy_value, vertical_accuracy_unit,
@@ -32,7 +32,6 @@ select /*+ parallel(4) */
        nvl(station.geom, sdo_cs.transform(geo_point, 4269)) geom,
        nvl(station.station_name, trim(biodata_site.station_nm)) station_name,
        station.organization_name,
-       station.description_text,
        station.station_type_name,
        nvl(station.latitude, round(biodata_site.dec_latitude , 7)) latitude,
        nvl(station.longitude, round(biodata_site.dec_longitude, 7)) longitude,
