@@ -7,7 +7,7 @@ whenever oserror exit failure rollback;
 select 'add RI start time: ' || systimestamp from dual;
 
 begin
-	etl_helper.add_ri('biodata');
+	etl_helper_main.add_ri('biodata');
 end;
 /
 
