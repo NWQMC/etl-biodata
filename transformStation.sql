@@ -7,7 +7,7 @@ whenever oserror exit failure rollback;
 select 'transform station start time: ' || systimestamp from dual;
 
 prompt dropping biodata station indexes
-exec etl_helper.drop_indexes('station_swap_biodata');
+exec etl_helper_station.drop_indexes('biodata');
         
 prompt populating biodata station
 truncate table station_swap_biodata;
@@ -85,6 +85,6 @@ select /*+ parallel(4) */
 commit;
 
 prompt building biodata station indexes
-exec etl_helper.create_station_indexes('biodata');
+exec etl_helper_station.create_indexes('biodata');
 
 select 'transform station end time: ' || systimestamp from dual;

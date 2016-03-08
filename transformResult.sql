@@ -144,7 +144,7 @@ select effort.dw_effort_id,
 commit;
        
 prompt dropping biodata result indexes
-exec etl_helper.drop_indexes('result_swap_biodata');
+exec etl_helper_result.drop_indexes('biodata');
 
 prompt populating biodata result
 truncate table result_swap_biodata;
@@ -369,6 +369,6 @@ select 4 data_source_id,
 commit;
 
 prompt building biodata result indexes
-exec etl_helper.create_result_indexes('biodata');
+exec etl_helper_result.create_indexes('biodata');
 
 select 'transform result end time: ' || systimestamp from dual;
