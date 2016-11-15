@@ -7,6 +7,10 @@ whenever oserror exit failure rollback;
 select 'transform activity start time: ' || systimestamp from dual;
 
 prompt populating activity_swap_biodata
+
+prompt dropping biodata activity indexes
+exec etl_helper_activity.drop_indexes('biodata');
+
 set define off;
 truncate table activity_swap_biodata;
 insert /*+ append parallel(4) */
@@ -152,5 +156,8 @@ select 4 data_source_id,
        project.data_release_category = 'Public' and
        sample.dw_sample_type_id in (7, 15, 16, 24);
 commit;
+
+prompt building biodata activity indexes
+exec etl_helper_activity.create_indexes('biodata');
 
 select 'transform activity end time: ' || systimestamp from dual;
