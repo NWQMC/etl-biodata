@@ -226,7 +226,7 @@ select activity_swap_biodata.data_source_id,
                                              weight as 'Weight')
                             ) a
                     ) result
-                 on activity_swap_biodata.dw_effort_id = result.dw_effort_id
+                 on activity_swap_biodata.activity_id = result.dw_effort_id
      order by activity_swap_biodata.station_id;
 
 commit;
