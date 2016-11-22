@@ -55,7 +55,7 @@ select activity_swap_biodata.data_source_id,
                activity_swap_biodata.huc,
                activity_swap_biodata.governmental_unit_code,
                activity_swap_biodata.organization_name,
-               activity_swap_biodata.activity_id
+               activity_swap_biodata.activity_id,
                activity_swap_biodata.activity_type_code,
                activity_swap_biodata.activity_media_subdiv_name,
                activity_swap_biodata.activity_start_time,
