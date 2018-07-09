@@ -34,7 +34,7 @@ insert /*+ append parallel(4) */
                               act_sam_collect_equip_comments, act_sam_prep_meth_id, act_sam_prep_meth_context,
                               act_sam_prep_meth_name, act_sam_prep_meth_qual_type, act_sam_prep_meth_desc,
                               sample_container_type, sample_container_color, act_sam_chemical_preservative,
-                              thermal_preservative_name, act_sam_transport_storage_desc, result_count)
+                              thermal_preservative_name, act_sam_transport_storage_desc)
 select 4 data_source_id,
        'BIODATA' data_source,
        station.station_id, 

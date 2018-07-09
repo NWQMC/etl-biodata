@@ -194,8 +194,6 @@ select activity_swap_biodata.data_source_id,
                null res_taxonomist_accred_yn,
                null res_taxonomist_accred_authorty
           from activity_swap_biodata
-               join activity_swap_biodata.result_id
-                       on effort.dw_sample_id = sample.dw_sample_id
                join (select a.*, rownum result_id
                        from (select taxonomic_result.dw_effort_id,
                                     taxon_wide.published_taxon_name,
