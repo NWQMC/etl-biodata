@@ -17,10 +17,6 @@ public class BatchConfiguration {
 	private JobBuilderFactory jobBuilderFactory;
 
 	@Autowired
-	@Qualifier("arsExtractFlow")
-	private Flow arsExtractFlow;
-
-	@Autowired
 	@Qualifier("orgDataFlow")
 	private Flow orgDataFlow;
 
@@ -60,8 +56,7 @@ public class BatchConfiguration {
 	public Job wqxEtl() {
 		return jobBuilderFactory.get("WQP_ARS_STEWARDS_ETL")
 //				.incrementer(jobIncrementer)
-				.start(arsExtractFlow)
-				.next(orgDataFlow)
+				.start(orgDataFlow)
 				.next(projectDataFlow)
 //				.next(projectObjectFlow)
 				.next(monitoringLocationFlow)
