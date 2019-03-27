@@ -8,15 +8,15 @@ import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.activity.Activity;
-import gov.acwi.wqp.etl.extract.domain.ArsResult;
+import gov.acwi.wqp.etl.biodata.domain.BiodataResult;
 
-public class ActivityProcessor implements ItemProcessor<ArsResult, Activity>{
+public class ActivityProcessor implements ItemProcessor<BiodataResult, Activity>{
 	private static final Logger LOG = LoggerFactory.getLogger(ActivityProcessor.class);
 
 	public static final int DEFAULT_SRID = 4269;
 
 	@Override
-	public Activity process(ArsResult item) throws Exception {
+	public Activity process(BiodataResult item) throws Exception {
 		Activity activity = new Activity();
 		activity.setDataSourceId(Application.DATA_SOURCE_ID);
 		activity.setDataSource(Application.DATA_SOURCE);

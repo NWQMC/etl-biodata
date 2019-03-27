@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import gov.acwi.wqp.etl.extract.domain.ArsOrganization;
+import gov.acwi.wqp.etl.biodata.domain.BiodataOrganization;
 
 
 @Configuration
@@ -39,7 +39,7 @@ public class TransformProjectData {
 
 	@Autowired
 	@Qualifier("wqxOrgReader")
-	private ItemReader<ArsOrganization> wqxOrgReader;
+	private ItemReader<BiodataOrganization> wqxOrgReader;
 
 	@Bean
 	public ItemWriter<ProjectData> projectDataWriter() {
@@ -59,7 +59,7 @@ public class TransformProjectData {
 	public Step transformProjectDataStep() {
 		return stepBuilderFactory
 				.get("transformProjectDataStep")
-				.<ArsOrganization, ProjectData>chunk(10)
+				.<BiodataOrganization, ProjectData>chunk(10)
 				.reader(wqxOrgReader)
 				.processor(new ProjectDataProcessor())
 				.writer(projectDataWriter())

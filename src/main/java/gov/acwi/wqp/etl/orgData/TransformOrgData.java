@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import gov.acwi.wqp.etl.extract.domain.ArsOrganization;
-import gov.acwi.wqp.etl.extract.domain.ArsOrganizationRowMapper;
+import gov.acwi.wqp.etl.biodata.domain.BiodataOrganization;
+import gov.acwi.wqp.etl.biodata.domain.BiodataOrganizationRowMapper;
 
 
 @Configuration
@@ -40,12 +40,12 @@ public class TransformOrgData {
 	private Flow buildOrgDataIndexesFlow;
 
 	@Bean
-	public JdbcCursorItemReader<ArsOrganization> wqxOrgReader() {
-		return new JdbcCursorItemReaderBuilder<ArsOrganization>()
+	public JdbcCursorItemReader<BiodataOrganization> wqxOrgReader() {
+		return new JdbcCursorItemReaderBuilder<BiodataOrganization>()
 				.dataSource(this.dataSource)
 				.name("organizationReader")
-				.sql("select * from ars_org_project")
-				.rowMapper(new ArsOrganizationRowMapper())
+				.sql("select * from biodata_org_project")
+				.rowMapper(new BiodataOrganizationRowMapper())
 				.build();
 	}
 
@@ -66,7 +66,7 @@ public class TransformOrgData {
 	public Step transformOrgDataStep() {
 		return stepBuilderFactory
 				.get("transformOrgDataStep")
-				.<ArsOrganization, OrgData>chunk(10)
+				.<BiodataOrganization, OrgData>chunk(10)
 				.reader(wqxOrgReader())
 				.processor(new OrgDataProcessor())
 				.writer(orgDataWriter())

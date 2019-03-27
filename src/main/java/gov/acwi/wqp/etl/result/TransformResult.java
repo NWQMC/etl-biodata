@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import gov.acwi.wqp.etl.extract.domain.ArsResult;
-import gov.acwi.wqp.etl.extract.domain.ArsResultResultRowMapper;
+import gov.acwi.wqp.etl.biodata.domain.BiodataResult;
+import gov.acwi.wqp.etl.biodata.domain.BiodataResultResultRowMapper;
 
 
 @Configuration
@@ -40,25 +40,25 @@ public class TransformResult {
 	private Flow buildResultIndexesFlow;
 
 	@Bean
-	public JdbcCursorItemReader<ArsResult> resultReader() {
-		return new JdbcCursorItemReaderBuilder<ArsResult>()
+	public JdbcCursorItemReader<BiodataResult> resultReader() {
+		return new JdbcCursorItemReaderBuilder<BiodataResult>()
 				.dataSource(this.dataSource)
 				.name("organizationReader")
 				//TODo cleanup for PostgreSQL
 				.sql("select activity_swap_stewards.activity_id,"
-						+ "  ars_result.activity_start_date,"
-						+ "  ars_result.activity_identifier,"
-						+ "  ars_result.activity_media_name,"
-						+ "  ars_result.activity_type_code,"
-						+ "  ars_result.activity_start_time,"
-						+ "  ars_result.activity_start_time_zone_code,"
-						+ "  ars_result.project_identifier,"
-						+ "  ars_result.sample_collection_method_identifier,"
-						+ "  ars_result.sample_collection_method_identifier_context,"
-						+ "  ars_result.sample_collection_method_name,"
-						+ "  ars_result.sample_collection_method_description_text,"
-						+ "  ars_result.sample_collection_equipment_name,"
-						+ "  ars_result.sample_collection_equipment_comment_text,"
+						+ "  biodata_result.activity_start_date,"
+						+ "  biodata_result.activity_identifier,"
+						+ "  biodata_result.activity_media_name,"
+						+ "  biodata_result.activity_type_code,"
+						+ "  biodata_result.activity_start_time,"
+						+ "  biodata_result.activity_start_time_zone_code,"
+						+ "  biodata_result.project_identifier,"
+						+ "  biodata_result.sample_collection_method_identifier,"
+						+ "  biodata_result.sample_collection_method_identifier_context,"
+						+ "  biodata_result.sample_collection_method_name,"
+						+ "  biodata_result.sample_collection_method_description_text,"
+						+ "  biodata_result.sample_collection_equipment_name,"
+						+ "  biodata_result.sample_collection_equipment_comment_text,"
 						+ "  activity_swap_stewards.station_id,"
 						+ "  activity_swap_stewards.site_id,"
 						+ "  activity_swap_stewards.organization,"
@@ -69,30 +69,30 @@ public class TransformResult {
 						+ "  activity_swap_stewards.geom,"
 						+ "  activity_swap_stewards.monitoring_location_name,"
 						+ "  activity_swap_stewards.project_name,"
-						+ "  ars_result.result_id,"
-						+ "  ars_result.result_detection_condition_text,"
-						+ "  ars_result.characteristic_name,"
-						+ "  ars_result.result_sample_fraction_text,"
-						+ "  ars_result.result_measure_value,"
-						+ "  ars_result.result_measure_unit_code,"
-						+ "  ars_result.result_status_identifier,"
-						+ "  ars_result.result_value_type_name,"
-						+ "  ars_result.data_quality_precision_value,"
-						+ "  ars_result.result_comment_text,"
-						+ "  ars_result.result_analytical_method_identifier,"
-						+ "  ars_result.result_analytical_method_identifier_context,"
-						+ "  ars_result.result_analytical_method_name,"
-						+ "  ars_result.result_analytical_method_description_text,"
-						+ "  ars_result.detection_quantitation_limit_type_name,"
-						+ "  ars_result.detection_quantitation_limit_measure_value,"
-						+ "  ars_result.detection_quantitation_limit_measure_unit_code,"
-						+ "  ars_char_name_to_type.characteristic_type"
-						+ " from ars_result"
+						+ "  biodata_result.result_id,"
+						+ "  biodata_result.result_detection_condition_text,"
+						+ "  biodata_result.characteristic_name,"
+						+ "  biodata_result.result_sample_fraction_text,"
+						+ "  biodata_result.result_measure_value,"
+						+ "  biodata_result.result_measure_unit_code,"
+						+ "  biodata_result.result_status_identifier,"
+						+ "  biodata_result.result_value_type_name,"
+						+ "  biodata_result.data_quality_precision_value,"
+						+ "  biodata_result.result_comment_text,"
+						+ "  biodata_result.result_analytical_method_identifier,"
+						+ "  biodata_result.result_analytical_method_identifier_context,"
+						+ "  biodata_result.result_analytical_method_name,"
+						+ "  biodata_result.result_analytical_method_description_text,"
+						+ "  biodata_result.detection_quantitation_limit_type_name,"
+						+ "  biodata_result.detection_quantitation_limit_measure_value,"
+						+ "  biodata_result.detection_quantitation_limit_measure_unit_code,"
+						+ "  biodata_char_name_to_type.characteristic_type"
+						+ " from biodata_result"
 						+ "      join activity_swap_stewards"
-						+ "        on ars_result.activity_identifier = activity_swap_stewards.activity"
-						+ "      left join ars_char_name_to_type"
-						+ "        on ars_result.characteristic_name = ars_char_name_to_type.characteristic_name")
-				.rowMapper(new ArsResultResultRowMapper())
+						+ "        on biodata_result.activity_identifier = activity_swap_stewards.activity"
+						+ "      left join biodata_char_name_to_type"
+						+ "        on biodata_result.characteristic_name = biodata_char_name_to_type.characteristic_name")
+				.rowMapper(new BiodataResultResultRowMapper())
 				.build();
 	}
 
@@ -130,7 +130,7 @@ public class TransformResult {
 	public Step transformResultStep() {
 		return stepBuilderFactory
 				.get("transformResultStep")
-				.<ArsResult, Result>chunk(10)
+				.<BiodataResult, Result>chunk(10)
 				.reader(resultReader())
 				.processor(new ResultProcessor())
 				.writer(resultWriter())

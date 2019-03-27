@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import gov.acwi.wqp.etl.extract.domain.ArsStation;
-import gov.acwi.wqp.etl.extract.domain.ArsStationRowMapper;
+import gov.acwi.wqp.etl.biodata.domain.BiodataStation;
+import gov.acwi.wqp.etl.biodata.domain.BiodataStationRowMapper;
 
 
 @Configuration
@@ -40,13 +40,13 @@ public class TransformMonitoringLocation {
 	private Flow buildMonitoringLocationIndexesFlow;
 
 	@Bean
-	public JdbcCursorItemReader<ArsStation> monitoringLocationReader() {
-		return new JdbcCursorItemReaderBuilder<ArsStation>()
+	public JdbcCursorItemReader<BiodataStation> monitoringLocationReader() {
+		return new JdbcCursorItemReaderBuilder<BiodataStation>()
 				.dataSource(this.dataSource)
 				.name("organizationReader")
 				//TODo cleanup for PostgreSQL
-				.sql("select ars_station.*, ars_org_project.*, ars_site_type_to_primary.primary_site_type resolved_monitoring_location_type_name from ars_station join ars_org_project on 1=1 left join ars_site_type_to_primary on ars_station.monitoring_location_type_name = ars_site_type_to_primary.site_type")
-				.rowMapper(new ArsStationRowMapper())
+				.sql("select biodata_station.*, biodata_org_project.*, biodata_site_type_to_primary.primary_site_type resolved_monitoring_location_type_name from biodata_station join biodata_org_project on 1=1 left join biodata_site_type_to_primary on biodata_station.monitoring_location_type_name = biodata_site_type_to_primary.site_type")
+				.rowMapper(new BiodataStationRowMapper())
 				.build();
 	}
 
@@ -78,7 +78,7 @@ public class TransformMonitoringLocation {
 	public Step transformMonitoringLocationStep() {
 		return stepBuilderFactory
 				.get("transformMonitoringLocationStep")
-				.<ArsStation, MonitoringLocation>chunk(10)
+				.<BiodataStation, MonitoringLocation>chunk(10)
 				.reader(monitoringLocationReader())
 				.processor(new MonitoringLocationProcessor())
 				.writer(monitoringLocationWriter())
