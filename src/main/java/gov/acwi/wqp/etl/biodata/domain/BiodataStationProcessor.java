@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.biodata.domain;
 
-import gov.acwi.wqp.etl.extract.domain.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.batch.item.ItemProcessor;
 

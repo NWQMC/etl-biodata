@@ -1,7 +1,5 @@
 package gov.acwi.wqp.etl.biodata.domain;
 
-import gov.acwi.wqp.etl.extract.domain.*;
-
 public class BiodataStation {
 
 	private Integer stationId;

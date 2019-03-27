@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.biodata.domain;
 
-import gov.acwi.wqp.etl.extract.domain.*;
 import org.postgis.PGgeometry;
 
 public class BiodataResult {

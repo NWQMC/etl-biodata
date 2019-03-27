@@ -3,7 +3,6 @@ select create_swap_table ('biodata', 'wqp', 'project_data');
 select create_swap_table ('biodata', 'wqp', 'station');
 select create_swap_table ('biodata', 'wqp', 'activity');
 select create_swap_table ('biodata', 'wqp', 'result');
-select create_swap_table ('biodata', 'wqp', 'r_detect_qnt_lmt');
 
 create table if not exists ars_org_project
 (organization                   VARCHAR(2500)

@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.biodata;
 
-import gov.acwi.wqp.etl.extract.*;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Step;
