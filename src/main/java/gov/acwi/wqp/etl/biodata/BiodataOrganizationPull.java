@@ -21,11 +21,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
 
-import gov.acwi.wqp.etl.extract.domain.ArsOrganization;
-import gov.acwi.wqp.etl.extract.domain.ArsOrganizationProcessor;
-import gov.acwi.wqp.etl.extract.domain.WqxOrganization;
-import gov.acwi.wqp.etl.extract.domain.WqxOrganizationDescription;
-import gov.acwi.wqp.etl.extract.domain.WqxProject;
+import gov.acwi.wqp.etl.biodata.domain.BiodataOrganization;
+import gov.acwi.wqp.etl.biodata.domain.BiodataOrganizationProcessor;
+import gov.acwi.wqp.etl.biodata.domain.WqxOrganization;
+import gov.acwi.wqp.etl.biodata.domain.WqxOrganizationDescription;
+import gov.acwi.wqp.etl.biodata.domain.WqxProject;
 
 @Component
 public class BiodataOrganizationPull {
@@ -40,19 +40,12 @@ public class BiodataOrganizationPull {
 	private Resource resource;
 
 	@Autowired
-	@Qualifier("truncateArsOrgProject")
-	private Tasklet truncateArsOrgProject;
+	@Qualifier("truncateBiodataOrgProject")
+	private Tasklet truncateBiodataOrgProject;
 
 	@Bean
-	public StaxEventItemReader<WqxOrganization> arsOrganizationReader() {
+	public StaxEventItemReader<WqxOrganization> biodataOrganizationReader() {
 		StaxEventItemReader<WqxOrganization> staxEventItemReader = new StaxEventItemReader<>();
-//		try {
-//			//This is a state with no data at this time. It will give us back just the Organization and Project data.
-//			staxEventItemReader.setResource(new UrlResource("https://www.nrrig.mwa.ars.usda.gov/st40_wqp/service1.svc/station?countrycode=us&statecode=US%3A56"));
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		staxEventItemReader.setResource(resource);
 		staxEventItemReader.setFragmentRootElementName("Organization");
 		Jaxb2Marshaller unMarshaller = new Jaxb2Marshaller();
@@ -62,41 +55,41 @@ public class BiodataOrganizationPull {
 	}
 
 	@Bean
-	public ItemWriter<ArsOrganization> arsOrganizationWriter() {
-		JdbcBatchItemWriter<ArsOrganization> itemWriter = new JdbcBatchItemWriter<ArsOrganization>();
+	public ItemWriter<BiodataOrganization> biodataOrganizationWriter() {
+		JdbcBatchItemWriter<BiodataOrganization> itemWriter = new JdbcBatchItemWriter<BiodataOrganization>();
 		itemWriter.setDataSource(dataSource);
 		itemWriter.setSql("insert "
-				+ " into ars_org_project (organization, organization_name, project_identifier, project_name, project_description_text)"
+				+ " into biodata_org_project (organization, organization_name, project_identifier, project_name, project_description_text)"
 				+ " values (:organizationIdentifier, :organizationName, :projectIdentifier, :projectName, :projectDescriptionText)");
-		itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<ArsOrganization>());
+		itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<BiodataOrganization>());
 		itemWriter.afterPropertiesSet();
 		return itemWriter;
 	}
 
 	@Bean
-	public Step truncateArsOrgProjectStep() {
+	public Step truncateBiodataOrgProjectStep() {
 		return stepBuilderFactory
-				.get("truncateArsOrgProjectStep")
-				.tasklet(truncateArsOrgProject)
+				.get("truncateBiodataOrgProjectStep")
+				.tasklet(truncateBiodataOrgProject)
 				.build();
 	}
 
 	@Bean
-	public Step arsOrganizationPullStep() {
+	public Step biodataOrganizationPullStep() {
 		return stepBuilderFactory
-				.get("arsOrganizationPullStep")
-				.<WqxOrganization, ArsOrganization>chunk(10)
-				.reader(arsOrganizationReader())
-				.processor(new ArsOrganizationProcessor())
-				.writer(arsOrganizationWriter())
+				.get("biodataOrganizationPullStep")
+				.<WqxOrganization, BiodataOrganization>chunk(10)
+				.reader(biodataOrganizationReader())
+				.processor(new BiodataOrganizationProcessor())
+				.writer(biodataOrganizationWriter())
 				.build();
 	}
 
 	@Bean
-	public Flow arsOrganizationPullFlow() {
-		return new FlowBuilder<SimpleFlow>("arsOrganizationPullFlow")
-				.start(truncateArsOrgProjectStep())
-				.next(arsOrganizationPullStep())
+	public Flow biodataOrganizationPullFlow() {
+		return new FlowBuilder<SimpleFlow>("biodataOrganizationPullFlow")
+				.start(truncateBiodataOrgProjectStep())
+				.next(biodataOrganizationPullStep())
 				.build();
 	}
 

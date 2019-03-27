@@ -36,25 +36,22 @@ public class BatchConfiguration {
 	@Qualifier("resultFlow")
 	private Flow resultFlow;
 
-	@Autowired
-	@Qualifier("resDetectQntLimitFlow")
-	private Flow resDetectQntLimitFlow;
-
-	@Autowired
-	@Qualifier("createSummariesFlow")
-	private Flow createSummariesFlow;
-
-	@Autowired
-	@Qualifier("createCodesFlow")
-	private Flow createCodesFlow;
-
-	@Autowired
-	@Qualifier("databaseFinalizeFlow")
-	private Flow databaseFinalizeFlow;
+//  TODO: are the following three flows needed?
+//	@Autowired
+//	@Qualifier("createSummariesFlow")
+//	private Flow createSummariesFlow;
+//
+//	@Autowired
+//	@Qualifier("createCodesFlow")
+//	private Flow createCodesFlow;
+//
+//	@Autowired
+//	@Qualifier("databaseFinalizeFlow")
+//	private Flow databaseFinalizeFlow;
 
 	@Bean
 	public Job wqxEtl() {
-		return jobBuilderFactory.get("WQP_ARS_STEWARDS_ETL")
+		return jobBuilderFactory.get("WQP_BIODATA_ETL")
 //				.incrementer(jobIncrementer)
 				.start(orgDataFlow)
 				.next(projectDataFlow)
@@ -67,11 +64,13 @@ public class BatchConfiguration {
 //				.next(activityMetricFlow)
 				.next(resultFlow)
 //				.next(resultObjectFlow)
-				.next(resDetectQntLimitFlow)
 //				.next(projectMlWeightingFlow)
-				.next(createSummariesFlow)
-				.next(createCodesFlow)
-				.next(databaseFinalizeFlow)
+                
+//              TODO: are the following three flows needed?
+//				.next(createSummariesFlow)
+//				.next(createCodesFlow)
+//				.next(databaseFinalizeFlow)
+                
 				.build()
 				.build();
 	}

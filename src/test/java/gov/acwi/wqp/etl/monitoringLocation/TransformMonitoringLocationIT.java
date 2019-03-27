@@ -50,10 +50,26 @@ public class TransformMonitoringLocationIT extends BaseFlowIT {
 	}
 
 	@Test
+    /*
+        1. make sure we have an empty station table to start
+        2. look in the transformStation file to look at the current query being run, to see what tables are being read from
+    
+        The following 3 tables replace the middle three tables in the database setup annotations for this test
+            3. bioshare biodata_site table contains some of the input data 
+                (accessed through oracle sql developer using credentials from tomcat machine) 
+                (only need the 3 sites that exist in the station_swap_biodata table in postgres rds db in chs, but you'll want 
+                    to filter them down to 10 or 20 total records, maybe using date?)
+            4. biodata_sample also from oracle 
+            5. biodata_sample_type also from oracle (only 22 rows, can pull the whole table)
+    
+            transform the data
+    
+        6. end result from chs postgres station_biodata table
+    */
 	@DatabaseSetup(value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup(value="classpath:/testData/ars/arsSiteTypeToPrimary.xml")
-	@DatabaseSetup(value="classpath:/testResult/ars/arsOrgProject.xml")
-	@DatabaseSetup(value="classpath:/testResult/ars/arsStation.xml")
+	@DatabaseSetup(value="classpath:/testData/biodata/bioShareBiodataSite.xml")
+	@DatabaseSetup(value="classpath:/testData/biodata/bioShareSample.xml")
+	@DatabaseSetup(value="classpath:/testData/biodata/bioShareSampleType.xml")
 	@ExpectedDatabase(value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void transformMonitoringLocationStepTest() {
 		try {

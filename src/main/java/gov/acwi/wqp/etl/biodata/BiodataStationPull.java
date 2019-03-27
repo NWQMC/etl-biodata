@@ -22,12 +22,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
-import gov.acwi.wqp.etl.extract.domain.ArsStation;
-import gov.acwi.wqp.etl.extract.domain.ArsStationProcessor;
-import gov.acwi.wqp.etl.extract.domain.WqxDrainageAreaMeasure;
-import gov.acwi.wqp.etl.extract.domain.WqxMonitoringLocation;
-import gov.acwi.wqp.etl.extract.domain.WqxMonitoringLocationGeospatial;
-import gov.acwi.wqp.etl.extract.domain.WqxMonitoringLocationIdentity;
+import gov.acwi.wqp.etl.biodata.domain.BiodataStation;
+import gov.acwi.wqp.etl.biodata.domain.BiodataStationProcessor;
+import gov.acwi.wqp.etl.biodata.domain.WqxDrainageAreaMeasure;
+import gov.acwi.wqp.etl.biodata.domain.WqxMonitoringLocation;
+import gov.acwi.wqp.etl.biodata.domain.WqxMonitoringLocationGeospatial;
+import gov.acwi.wqp.etl.biodata.domain.WqxMonitoringLocationIdentity;
 
 
 @Configuration
@@ -43,19 +43,12 @@ public class BiodataStationPull {
 	private Resource resource;
 
 	@Autowired
-	@Qualifier("truncateArsStation")
-	private Tasklet truncateArsStation;
+	@Qualifier("truncateBiodataStation")
+	private Tasklet truncateBiodataStation;
 
 	@Bean
-	public StaxEventItemReader<WqxMonitoringLocation> arsStationReader() {
+	public StaxEventItemReader<WqxMonitoringLocation> biodataStationReader() {
 		StaxEventItemReader<WqxMonitoringLocation> staxEventItemReader = new StaxEventItemReader<>();
-//		try {
-//			//This is a state with no data at this time. It will give us back just the Organization and Project data.
-//			staxEventItemReader.setResource(new UrlResource("https://www.nrrig.mwa.ars.usda.gov/st40_wqp/service1.svc/station?countrycode=us&statecode=US%3A56"));
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		staxEventItemReader.setResource(resource);
 		staxEventItemReader.setFragmentRootElementName("MonitoringLocation");
 		Jaxb2Marshaller unMarshaller = new Jaxb2Marshaller();
@@ -66,14 +59,14 @@ public class BiodataStationPull {
 	}
 
 	@Bean
-	public ItemWriter<ArsStation> arsStationWriter() {
-		JdbcBatchItemWriter<ArsStation> itemWriter = new JdbcBatchItemWriter<ArsStation>();
+	public ItemWriter<BiodataStation> biodataStationWriter() {
+		JdbcBatchItemWriter<BiodataStation> itemWriter = new JdbcBatchItemWriter<BiodataStation>();
 		itemWriter.setDataSource(dataSource);
 		itemWriter.setSql("insert "
-				+ " into ars_station (monitoring_location_identifier, monitoring_location_name, monitoring_location_type_name, monitoring_location_description_text, huc_eight_digit_code, huc_twelve_digit_code, drainage_area_measure_value, drainage_area_measure_unit_code, latitude_measure, longitude_measure, horizontal_collection_method_name, horizontal_coordinate_reference_system_datum_name, country_code, state_code, county_code)"
+				+ " into biodata_station (monitoring_location_identifier, monitoring_location_name, monitoring_location_type_name, monitoring_location_description_text, huc_eight_digit_code, huc_twelve_digit_code, drainage_area_measure_value, drainage_area_measure_unit_code, latitude_measure, longitude_measure, horizontal_collection_method_name, horizontal_coordinate_reference_system_datum_name, country_code, state_code, county_code)"
 				+ " values (:monitoringLocationIdentifier, :monitoringLocationName, :monitoringLocationTypeName, :monitoringLocationDescriptionText, :hucEightDigitCode, :hucTwelveDigitCode, :drainageAreaMeasureValue, :drainageAreaMeasureUnitCode, :latitudeMeasure, :longitudeMeasure, :horizontalCollectionMethodName, :horizontalCoordinateReferenceSystemDatumName, :countryCode, :stateCode, :countyCode)");
 
-		ItemSqlParameterSourceProvider<ArsStation> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
+		ItemSqlParameterSourceProvider<BiodataStation> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
 
 		itemWriter.setItemSqlParameterSourceProvider(paramProvider);
 		return itemWriter;
@@ -81,27 +74,27 @@ public class BiodataStationPull {
 
 
 	@Bean
-	public Step truncateArsStationStep() {
+	public Step truncateBiodataStationStep() {
 		return stepBuilderFactory
-				.get("truncateArsStationStep")
-				.tasklet(truncateArsStation)
+				.get("truncateBiodataStationStep")
+				.tasklet(truncateBiodataStation)
 				.build();
 	}
 	@Bean
-	public Step arsStationPullStep() {
-		return stepBuilderFactory.get("arsStationPullStep")
-				.<WqxMonitoringLocation, ArsStation>chunk(10)
-				.reader(arsStationReader())
-				.processor(new ArsStationProcessor())
-				.writer(arsStationWriter())
+	public Step biodataStationPullStep() {
+		return stepBuilderFactory.get("biodataStationPullStep")
+				.<WqxMonitoringLocation, BiodataStation>chunk(10)
+				.reader(biodataStationReader())
+				.processor(new BiodataStationProcessor())
+				.writer(biodataStationWriter())
 				.build();
 	}
 
 	@Bean
-	public Flow arsStationPullFlow() {
-		return new FlowBuilder<SimpleFlow>("arsStationPullFlow")
-				.start(truncateArsStationStep())
-				.next(arsStationPullStep())
+	public Flow biodataStationPullFlow() {
+		return new FlowBuilder<SimpleFlow>("biodataStationPullFlow")
+				.start(truncateBiodataStationStep())
+				.next(biodataStationPullStep())
 				.build();
 	}
 

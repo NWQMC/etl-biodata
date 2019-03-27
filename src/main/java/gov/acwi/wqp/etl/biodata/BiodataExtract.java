@@ -13,23 +13,23 @@ import org.springframework.context.annotation.Configuration;
 public class BiodataExtract {
 
 	@Autowired
-	@Qualifier("arsOrganizationPullFlow")
-	private Flow arsOrganizationPullFlow;
+	@Qualifier("biodataOrganizationPullFlow")
+	private Flow biodataOrganizationPullFlow;
 
 	@Autowired
-	@Qualifier("arsStationPullFlow")
-	private Flow arsStationPullFlow;
+	@Qualifier("biodataStationPullFlow")
+	private Flow biodataStationPullFlow;
 
 	@Autowired
-	@Qualifier("arsResultPullFlow")
-	private Flow arsResultPullFlow;
+	@Qualifier("biodataResultPullFlow")
+	private Flow biodataResultPullFlow;
 
 	@Bean
-	public Flow arsExtractFlow() {
-		return new FlowBuilder<SimpleFlow>("arsExtractFlow")
-				.start(arsOrganizationPullFlow)
-				.next(arsStationPullFlow)
-				.next(arsResultPullFlow)
+	public Flow biodataExtractFlow() {
+		return new FlowBuilder<SimpleFlow>("biodataExtractFlow")
+				.start(biodataOrganizationPullFlow)
+				.next(biodataStationPullFlow)
+				.next(biodataResultPullFlow)
 				.build();
 	}
 
