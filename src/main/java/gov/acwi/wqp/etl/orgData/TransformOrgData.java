@@ -53,7 +53,7 @@ public class TransformOrgData {
 	public ItemWriter<OrgData> orgDataWriter() {
 		JdbcBatchItemWriter<OrgData> itemWriter = new JdbcBatchItemWriter<OrgData>();
 		itemWriter.setDataSource(dataSource);
-		itemWriter.setSql("insert into org_data_swap_stewards (data_source_id, data_source, organization_id, organization, organization_name)"
+		itemWriter.setSql("insert into org_data_swap_biodata (data_source_id, data_source, organization_id, organization, organization_name)"
 				+ " values (:dataSourceId, :dataSource, :organizationId, :organization, :organizationName)");
 
 		ItemSqlParameterSourceProvider<OrgData> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();

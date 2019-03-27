@@ -59,21 +59,21 @@ public class TransformActivity {
 						+ "  biodata_result.sample_collection_method_description_text,"
 						+ "  biodata_result.sample_collection_equipment_name,"
 						+ "  biodata_result.sample_collection_equipment_comment_text,"
-						+ "  station_swap_stewards.station_id,"
-						+ "  station_swap_stewards.site_id,"
-						+ "  station_swap_stewards.organization,"
-						+ "  station_swap_stewards.organization_name,"
-						+ "  station_swap_stewards.site_type,"
-						+ "  station_swap_stewards.huc,"
-						+ "  station_swap_stewards.governmental_unit_code,"
-						+ "  station_swap_stewards.geom,"
-						+ "  station_swap_stewards.station_name,"
-						+ "  project_data_swap_stewards.project_name"
+						+ "  station_swap_biodata.station_id,"
+						+ "  station_swap_biodata.site_id,"
+						+ "  station_swap_biodata.organization,"
+						+ "  station_swap_biodata.organization_name,"
+						+ "  station_swap_biodata.site_type,"
+						+ "  station_swap_biodata.huc,"
+						+ "  station_swap_biodata.governmental_unit_code,"
+						+ "  station_swap_biodata.geom,"
+						+ "  station_swap_biodata.station_name,"
+						+ "  project_data_swap_biodata.project_name"
 						+ " from biodata_result"
-						+ "      join station_swap_stewards"
-						+ "        on biodata_result.monitoring_location_identifier = substring(station_swap_stewards.site_id, 5)"
-						+ "      join project_data_swap_stewards"
-						+ "        on biodata_result.project_identifier = project_data_swap_stewards.project_identifier"
+						+ "      join station_swap_biodata"
+						+ "        on biodata_result.monitoring_location_identifier = substring(station_swap_biodata.site_id, 5)"
+						+ "      join project_data_swap_biodata"
+						+ "        on biodata_result.project_identifier = project_data_swap_biodata.project_identifier"
 						+ "   order by biodata_result.activity_identifier) a")
 				.rowMapper(new BiodataResultActivityRowMapper())
 				.build();
@@ -84,7 +84,7 @@ public class TransformActivity {
 		JdbcBatchItemWriter<Activity> itemWriter = new JdbcBatchItemWriter<Activity>();
 		itemWriter.setDataSource(dataSource);
 		itemWriter.setSql("insert "
-				+ " into activity_swap_stewards (data_source_id, data_source, station_id, site_id, event_date, activity," + 
+				+ " into activity_swap_biodata (data_source_id, data_source, station_id, site_id, event_date, activity," + 
 				"                                sample_media, organization, site_type, huc, governmental_unit_code, geom," + 
 				"                                organization_name, activity_id, activity_type_code, activity_start_time," + 
 				"                                act_start_time_zone, project_id, project_name, monitoring_location_name," + 

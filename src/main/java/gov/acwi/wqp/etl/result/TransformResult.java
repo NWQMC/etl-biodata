@@ -45,7 +45,7 @@ public class TransformResult {
 				.dataSource(this.dataSource)
 				.name("organizationReader")
 				//TODo cleanup for PostgreSQL
-				.sql("select activity_swap_stewards.activity_id,"
+				.sql("select activity_swap_biodata.activity_id,"
 						+ "  biodata_result.activity_start_date,"
 						+ "  biodata_result.activity_identifier,"
 						+ "  biodata_result.activity_media_name,"
@@ -59,16 +59,16 @@ public class TransformResult {
 						+ "  biodata_result.sample_collection_method_description_text,"
 						+ "  biodata_result.sample_collection_equipment_name,"
 						+ "  biodata_result.sample_collection_equipment_comment_text,"
-						+ "  activity_swap_stewards.station_id,"
-						+ "  activity_swap_stewards.site_id,"
-						+ "  activity_swap_stewards.organization,"
-						+ "  activity_swap_stewards.organization_name,"
-						+ "  activity_swap_stewards.site_type,"
-						+ "  activity_swap_stewards.huc,"
-						+ "  activity_swap_stewards.governmental_unit_code,"
-						+ "  activity_swap_stewards.geom,"
-						+ "  activity_swap_stewards.monitoring_location_name,"
-						+ "  activity_swap_stewards.project_name,"
+						+ "  activity_swap_biodata.station_id,"
+						+ "  activity_swap_biodata.site_id,"
+						+ "  activity_swap_biodata.organization,"
+						+ "  activity_swap_biodata.organization_name,"
+						+ "  activity_swap_biodata.site_type,"
+						+ "  activity_swap_biodata.huc,"
+						+ "  activity_swap_biodata.governmental_unit_code,"
+						+ "  activity_swap_biodata.geom,"
+						+ "  activity_swap_biodata.monitoring_location_name,"
+						+ "  activity_swap_biodata.project_name,"
 						+ "  biodata_result.result_id,"
 						+ "  biodata_result.result_detection_condition_text,"
 						+ "  biodata_result.characteristic_name,"
@@ -88,8 +88,8 @@ public class TransformResult {
 						+ "  biodata_result.detection_quantitation_limit_measure_unit_code,"
 						+ "  biodata_char_name_to_type.characteristic_type"
 						+ " from biodata_result"
-						+ "      join activity_swap_stewards"
-						+ "        on biodata_result.activity_identifier = activity_swap_stewards.activity"
+						+ "      join activity_swap_biodata"
+						+ "        on biodata_result.activity_identifier = activity_swap_biodata.activity"
 						+ "      left join biodata_char_name_to_type"
 						+ "        on biodata_result.characteristic_name = biodata_char_name_to_type.characteristic_name")
 				.rowMapper(new BiodataResultResultRowMapper())
@@ -101,7 +101,7 @@ public class TransformResult {
 		JdbcBatchItemWriter<Result> itemWriter = new JdbcBatchItemWriter<Result>();
 		itemWriter.setDataSource(dataSource);
 		itemWriter.setSql("insert "
-				+ " into result_swap_stewards (data_source_id, data_source, station_id, site_id, event_date, activity,"
+				+ " into result_swap_biodata (data_source_id, data_source, station_id, site_id, event_date, activity,"
 				+ "                                sample_media, organization, site_type, huc, governmental_unit_code, geom,"
 				+ "                                organization_name, activity_id, activity_type_code, activity_start_time,"
 				+ "                                act_start_time_zone, project_id, project_name, monitoring_location_name,"

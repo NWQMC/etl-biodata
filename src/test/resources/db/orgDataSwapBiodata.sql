@@ -1,0 +1,1 @@
+select create_swap_table ('biodata', 'wqp', 'org_data');

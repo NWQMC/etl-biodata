@@ -1,9 +1,9 @@
-select create_swap_table ('stewards', 'wqp', 'org_data');
-select create_swap_table ('stewards', 'wqp', 'project_data');
-select create_swap_table ('stewards', 'wqp', 'station');
-select create_swap_table ('stewards', 'wqp', 'activity');
-select create_swap_table ('stewards', 'wqp', 'result');
-select create_swap_table ('stewards', 'wqp', 'r_detect_qnt_lmt');
+select create_swap_table ('biodata', 'wqp', 'org_data');
+select create_swap_table ('biodata', 'wqp', 'project_data');
+select create_swap_table ('biodata', 'wqp', 'station');
+select create_swap_table ('biodata', 'wqp', 'activity');
+select create_swap_table ('biodata', 'wqp', 'result');
+select create_swap_table ('biodata', 'wqp', 'r_detect_qnt_lmt');
 
 create table if not exists ars_org_project
 (organization                   VARCHAR(2500)

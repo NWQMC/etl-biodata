@@ -55,7 +55,7 @@ public class TransformMonitoringLocation {
 		JdbcBatchItemWriter<MonitoringLocation> itemWriter = new JdbcBatchItemWriter<MonitoringLocation>();
 		itemWriter.setDataSource(dataSource);
 		itemWriter.setSql("insert "
-				+ " into station_swap_stewards (data_source_id, data_source, station_id, site_id, organization, site_type, huc, governmental_unit_code,"
+				+ " into station_swap_biodata (data_source_id, data_source, station_id, site_id, organization, site_type, huc, governmental_unit_code,"
 					+ " geom, station_name, organization_name, description_text, station_type_name, latitude, longitude, map_scale,"
 					+ " geopositioning_method, hdatum_id_code, elevation_value, elevation_unit, elevation_method, vdatum_id_code,"
 					+ " drain_area_value, drain_area_unit, contrib_drain_area_value, contrib_drain_area_unit,"
