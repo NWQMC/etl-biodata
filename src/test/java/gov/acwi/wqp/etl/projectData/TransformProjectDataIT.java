@@ -24,11 +24,11 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import gov.acwi.wqp.etl.BaseFlowIT;
+import gov.acwi.wqp.etl.BiodataBaseFlowIT;
 import gov.acwi.wqp.etl.projectData.index.BuildProjectDataIndexesFlowIT;
 import gov.acwi.wqp.etl.projectData.table.SetupProjectDataSwapTableFlowIT;
 
-public class TransformProjectDataIT extends BaseFlowIT {
+public class TransformProjectDataIT extends BiodataBaseFlowIT {
 
 	@Autowired
 	@Qualifier("projectDataFlow")

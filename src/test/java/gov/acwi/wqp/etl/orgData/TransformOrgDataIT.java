@@ -23,11 +23,11 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import gov.acwi.wqp.etl.BaseFlowIT;
+import gov.acwi.wqp.etl.BiodataBaseFlowIT;
 import gov.acwi.wqp.etl.orgData.index.BuildOrgDataIndexesFlowIT;
 import gov.acwi.wqp.etl.orgData.table.SetupOrgDataSwapTableFlowIT;
 
-public class TransformOrgDataIT extends BaseFlowIT {
+public class TransformOrgDataIT extends BiodataBaseFlowIT {
 
 	@Autowired
 	@Qualifier("orgDataFlow")

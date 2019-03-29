@@ -24,9 +24,9 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import gov.acwi.wqp.etl.BaseFlowIT;
+import gov.acwi.wqp.etl.BiodataBaseFlowIT;
 
-public class ArsOrganizationPullIT extends BaseFlowIT {
+public class ArsOrganizationPullIT extends BiodataBaseFlowIT {
 
 	@Autowired
 	@Qualifier("arsOrganizationPullFlow")

@@ -10,3 +10,15 @@ spring:
 #    password: ***REMOVED***
 
 #logging.level.root: TRACE
+
+# TODO: temporarily using two connections
+  
+  datasource-wqp:
+    url: jdbc:postgresql://${WQP_HOST}:${WQP_PORT}/${WQP_DB}
+    username: ${WQP_USERNAME}
+    password: ${WQP_PASSWORD}
+      
+  datasource-biodata:
+    url: jdbc:postgresql://${BIODATA_HOST}:${BIODATA_PORT}/${BIODATA_DB}
+    username: ${BIODATA_USERNAME}
+    password: ${BIODATA_PASSWORD}

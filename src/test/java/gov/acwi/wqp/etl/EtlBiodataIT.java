@@ -10,7 +10,7 @@ import org.springframework.batch.core.JobExecution;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-public class EtlBiodataIT extends BaseFlowIT {
+public class EtlBiodataIT extends BiodataBaseFlowIT {
 
 	@Test
 //	@ExpectedDatabase(value="classpath:/testResult/wqp/orgData/allIndexes.xml",

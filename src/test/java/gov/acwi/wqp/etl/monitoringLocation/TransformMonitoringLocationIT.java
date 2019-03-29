@@ -24,11 +24,11 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
-import gov.acwi.wqp.etl.BaseFlowIT;
+import gov.acwi.wqp.etl.BiodataBaseFlowIT;
 import gov.acwi.wqp.etl.monitoringLocation.index.BuildMonitoringLocationIndexesFlowIT;
 import gov.acwi.wqp.etl.monitoringLocation.table.SetupMonitoringLocationSwapTableFlowIT;
 
-public class TransformMonitoringLocationIT extends BaseFlowIT {
+public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 
 	@Autowired
 	@Qualifier("monitoringLocationFlow")
@@ -66,11 +66,11 @@ public class TransformMonitoringLocationIT extends BaseFlowIT {
     
         6. end result from chs postgres station_biodata table
     */
-	@DatabaseSetup(value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup(value="classpath:/testData/biodata/bioShareBiodataSite.xml")
-	@DatabaseSetup(value="classpath:/testData/biodata/bioShareSample.xml")
-	@DatabaseSetup(value="classpath:/testData/biodata/bioShareSampleType.xml")
-	@ExpectedDatabase(value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@DatabaseSetup(     connection="wqp",       value="classpath:/testResult/wqp/station/empty.xml")
+	@DatabaseSetup(     connection="biodata",   value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
+	@DatabaseSetup(     connection="biodata",   value="classpath:/testData/biodata/station/bioShareSample.xml")
+	@DatabaseSetup(     connection="biodata",   value="classpath:/testData/biodata/station/bioShareSampleType.xml")
+	@ExpectedDatabase(  connection="wqp",       value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void transformMonitoringLocationStepTest() {
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchStep("transformMonitoringLocationStep", testJobParameters);
