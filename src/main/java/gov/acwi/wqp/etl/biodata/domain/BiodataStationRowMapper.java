@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 
+	// THIS IS A MAPPING OF THE BIO_SHARE RESORUCES
 	public static final String STATION_ID_COLUMN_NAME = "station_id";
 	public static final String MONITORING_LOCATION_IDENTIFIER_COLUMN_NAME = "monitoring_location_identifier";
 	public static final String MONITORING_LOCATION_NAME_COLUMN_NAME = "monitoring_location_name";
@@ -24,7 +25,8 @@ public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 	public static final String COUNTRY_CODE_COLUMN_NAME = "country_code";
 	public static final String STATE_CODE_COLUMN_NAME = "state_code";
 	public static final String COUNTY_CODE_COLUMN_NAME = "county_code";
-
+	
+	// THIS IS A MAPPING TO THE POSTGRES CHS RESOURCES
 	@Override
 	public BiodataStation mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BiodataStation station = new BiodataStation();

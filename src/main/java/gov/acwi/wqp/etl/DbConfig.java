@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DbConfig {
@@ -24,6 +25,12 @@ public class DbConfig {
 	public DataSource wqpDataSource() {
 		return wqpDataSourceProperties().initializeDataSourceBuilder().build();
 	}
+	
+	@Bean
+	@Primary
+	public JdbcTemplate jdbcTemplateWqp() {
+		return new JdbcTemplate(wqpDataSource());
+	}
 
 	@Bean
 	@ConfigurationProperties("spring.datasource-biodata")
@@ -35,5 +42,10 @@ public class DbConfig {
 	@ConfigurationProperties("spring.datasource-biodata")
 	public DataSource biodataDataSource() {
 		return biodataDataSourceProperties().initializeDataSourceBuilder().build();
+	}
+	
+	@Bean
+	public JdbcTemplate jdbcTemplateBiodata() {
+		return new JdbcTemplate(biodataDataSource());
 	}
 }

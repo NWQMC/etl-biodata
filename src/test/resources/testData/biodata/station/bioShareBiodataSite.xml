@@ -35,9 +35,7 @@
         ECO_NA_L2_CODE="8.2" 
         ECO_NA_L3_CODE="8.2.4" 
         ECO_US_L3_CODE="55" 
-        ECO_US_L4_CODE="55a" 
-        CREATED_DATE="" 
-        FLAGGED_DELETE_DATE="">
+        ECO_US_L4_CODE="55a">
     </biodata_site>
     
     <biodata_site 
@@ -75,9 +73,7 @@
         ECO_NA_L2_CODE="8.2" 
         ECO_NA_L3_CODE="8.2.4" 
         ECO_US_L3_CODE="55" 
-        ECO_US_L4_CODE="55a" 
-        CREATED_DATE="" 
-        FLAGGED_DELETE_DATE="">
+        ECO_US_L4_CODE="55a">
     </biodata_site>
     
     <biodata_site 
@@ -115,8 +111,6 @@
         ECO_NA_L2_CODE="8.2" 
         ECO_NA_L3_CODE="8.2.4" 
         ECO_US_L3_CODE="55" 
-        ECO_US_L4_CODE="55a" 
-        CREATED_DATE="" 
-        FLAGGED_DELETE_DATE="">
+        ECO_US_L4_CODE="55a"> 
     </biodata_site>
 </dataset>

@@ -12,23 +12,20 @@ import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
 public class BiodataDBTestConfig {
-    
-    @Autowired
-    @Qualifier("biodataDataSource")
+
+	@Autowired
+	@Qualifier("biodataDataSource")
 	private DataSource dataSource;
-    
-    @Autowired
+	
+	@Autowired
 	private DatabaseConfigBean dbUnitDatabaseConfig;
 	@Bean
-	public DatabaseDataSourceConnectionFactoryBean biodata() throws SQLException {
-        // TODO: Allows there to be empty fields in the test data - specifically here to handle empty CREATED_DATE fields from bioshare
-        dbUnitDatabaseConfig.setAllowEmptyFields(true);
-        
+	public DatabaseDataSourceConnectionFactoryBean biodata() throws SQLException {   
 		DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection = new DatabaseDataSourceConnectionFactoryBean();
 		dbUnitDatabaseConnection.setDatabaseConfig(dbUnitDatabaseConfig);
 		dbUnitDatabaseConnection.setDataSource(dataSource);
 		dbUnitDatabaseConnection.setSchema("biodata");
 		return dbUnitDatabaseConnection;
 	}
-    
+	
 }

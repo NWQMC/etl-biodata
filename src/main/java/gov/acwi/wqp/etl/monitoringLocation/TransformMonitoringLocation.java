@@ -27,9 +27,6 @@ public class TransformMonitoringLocation {
 
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
-
-//	@Autowired
-//	private DataSource dataSource;
     
     @Autowired
 	@Qualifier("wqpDataSource")
@@ -51,9 +48,12 @@ public class TransformMonitoringLocation {
 	public JdbcCursorItemReader<BiodataStation> monitoringLocationReader() {
 		return new JdbcCursorItemReaderBuilder<BiodataStation>()
 				.dataSource(this.biodataDataSource)
-				.name("organizationReader")
+				.name("monitoringLocationReader")
 				//TODo cleanup for PostgreSQL
-				.sql("select biodata_station.*, biodata_org_project.*, biodata_site_type_to_primary.primary_site_type resolved_monitoring_location_type_name from biodata_station join biodata_org_project on 1=1 left join biodata_site_type_to_primary on biodata_station.monitoring_location_type_name = biodata_site_type_to_primary.site_type")
+//				.sql("select biodata_station.*, biodata_org_project.*, biodata_site_type_to_primary.primary_site_type resolved_monitoring_location_type_name from biodata_station join biodata_org_project on 1=1 left join biodata_site_type_to_primary on biodata_station.monitoring_location_type_name = biodata_site_type_to_primary.site_type")
+				
+				// THIS IS THE TRANSFORM_STATION.sql SELECT
+				.sql("select happy_bunnies.*, biodata_org_project.*, biodata_site_type_to_primary.primary_site_type resolved_monitoring_location_type_name from happy_bunnies join biodata_org_project on 1=1 left join biodata_site_type_to_primary on happy_bunnies.monitoring_location_type_name = biodata_site_type_to_primary.site_type")
 				.rowMapper(new BiodataStationRowMapper())
 				.build();
 	}
@@ -62,6 +62,8 @@ public class TransformMonitoringLocation {
 	public ItemWriter<MonitoringLocation> monitoringLocationWriter() {
 		JdbcBatchItemWriter<MonitoringLocation> itemWriter = new JdbcBatchItemWriter<MonitoringLocation>();
 		itemWriter.setDataSource(wqpDataSource);
+		
+		// THIS IS THE TRANSFORM_STATION.sql INSERT
 		itemWriter.setSql("insert "
 				+ " into station_swap_biodata (data_source_id, data_source, station_id, site_id, organization, site_type, huc, governmental_unit_code,"
 					+ " geom, station_name, organization_name, description_text, station_type_name, latitude, longitude, map_scale,"

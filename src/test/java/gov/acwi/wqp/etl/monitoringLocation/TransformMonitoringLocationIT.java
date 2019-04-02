@@ -66,11 +66,11 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
     
         6. end result from chs postgres station_biodata table
     */
-	@DatabaseSetup(     connection="wqp",       value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup(     connection="biodata",   value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
-	@DatabaseSetup(     connection="biodata",   value="classpath:/testData/biodata/station/bioShareSample.xml")
-	@DatabaseSetup(     connection="biodata",   value="classpath:/testData/biodata/station/bioShareSampleType.xml")
-	@ExpectedDatabase(  connection="wqp",       value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@DatabaseSetup(		connection="wqp",		value="classpath:/testResult/wqp/station/empty.xml")
+	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
+	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareSample.xml")
+	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareSampleType.xml")
+	@ExpectedDatabase(	connection="wqp",		value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void transformMonitoringLocationStepTest() {
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchStep("transformMonitoringLocationStep", testJobParameters);
