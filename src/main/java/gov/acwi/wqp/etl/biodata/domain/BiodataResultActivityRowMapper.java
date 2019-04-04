@@ -33,7 +33,7 @@ public class BiodataResultActivityRowMapper implements RowMapper<BiodataResult> 
 		arsResult.setOrganizationName(rs.getString(BiodataOrganizationRowMapper.ORGANIZATION_NAME_COLUMN_NAME));
 		arsResult.setProjectIdentifier(rs.getString(BiodataOrganizationRowMapper.PROJECT_IDENTIFIER_COLUMN_NAME));
 		arsResult.setProjectName(rs.getString(BiodataOrganizationRowMapper.PROJECT_NAME_COLUMN_NAME));
-		arsResult.setStationId(rs.getInt(BiodataStationRowMapper.STATION_ID_COLUMN_NAME));
+//		arsResult.setStationId(rs.getInt(BiodataStationRowMapper.STATION_ID));
 		arsResult.setSiteId(rs.getString(SITE_ID_COLUMN_NAME));
 		arsResult.setMonitoringLocationName(rs.getString(STATION_NAME_COLUMN_NAME));
 		arsResult.setResolvedMonitoringLocationTypeName(rs.getString(SITE_TYPE_COLUMN_NAME));

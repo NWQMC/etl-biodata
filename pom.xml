@@ -65,6 +65,14 @@
             <artifactId>wqp-etl-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+		<!-- avoid getter/setter boilerplate -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.4</version>
+			<type>jar</type>
+		</dependency>
+
 
         <!-- TEST DEPENDENCIES-->
         <dependency>

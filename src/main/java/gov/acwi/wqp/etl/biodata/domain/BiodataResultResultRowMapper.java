@@ -34,9 +34,9 @@ public class BiodataResultResultRowMapper implements RowMapper<BiodataResult> {
 		arsResult.setOrganizationName(rs.getString(BiodataOrganizationRowMapper.ORGANIZATION_NAME_COLUMN_NAME));
 		arsResult.setProjectIdentifier(rs.getString(BiodataOrganizationRowMapper.PROJECT_IDENTIFIER_COLUMN_NAME));
 		arsResult.setProjectName(rs.getString(BiodataOrganizationRowMapper.PROJECT_NAME_COLUMN_NAME));
-		arsResult.setStationId(rs.getInt(BiodataStationRowMapper.STATION_ID_COLUMN_NAME));
+//		arsResult.setStationId(rs.getInt(BiodataStationRowMapper.STATION_ID));
 		arsResult.setSiteId(rs.getString(BiodataResultActivityRowMapper.SITE_ID_COLUMN_NAME));
-		arsResult.setMonitoringLocationName(rs.getString(BiodataStationRowMapper.MONITORING_LOCATION_NAME_COLUMN_NAME));
+//		arsResult.setMonitoringLocationName(rs.getString(BiodataStationRowMapper.MONITORING_LOCATION_NAME_COLUMN_NAME));
 		arsResult.setResolvedMonitoringLocationTypeName(rs.getString(BiodataResultActivityRowMapper.SITE_TYPE_COLUMN_NAME));
 		arsResult.setHucTwelveDigitCode(rs.getString(BiodataResultActivityRowMapper.HUC_COLUMN_NAME));
 		arsResult.setGovernmentalUnitCode(rs.getString(BiodataResultActivityRowMapper.GOVERNMENTAL_UNIT_CODE_COLUMN_NAME));
