@@ -18,26 +18,40 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 
 		monitoringLocation.setDataSourceId(Application.DATA_SOURCE_ID);
 		monitoringLocation.setDataSource(Application.DATA_SOURCE);
-//		monitoringLocation.setStationId(biodataStation.getStationId());
-//		monitoringLocation.setSiteId(String.join("-", biodataStation.getOrganization(), biodataStation.getMonitoringLocationIdentifier()));
+		monitoringLocation.setStationId(biodataStation.getBiodataSiteId());
+		monitoringLocation.setSiteId(
+			String.join("-", biodataStation.getAgencyCd(), biodataStation.getSiteNo())
+		);
 		monitoringLocation.setOrganization(biodataStation.getOrganization());
-//		monitoringLocation.setSiteType(biodataStation.getResolvedMonitoringLocationTypeName() == null ? DEFAULT_SITE_TYPE : biodataStation.getResolvedMonitoringLocationTypeName());
-//		monitoringLocation.setHuc(biodataStation.getHucTwelveDigitCode() == null ? biodataStation.getHucEightDigitCode() : biodataStation.getHucTwelveDigitCode());
-//		monitoringLocation.setGovernmentalUnitCode(String.join(":", biodataStation.getCountryCode(), biodataStation.getStateCode(), biodataStation.getCountyCode()));
-//		monitoringLocation.setStationName(biodataStation.getMonitoringLocationName());
 		monitoringLocation.setOrganizationName(biodataStation.getOrganizationName());
-//		monitoringLocation.setDescriptionText(biodataStation.getMonitoringLocationDescriptionText());
-//		monitoringLocation.setStationTypeName(biodataStation.getMonitoringLocationTypeName());
-//		monitoringLocation.setLatitude(getBigDecimal(biodataStation.getLatitude()));
-//		monitoringLocation.setLongitude(getBigDecimal(biodataStation.getLongitude()));
+		monitoringLocation.setStationTypeName(biodataStation.getStationTypeName());
+		monitoringLocation.setElevationMethod(biodataStation.getElevationMethod());
+		monitoringLocation.setElevationUnit(biodataStation.getElevationUnit());
+		monitoringLocation.setElevationValue(biodataStation.getElevationValue());
+		monitoringLocation.setLatitude(getBigDecimal(biodataStation.getDecLatitude()));
+		monitoringLocation.setLongitude(getBigDecimal(biodataStation.getDecLongitude()));
 		monitoringLocation.setGeopositioningMethod(biodataStation.getGeopositioningMethod());
-//		monitoringLocation.setHdatumIdCode(biodataStation.getHdatumIdCode());
-//		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataStation.getDrainAreaValue()));
+		monitoringLocation.setGeopositionAccyUnit(biodataStation.getGeopositionAccyUnit());
+		monitoringLocation.setGeopositionAccyValue(biodataStation.getGeopositionAccyValue());
+//		monitoringLocation.setGovernmentalUnitCode(biodataStation.getGovernmentalUnitCode());
+		if (biodataStation.getGovernmentalUnitCode() == null) {
+			monitoringLocation.setGovernmentalUnitCode(String.join(":",biodataStation.getCountryCd(), biodataStation.getStateCd(), biodataStation.getCountyCd())); 
+		} else {
+			monitoringLocation.setGovernmentalUnitCode(biodataStation.getGovernmentalUnitCode());
+		} 
+		
+//		monitoringLocation.setGovernmentalUnitCode(biodataStation.getGovernmentalUnitCode() == null ? : );
+		monitoringLocation.setGovernmentalUnitCode(String.join(":", biodataStation.getCountryCd(), biodataStation.getStateCd(), biodataStation.getCountyCd()));
+		monitoringLocation.setHdatumIdCode(biodataStation.getCoordDatumCd());
+		monitoringLocation.setHuc(biodataStation.getHucCd());
+		monitoringLocation.setSiteType(biodataStation.getSiteTypeLongName());
+		monitoringLocation.setStationName(biodataStation.getStationNm());
+		monitoringLocation.setVdatumIdCode(biodataStation.getVdatumIdCode());
+		monitoringLocation.setVerticalAccuracyUnit(biodataStation.getVerticalAccuracyUnit());
+		monitoringLocation.setVerticalAccuracyValue(biodataStation.getVerticalAccuracyValue());
+		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataStation.getDrainAreaVa()));
 		monitoringLocation.setDrainAreaUnit(biodataStation.getDrainAreaUnit());
-		monitoringLocation.calculateGeom(
-				monitoringLocation.getLatitude(),
-				monitoringLocation.getLongitude(),
-				MonitoringLocation.DEFAULT_SRID);
+		monitoringLocation.setGeom(biodataStation.getGeoPoint());
 		return monitoringLocation;
 	}
 

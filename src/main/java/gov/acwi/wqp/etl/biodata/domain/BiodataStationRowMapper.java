@@ -2,6 +2,7 @@ package gov.acwi.wqp.etl.biodata.domain;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.postgis.PGgeometry;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -60,7 +61,7 @@ public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 		station.setCountryCd(rs.getString(COUNTRY_CD));
 		station.setStateCd(rs.getString(STATE_CD));
 		station.setCountyCd(rs.getString(COUNTY_CD));
-		station.setGeoPoint(rs.getString(GEO_POINT));
+		station.setGeoPoint( (PGgeometry) rs.getObject(GEO_POINT));
 		station.setStationNm(rs.getString(STATION_NM));
 		station.setOrganizationName(rs.getString(ORGANIZATION_NAME));
 		station.setStationTypeName(rs.getString(STATION_TYPE_NAME));

@@ -23,7 +23,7 @@ public class Application implements CommandLineRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
 	public static final String JOB_ID = "jobId";
-	public static final Integer DATA_SOURCE_ID = 1;
+	public static final Integer DATA_SOURCE_ID = 4;
 	public static final String DATA_SOURCE = "BIODATA";
 	public static final Integer ORGANIZATION_ID = 3000000;
 

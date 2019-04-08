@@ -58,6 +58,7 @@ select /*+ parallel(4) */
        station.organization,
        nvl(station.site_type, biodata_site.site_type_long_name) site_type,
        nvl(station.huc, biodata_site.huc_cd) huc,
+-- add this logic back into the processor
        nvl(station.governmental_unit_code, biodata_site.country_cd || ':' || biodata_site.state_cd || ':' || biodata_site.county_cd) governmental_unit_code,
        nvl(station.geom, sdo_cs.transform(geo_point, 4269)) geom,
        nvl(station.station_name, trim(biodata_site.station_nm)) station_name,
@@ -67,20 +68,25 @@ select /*+ parallel(4) */
        nvl(station.longitude, round(biodata_site.dec_longitude, 7)) longitude,
        station.map_scale,
        station.geopositioning_method,
+-- 	   check
        nvl(station.hdatum_id_code, nvl(biodata_site.coord_datum_cd, 'Unknown')) hdatum_id_code,
+	   -- add this logic back into the processor
        nvl(station.elevation_value,
            case when biodata_site.alt_datum_cd is not null then case when biodata_site.altitude = '.' then '0' else trim(biodata_site.altitude) end else null end
           ) elevation_value,
+	   -- add this logic back into the processor
        nvl(station.elevation_unit,
            case when biodata_site.altitude is not null and biodata_site.alt_datum_cd is not null then 'feet' else null end
           ) elevation_unit,
        station.elevation_method,
+-- add this logic back into the processor
        nvl(station.vdatum_id_code,
            case when biodata_site.altitude is not null then biodata_site.alt_datum_cd else null end
           ) vdatum_id_code,
        nvl(station.drain_area_value,
            to_number(biodata_site.drain_area_va)
           ) drain_area_value,
+-- add this logic back into the processor
        nvl(station.drain_area_unit,
            nvl2(biodata_site.drain_area_va, 'sq mi', null)
           ) drain_area_unit,

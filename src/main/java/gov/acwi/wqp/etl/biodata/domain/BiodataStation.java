@@ -2,6 +2,7 @@ package gov.acwi.wqp.etl.biodata.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.postgis.PGgeometry;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class BiodataStation {
 	private String countryCd;
 	private String stateCd;
 	private String countyCd;
-	private String geoPoint;
+	private PGgeometry geoPoint;
 	private String stationNm;
 	private String stationTypeName;
 	private String organizationName;

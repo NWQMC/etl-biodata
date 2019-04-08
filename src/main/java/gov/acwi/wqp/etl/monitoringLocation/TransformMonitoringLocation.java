@@ -70,7 +70,7 @@ public class TransformMonitoringLocation {
 "		       coalesce(station_nwis.longitude, round(biodata_site.dec_longitude, 7)) dec_longitude, " +
 "		       station_nwis.map_scale, " +
 "		       station_nwis.geopositioning_method, " +
-"		       coalesce(station_nwis.hdatum_id_code, biodata_site.coord_datum_cd) coord_datum_cd, " +
+"		       coalesce(station_nwis.hdatum_id_code, biodata_site.coord_datum_cd, 'Unknown') coord_datum_cd, " +
 "		       station_nwis.elevation_value, " +
 "		       station_nwis.elevation_unit, " +
 "		       station_nwis.elevation_method, " +
