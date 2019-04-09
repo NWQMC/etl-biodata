@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 	
 	public static final String BIODATA_SITE_ID = "biodata_site_id";
+	public static final String NWIS_SITE_ID = "site_id";
 	public static final String AGENCY_CD = "agency_cd";
 	public static final String SITE_NO = "site_no";
 	public static final String ORGANIZATION = "organization";
@@ -30,8 +31,11 @@ public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 	public static final String ELEVATION_VALUE = "elevation_value";
 	public static final String ELEVATION_UNIT = "elevation_unit";
 	public static final String ELEVATION_METHOD = "elevation_method";
+	public static final String ALT_DATUM_CD = "alt_datum_cd";
+	public static final String ALTITUDE = "altitude";
 	public static final String VDATUM_ID_CODE = "vdatum_id_code";
 	public static final String DRAIN_AREA_VA = "drain_area_va";
+	public static final String BIODATA_DRAIN_AREA_VA = "biodata_drain_area_va";
 	public static final String DRAIN_AREA_UNIT = "drain_area_unit";
 	public static final String CONTRIB_DRAIN_AREA_VALUE = "contrib_drain_area_value";
 	public static final String CONTRIB_DRAIN_AREA_UNIT = "contrib_drain_area_unit";
@@ -52,6 +56,7 @@ public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 	public BiodataStation mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BiodataStation station = new BiodataStation();
 		station.setBiodataSiteId(rs.getInt(BIODATA_SITE_ID));
+		station.setNwisSiteId(rs.getString(NWIS_SITE_ID));
 		station.setAgencyCd(rs.getString(AGENCY_CD));
 		station.setSiteNo(rs.getString(SITE_NO));
 		station.setOrganization(rs.getString(ORGANIZATION));
@@ -70,11 +75,14 @@ public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 		station.setMapScale(rs.getString(MAP_SCALE));
 		station.setGeopositioningMethod(rs.getString(GEOPOSITIONING_METHOD));
 		station.setCoordDatumCd(rs.getString(COORD_DATUM_CD));
+		station.setAltDatumCd(rs.getString(ALT_DATUM_CD));
+		station.setAltitude(rs.getString(ALTITUDE));
 		station.setElevationValue(rs.getString(ELEVATION_VALUE));
 		station.setElevationUnit(rs.getString(ELEVATION_UNIT));
 		station.setElevationMethod(rs.getString(ELEVATION_METHOD));
 		station.setVdatumIdCode(rs.getString(VDATUM_ID_CODE));
 		station.setDrainAreaVa(rs.getString(DRAIN_AREA_VA));
+		station.setBiodataDrainAreaVa(rs.getString(BIODATA_DRAIN_AREA_VA));
 		station.setDrainAreaUnit(rs.getString(DRAIN_AREA_UNIT));
 		station.setContribDrainAreaValue(rs.getString(CONTRIB_DRAIN_AREA_VALUE));
 		station.setContribDrainAreaUnit(rs.getString(CONTRIB_DRAIN_AREA_UNIT));

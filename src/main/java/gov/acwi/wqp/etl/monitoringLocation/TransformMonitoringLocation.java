@@ -52,6 +52,7 @@ public class TransformMonitoringLocation {
 				.sql("select  " +
 "		       4 data_source_id, " +
 "		       'BIODATA' data_source, " +
+"			   station_nwis.site_id, " +
 "		       biodata_site.biodata_site_id, " +
 "		       biodata_site.agency_cd," +
 "			   biodata_site.site_no, " +
@@ -73,9 +74,12 @@ public class TransformMonitoringLocation {
 "		       coalesce(station_nwis.hdatum_id_code, biodata_site.coord_datum_cd, 'Unknown') coord_datum_cd, " +
 "		       station_nwis.elevation_value, " +
 "		       station_nwis.elevation_unit, " +
+"			   biodata_site.altitude, " + 
+"			   biodata_site.alt_datum_cd, " +
 "		       station_nwis.elevation_method, " +
 "		       station_nwis.vdatum_id_code, " +
 "		       coalesce(station_nwis.drain_area_value, to_number(biodata_site.drain_area_va, '12345678')) drain_area_va, " +
+"			   biodata_site.drain_area_va biodata_drain_area_va, " +
 "		       station_nwis.drain_area_unit, " +
 "		       station_nwis.contrib_drain_area_value, " +
 "		       station_nwis.contrib_drain_area_unit, " +

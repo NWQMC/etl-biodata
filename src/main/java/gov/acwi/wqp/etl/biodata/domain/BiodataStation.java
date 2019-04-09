@@ -9,6 +9,7 @@ import org.postgis.PGgeometry;
 public class BiodataStation {
 	
 	private Integer biodataSiteId;
+	private String nwisSiteId;
 	private String agencyCd;
 	private String siteNo;
 	private String organization;
@@ -31,8 +32,11 @@ public class BiodataStation {
 	private String elevationValue;
 	private String elevationUnit;
 	private String elevationMethod;
+	private String altDatumCd;
+	private String altitude;
 	private String vdatumIdCode;
 	private String drainAreaVa;
+	private String biodataDrainAreaVa;
 	private String drainAreaUnit;
 	private String contribDrainAreaValue;
 	private String contribDrainAreaUnit;
