@@ -25,8 +25,6 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import gov.acwi.wqp.etl.BiodataBaseFlowIT;
-import gov.acwi.wqp.etl.monitoringLocation.index.BuildMonitoringLocationIndexesFlowIT;
-import gov.acwi.wqp.etl.monitoringLocation.table.SetupMonitoringLocationSwapTableFlowIT;
 
 public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 
@@ -67,20 +65,12 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 	}
 
 	@Test
-	@DatabaseSetup(value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup(value="classpath:/testData/ars/arsSiteTypeToPrimary.xml")
-	@DatabaseSetup(value="classpath:/testData/wqp/station/stationOld.xml")
-	@DatabaseSetup(value="classpath:/testResult/ars/arsOrgProject.xml")
-	@DatabaseSetup(value="classpath:/testResult/ars/arsStation.xml")
-	@ExpectedDatabase(value="classpath:/testResult/wqp/monitoringLocation/indexes/all.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
-				table=BuildMonitoringLocationIndexesFlowIT.EXPECTED_DATABASE_TABLE,
-				query=BuildMonitoringLocationIndexesFlowIT.EXPECTED_DATABASE_QUERY)
-	@ExpectedDatabase(connection="pg", value="classpath:/testResult/wqp/monitoringLocation/create.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
-				table=SetupMonitoringLocationSwapTableFlowIT.EXPECTED_DATABASE_TABLE,
-				query=SetupMonitoringLocationSwapTableFlowIT.EXPECTED_DATABASE_QUERY)
-	@ExpectedDatabase(value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@DatabaseSetup(		connection="wqp",		value="classpath:/testResult/wqp/station/empty.xml")
+	@DatabaseSetup(		connection="wqp",		value="classpath:/testData/nwis/station/nwisStation.xml")
+	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
+	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareSample.xml")
+	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareSampleType.xml")
+	@ExpectedDatabase(	connection="wqp",		value="classpath:/testResult/wqp/station/station.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void monitoringLocationFlowTest() {
 		Job monitoringLocationFlowTest = jobBuilderFactory.get("monitoringLocationFlowTest")
 					.start(monitoringLocationFlow)

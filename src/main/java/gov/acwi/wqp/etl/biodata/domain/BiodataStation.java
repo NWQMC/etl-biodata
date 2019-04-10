@@ -1,11 +1,9 @@
 package gov.acwi.wqp.etl.biodata.domain;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.postgis.PGgeometry;
 
 @Data
-@NoArgsConstructor
 public class BiodataStation {
 	
 	private Integer biodataSiteId;

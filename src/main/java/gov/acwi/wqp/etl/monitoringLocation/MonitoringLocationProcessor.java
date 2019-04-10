@@ -11,6 +11,9 @@ import gov.acwi.wqp.etl.biodata.domain.BiodataStation;
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation, MonitoringLocation>{
 
 	public static final String DEFAULT_SITE_TYPE = "Not Assigned";
+	public static final String DEFAULT_ELEVATION_UNIT = "feet";
+	public static final String DEFAULT_ELEVATION_VALUE = "0";
+	public static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
 
 	@Override
 	public MonitoringLocation process(BiodataStation biodataStation) throws Exception {
@@ -48,7 +51,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 		String elevationUnit = biodataStation.getElevationUnit();
 		if (elevationUnit == null) {
 			monitoringLocation.setElevationUnit(biodataStation.getAltDatumCd() != null && biodataStation.getAltitude() != null
-					? "feet"
+					? DEFAULT_ELEVATION_UNIT
 					: null);
 		}
 		monitoringLocation.setElevationUnit(elevationUnit);
@@ -57,7 +60,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 		if (elevationValue == null) {
 			if (biodataStation.getAltDatumCd() != null) {
 				elevationValue = biodataStation.getAltitude().equals(".") 
-						? "0" 
+						? DEFAULT_ELEVATION_VALUE 
 						: biodataStation.getAltitude().trim();
 			}
 		}
@@ -74,7 +77,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 		String drainAreaUnit = biodataStation.getDrainAreaUnit();
 		if (drainAreaUnit == null) {
 			drainAreaUnit = biodataStation.getBiodataDrainAreaVa() != null 
-					? "sq mi" 
+					? DEFAULT_DRAIN_AREA_UNIT 
 					: null;
 		}
 		monitoringLocation.setDrainAreaUnit(drainAreaUnit);
