@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.util.FileCopyUtils;
 
-
 @Configuration
 public class TransformMonitoringLocation {
 
@@ -122,5 +121,4 @@ public class TransformMonitoringLocation {
 				.next(buildMonitoringLocationIndexesFlow)
 				.build();
 	}
-
 }

@@ -10,7 +10,6 @@ import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
 
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
 
-	public static final String DEFAULT_SITE_TYPE = "Not Assigned";
 	public static final String DEFAULT_ELEVATION_UNIT = "feet";
 	public static final String DEFAULT_ELEVATION_VALUE = "0";
 	public static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
