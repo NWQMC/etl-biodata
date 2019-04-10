@@ -36,10 +36,6 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataStation.getDrainAreaVa()));
 		monitoringLocation.setGeom(biodataStation.getGeoPoint());
 		monitoringLocation.setElevationMethod(biodataStation.getElevationMethod());
-		monitoringLocation.setElevationUnit(biodataStation.getElevationUnit());
-		monitoringLocation.setElevationValue(biodataStation.getElevationValue());
-		monitoringLocation.setVdatumIdCode(biodataStation.getVdatumIdCode());
-		monitoringLocation.setDrainAreaUnit(biodataStation.getDrainAreaUnit());
 		
 		monitoringLocation.setSiteId(biodataStation.getNwisSiteId() == null
 				? String.join("-", biodataStation.getAgencyCd(), biodataStation.getSiteNo())
@@ -49,31 +45,33 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 				? String.join(":",biodataStation.getCountryCd(), biodataStation.getStateCd(), biodataStation.getCountyCd())
 				: biodataStation.getGovernmentalUnitCode());
 		
-		if (monitoringLocation.getElevationUnit() == null) {
+		String elevationUnit = biodataStation.getElevationUnit();
+		if (elevationUnit == null) {
 			monitoringLocation.setElevationUnit(biodataStation.getAltDatumCd() != null && biodataStation.getAltitude() != null
 					? "feet"
 					: null);
 		}
+		monitoringLocation.setElevationUnit(elevationUnit);
 		
-		if (monitoringLocation.getElevationValue() == null) {
+		String elevationValue = biodataStation.getElevationValue();
+		if (elevationValue == null) {
 			if (biodataStation.getAltDatumCd() != null) {
-				monitoringLocation.setElevationValue(biodataStation.getAltitude().equals(".") 
-						? "0" 
-						: biodataStation.getAltitude().trim());
+				elevationValue = biodataStation.getAltitude().equals(".") ? "0" : biodataStation.getAltitude().trim();
 			}
 		}
+		monitoringLocation.setElevationValue(elevationValue);
 		
-		if (monitoringLocation.getVdatumIdCode() == null) {
-			monitoringLocation.setVdatumIdCode(biodataStation.getAltitude() != null 
-					? biodataStation.getAltDatumCd() 
-					: null);
+		String vDatumIdCode = biodataStation.getVdatumIdCode();
+		if (vDatumIdCode == null) {
+			vDatumIdCode = biodataStation.getAltitude() != null ? biodataStation.getAltDatumCd() : null;
 		} 
+		monitoringLocation.setVdatumIdCode(vDatumIdCode);
 		
-		if (monitoringLocation.getDrainAreaUnit() == null) {
-			monitoringLocation.setDrainAreaUnit(biodataStation.getBiodataDrainAreaVa() != null 
-					? "sq mi" 
-					: null);
+		String drainAreaUnit = biodataStation.getDrainAreaUnit();
+		if (drainAreaUnit == null) {
+			drainAreaUnit = biodataStation.getBiodataDrainAreaVa() != null ? "sq mi" : null;
 		}
+		monitoringLocation.setDrainAreaUnit(drainAreaUnit);
 
 		return monitoringLocation;
 	}
