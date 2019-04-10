@@ -4,7 +4,7 @@ import lombok.Data;
 import org.postgis.PGgeometry;
 
 @Data
-public class BiodataStation {
+public class BiodataMonitoringLocation {
 	
 	private Integer biodataSiteId;
 	private String nwisSiteId;

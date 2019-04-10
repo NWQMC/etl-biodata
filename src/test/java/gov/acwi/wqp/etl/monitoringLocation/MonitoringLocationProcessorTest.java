@@ -1,6 +1,6 @@
 package gov.acwi.wqp.etl.monitoringLocation;
 
-import gov.acwi.wqp.etl.biodata.domain.BiodataStation;
+import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,10 +39,10 @@ public class MonitoringLocationProcessorTest {
 	@Test
 	public void testProcess() throws Exception {
 		System.out.println("process");
-		BiodataStation biodataStation = null;
+		BiodataMonitoringLocation biodataML = null;
 		MonitoringLocationProcessor instance = new MonitoringLocationProcessor();
 		MonitoringLocation expResult = null;
-		MonitoringLocation result = instance.process(biodataStation);
+		MonitoringLocation result = instance.process(biodataML);
 		assertEquals(expResult, result);
 		// TODO review the generated test code and remove the default call to fail.
 		fail("The test case is a prototype.");

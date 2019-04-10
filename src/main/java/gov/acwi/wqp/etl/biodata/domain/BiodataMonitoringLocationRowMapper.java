@@ -6,7 +6,7 @@ import org.postgis.PGgeometry;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
+public class BiodataMonitoringLocationRowMapper implements RowMapper<BiodataMonitoringLocation> {
 	
 	public static final String BIODATA_SITE_ID = "biodata_site_id";
 	public static final String NWIS_SITE_ID = "site_id";
@@ -53,52 +53,52 @@ public class BiodataStationRowMapper implements RowMapper<BiodataStation> {
 	public static final String HOLE_DEPTH_UNIT = "hole_depth_unit";
 
 	@Override
-	public BiodataStation mapRow(ResultSet rs, int rowNum) throws SQLException {
-		BiodataStation station = new BiodataStation();
-		station.setBiodataSiteId(rs.getInt(BIODATA_SITE_ID));
-		station.setNwisSiteId(rs.getString(NWIS_SITE_ID));
-		station.setAgencyCd(rs.getString(AGENCY_CD));
-		station.setSiteNo(rs.getString(SITE_NO));
-		station.setOrganization(rs.getString(ORGANIZATION));
-		station.setSiteTypeLongName(rs.getString(SITE_TYPE_LONG_NAME));
-		station.setHucCd(rs.getString(HUC_CD));
-		station.setGovernmentalUnitCode(rs.getString(GOVERNMENTAL_UNIT_CODE));
-		station.setCountryCd(rs.getString(COUNTRY_CD));
-		station.setStateCd(rs.getString(STATE_CD));
-		station.setCountyCd(rs.getString(COUNTY_CD));
-		station.setGeoPoint( (PGgeometry) rs.getObject(GEO_POINT));
-		station.setStationNm(rs.getString(STATION_NM));
-		station.setOrganizationName(rs.getString(ORGANIZATION_NAME));
-		station.setStationTypeName(rs.getString(STATION_TYPE_NAME));
-		station.setDecLatitude(rs.getString(DEC_LATITUDE));
-		station.setDecLongitude(rs.getString(DEC_LONGITUDE));
-		station.setMapScale(rs.getString(MAP_SCALE));
-		station.setGeopositioningMethod(rs.getString(GEOPOSITIONING_METHOD));
-		station.setCoordDatumCd(rs.getString(COORD_DATUM_CD));
-		station.setAltDatumCd(rs.getString(ALT_DATUM_CD));
-		station.setAltitude(rs.getString(ALTITUDE));
-		station.setElevationValue(rs.getString(ELEVATION_VALUE));
-		station.setElevationUnit(rs.getString(ELEVATION_UNIT));
-		station.setElevationMethod(rs.getString(ELEVATION_METHOD));
-		station.setVdatumIdCode(rs.getString(VDATUM_ID_CODE));
-		station.setDrainAreaVa(rs.getString(DRAIN_AREA_VA));
-		station.setBiodataDrainAreaVa(rs.getString(BIODATA_DRAIN_AREA_VA));
-		station.setDrainAreaUnit(rs.getString(DRAIN_AREA_UNIT));
-		station.setContribDrainAreaValue(rs.getString(CONTRIB_DRAIN_AREA_VALUE));
-		station.setContribDrainAreaUnit(rs.getString(CONTRIB_DRAIN_AREA_UNIT));
-		station.setGeopositionAccyValue(rs.getString(GEOPOSITION_ACCY_VALUE));
-		station.setGeopositionAccyUnit(rs.getString(GEOPOSITION_ACCY_UNIT));
-		station.setVerticalAccuracyValue(rs.getString(VERTICAL_ACCURACY_VALUE));
-		station.setVerticalAccuracyUnit(rs.getString(VERTICAL_ACCURACY_UNIT));
-		station.setNatAqfrName(rs.getString(NAT_AQFR_NAME));
-		station.setAqfrName(rs.getString(AQFR_NAME));
-		station.setAqfrTypeName(rs.getString(AQFR_TYPE_NAME));
-		station.setConstructionDate(rs.getString(CONSTRUCTION_DATE));
-		station.setWellDepthValue(rs.getString(WELL_DEPTH_VALUE));
-		station.setWellDepthUnit(rs.getString(WELL_DEPTH_UNIT));
-		station.setHoleDepthValue(rs.getString(HOLE_DEPTH_VALUE));
-		station.setHoleDepthUnit(rs.getString(HOLE_DEPTH_UNIT));
-		return station;
+	public BiodataMonitoringLocation mapRow(ResultSet rs, int rowNum) throws SQLException {
+		BiodataMonitoringLocation biodataML = new BiodataMonitoringLocation();
+		biodataML.setBiodataSiteId(rs.getInt(BIODATA_SITE_ID));
+		biodataML.setNwisSiteId(rs.getString(NWIS_SITE_ID));
+		biodataML.setAgencyCd(rs.getString(AGENCY_CD));
+		biodataML.setSiteNo(rs.getString(SITE_NO));
+		biodataML.setOrganization(rs.getString(ORGANIZATION));
+		biodataML.setSiteTypeLongName(rs.getString(SITE_TYPE_LONG_NAME));
+		biodataML.setHucCd(rs.getString(HUC_CD));
+		biodataML.setGovernmentalUnitCode(rs.getString(GOVERNMENTAL_UNIT_CODE));
+		biodataML.setCountryCd(rs.getString(COUNTRY_CD));
+		biodataML.setStateCd(rs.getString(STATE_CD));
+		biodataML.setCountyCd(rs.getString(COUNTY_CD));
+		biodataML.setGeoPoint( (PGgeometry) rs.getObject(GEO_POINT));
+		biodataML.setStationNm(rs.getString(STATION_NM));
+		biodataML.setOrganizationName(rs.getString(ORGANIZATION_NAME));
+		biodataML.setStationTypeName(rs.getString(STATION_TYPE_NAME));
+		biodataML.setDecLatitude(rs.getString(DEC_LATITUDE));
+		biodataML.setDecLongitude(rs.getString(DEC_LONGITUDE));
+		biodataML.setMapScale(rs.getString(MAP_SCALE));
+		biodataML.setGeopositioningMethod(rs.getString(GEOPOSITIONING_METHOD));
+		biodataML.setCoordDatumCd(rs.getString(COORD_DATUM_CD));
+		biodataML.setAltDatumCd(rs.getString(ALT_DATUM_CD));
+		biodataML.setAltitude(rs.getString(ALTITUDE));
+		biodataML.setElevationValue(rs.getString(ELEVATION_VALUE));
+		biodataML.setElevationUnit(rs.getString(ELEVATION_UNIT));
+		biodataML.setElevationMethod(rs.getString(ELEVATION_METHOD));
+		biodataML.setVdatumIdCode(rs.getString(VDATUM_ID_CODE));
+		biodataML.setDrainAreaVa(rs.getString(DRAIN_AREA_VA));
+		biodataML.setBiodataDrainAreaVa(rs.getString(BIODATA_DRAIN_AREA_VA));
+		biodataML.setDrainAreaUnit(rs.getString(DRAIN_AREA_UNIT));
+		biodataML.setContribDrainAreaValue(rs.getString(CONTRIB_DRAIN_AREA_VALUE));
+		biodataML.setContribDrainAreaUnit(rs.getString(CONTRIB_DRAIN_AREA_UNIT));
+		biodataML.setGeopositionAccyValue(rs.getString(GEOPOSITION_ACCY_VALUE));
+		biodataML.setGeopositionAccyUnit(rs.getString(GEOPOSITION_ACCY_UNIT));
+		biodataML.setVerticalAccuracyValue(rs.getString(VERTICAL_ACCURACY_VALUE));
+		biodataML.setVerticalAccuracyUnit(rs.getString(VERTICAL_ACCURACY_UNIT));
+		biodataML.setNatAqfrName(rs.getString(NAT_AQFR_NAME));
+		biodataML.setAqfrName(rs.getString(AQFR_NAME));
+		biodataML.setAqfrTypeName(rs.getString(AQFR_TYPE_NAME));
+		biodataML.setConstructionDate(rs.getString(CONSTRUCTION_DATE));
+		biodataML.setWellDepthValue(rs.getString(WELL_DEPTH_VALUE));
+		biodataML.setWellDepthUnit(rs.getString(WELL_DEPTH_UNIT));
+		biodataML.setHoleDepthValue(rs.getString(HOLE_DEPTH_VALUE));
+		biodataML.setHoleDepthUnit(rs.getString(HOLE_DEPTH_UNIT));
+		return biodataML;
 	}
 
 }

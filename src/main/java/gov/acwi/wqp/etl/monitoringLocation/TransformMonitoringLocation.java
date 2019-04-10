@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import gov.acwi.wqp.etl.biodata.domain.BiodataStation;
-import gov.acwi.wqp.etl.biodata.domain.BiodataStationRowMapper;
+import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
+import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocationRowMapper;
 
 
 @Configuration
@@ -45,8 +45,8 @@ public class TransformMonitoringLocation {
 	private Flow buildMonitoringLocationIndexesFlow;
 
 	@Bean
-	public JdbcCursorItemReader<BiodataStation> monitoringLocationReader() {
-		return new JdbcCursorItemReaderBuilder<BiodataStation>()
+	public JdbcCursorItemReader<BiodataMonitoringLocation> monitoringLocationReader() {
+		return new JdbcCursorItemReaderBuilder<BiodataMonitoringLocation>()
 				.dataSource(this.biodataDataSource)
 				.name("monitoringLocationReader")
 				.sql("select  " +
@@ -108,7 +108,7 @@ public class TransformMonitoringLocation {
 "		                      sample_type.data_category_code = 'FSH' and " +
 "		                      biodata_site.data_release_category = 'Public' and " +
 "		                      sample.data_release_category = 'Public');")
-				.rowMapper(new BiodataStationRowMapper())
+				.rowMapper(new BiodataMonitoringLocationRowMapper())
 				.build();
 	}
 
@@ -142,7 +142,7 @@ public class TransformMonitoringLocation {
 	public Step transformMonitoringLocationStep() {
 		return stepBuilderFactory
 				.get("transformMonitoringLocationStep")
-				.<BiodataStation, MonitoringLocation>chunk(10)
+				.<BiodataMonitoringLocation, MonitoringLocation>chunk(10)
 				.reader(monitoringLocationReader())
 				.processor(new MonitoringLocationProcessor())
 				.writer(monitoringLocationWriter())

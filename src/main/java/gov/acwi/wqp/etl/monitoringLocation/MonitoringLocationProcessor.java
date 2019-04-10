@@ -6,9 +6,9 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
-import gov.acwi.wqp.etl.biodata.domain.BiodataStation;
+import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
 
-public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation, MonitoringLocation>{
+public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
 
 	public static final String DEFAULT_SITE_TYPE = "Not Assigned";
 	public static final String DEFAULT_ELEVATION_UNIT = "feet";
@@ -16,67 +16,67 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 	public static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
 
 	@Override
-	public MonitoringLocation process(BiodataStation biodataStation) throws Exception {
+	public MonitoringLocation process(BiodataMonitoringLocation biodataML) throws Exception {
 		MonitoringLocation monitoringLocation = new MonitoringLocation();
 
 		monitoringLocation.setDataSourceId(Application.DATA_SOURCE_ID);
 		monitoringLocation.setDataSource(Application.DATA_SOURCE);
-		monitoringLocation.setStationId(biodataStation.getBiodataSiteId());
-		monitoringLocation.setOrganization(biodataStation.getOrganization());
-		monitoringLocation.setOrganizationName(biodataStation.getOrganizationName());
-		monitoringLocation.setStationTypeName(biodataStation.getStationTypeName());
-		monitoringLocation.setLatitude(getBigDecimal(biodataStation.getDecLatitude()));
-		monitoringLocation.setLongitude(getBigDecimal(biodataStation.getDecLongitude()));
-		monitoringLocation.setGeopositioningMethod(biodataStation.getGeopositioningMethod());
-		monitoringLocation.setGeopositionAccyUnit(biodataStation.getGeopositionAccyUnit());
-		monitoringLocation.setGeopositionAccyValue(biodataStation.getGeopositionAccyValue());
-		monitoringLocation.setHdatumIdCode(biodataStation.getCoordDatumCd());
-		monitoringLocation.setHuc(biodataStation.getHucCd());
-		monitoringLocation.setSiteType(biodataStation.getSiteTypeLongName());
-		monitoringLocation.setStationName(biodataStation.getStationNm());
-		monitoringLocation.setVerticalAccuracyUnit(biodataStation.getVerticalAccuracyUnit());
-		monitoringLocation.setVerticalAccuracyValue(biodataStation.getVerticalAccuracyValue());
-		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataStation.getDrainAreaVa()));
-		monitoringLocation.setGeom(biodataStation.getGeoPoint());
-		monitoringLocation.setElevationMethod(biodataStation.getElevationMethod());
+		monitoringLocation.setStationId(biodataML.getBiodataSiteId());
+		monitoringLocation.setOrganization(biodataML.getOrganization());
+		monitoringLocation.setOrganizationName(biodataML.getOrganizationName());
+		monitoringLocation.setStationTypeName(biodataML.getStationTypeName());
+		monitoringLocation.setLatitude(getBigDecimal(biodataML.getDecLatitude()));
+		monitoringLocation.setLongitude(getBigDecimal(biodataML.getDecLongitude()));
+		monitoringLocation.setGeopositioningMethod(biodataML.getGeopositioningMethod());
+		monitoringLocation.setGeopositionAccyUnit(biodataML.getGeopositionAccyUnit());
+		monitoringLocation.setGeopositionAccyValue(biodataML.getGeopositionAccyValue());
+		monitoringLocation.setHdatumIdCode(biodataML.getCoordDatumCd());
+		monitoringLocation.setHuc(biodataML.getHucCd());
+		monitoringLocation.setSiteType(biodataML.getSiteTypeLongName());
+		monitoringLocation.setStationName(biodataML.getStationNm());
+		monitoringLocation.setVerticalAccuracyUnit(biodataML.getVerticalAccuracyUnit());
+		monitoringLocation.setVerticalAccuracyValue(biodataML.getVerticalAccuracyValue());
+		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataML.getDrainAreaVa()));
+		monitoringLocation.setGeom(biodataML.getGeoPoint());
+		monitoringLocation.setElevationMethod(biodataML.getElevationMethod());
 		
-		monitoringLocation.setSiteId(biodataStation.getNwisSiteId() == null
-				? String.join("-", biodataStation.getAgencyCd(), biodataStation.getSiteNo())
-				: biodataStation.getNwisSiteId());
+		monitoringLocation.setSiteId(biodataML.getNwisSiteId() == null
+				? String.join("-", biodataML.getAgencyCd(), biodataML.getSiteNo())
+				: biodataML.getNwisSiteId());
 		
-		monitoringLocation.setGovernmentalUnitCode(biodataStation.getGovernmentalUnitCode() == null 
-				? String.join(":",biodataStation.getCountryCd(), biodataStation.getStateCd(), biodataStation.getCountyCd())
-				: biodataStation.getGovernmentalUnitCode());
+		monitoringLocation.setGovernmentalUnitCode(biodataML.getGovernmentalUnitCode() == null 
+				? String.join(":",biodataML.getCountryCd(), biodataML.getStateCd(), biodataML.getCountyCd())
+				: biodataML.getGovernmentalUnitCode());
 		
-		String elevationUnit = biodataStation.getElevationUnit();
+		String elevationUnit = biodataML.getElevationUnit();
 		if (elevationUnit == null) {
-			monitoringLocation.setElevationUnit(biodataStation.getAltDatumCd() != null && biodataStation.getAltitude() != null
+			monitoringLocation.setElevationUnit(biodataML.getAltDatumCd() != null && biodataML.getAltitude() != null
 					? DEFAULT_ELEVATION_UNIT
 					: null);
 		}
 		monitoringLocation.setElevationUnit(elevationUnit);
 		
-		String elevationValue = biodataStation.getElevationValue();
+		String elevationValue = biodataML.getElevationValue();
 		if (elevationValue == null) {
-			if (biodataStation.getAltDatumCd() != null) {
-				elevationValue = biodataStation.getAltitude().equals(".") 
+			if (biodataML.getAltDatumCd() != null) {
+				elevationValue = biodataML.getAltitude().equals(".") 
 						? DEFAULT_ELEVATION_VALUE 
-						: biodataStation.getAltitude().trim();
+						: biodataML.getAltitude().trim();
 			}
 		}
 		monitoringLocation.setElevationValue(elevationValue);
 		
-		String vDatumIdCode = biodataStation.getVdatumIdCode();
+		String vDatumIdCode = biodataML.getVdatumIdCode();
 		if (vDatumIdCode == null) {
-			vDatumIdCode = biodataStation.getAltitude() != null 
-					? biodataStation.getAltDatumCd() 
+			vDatumIdCode = biodataML.getAltitude() != null 
+					? biodataML.getAltDatumCd() 
 					: null;
 		} 
 		monitoringLocation.setVdatumIdCode(vDatumIdCode);
 		
-		String drainAreaUnit = biodataStation.getDrainAreaUnit();
+		String drainAreaUnit = biodataML.getDrainAreaUnit();
 		if (drainAreaUnit == null) {
-			drainAreaUnit = biodataStation.getBiodataDrainAreaVa() != null 
+			drainAreaUnit = biodataML.getBiodataDrainAreaVa() != null 
 					? DEFAULT_DRAIN_AREA_UNIT 
 					: null;
 		}
