@@ -56,20 +56,26 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataStation
 		String elevationValue = biodataStation.getElevationValue();
 		if (elevationValue == null) {
 			if (biodataStation.getAltDatumCd() != null) {
-				elevationValue = biodataStation.getAltitude().equals(".") ? "0" : biodataStation.getAltitude().trim();
+				elevationValue = biodataStation.getAltitude().equals(".") 
+						? "0" 
+						: biodataStation.getAltitude().trim();
 			}
 		}
 		monitoringLocation.setElevationValue(elevationValue);
 		
 		String vDatumIdCode = biodataStation.getVdatumIdCode();
 		if (vDatumIdCode == null) {
-			vDatumIdCode = biodataStation.getAltitude() != null ? biodataStation.getAltDatumCd() : null;
+			vDatumIdCode = biodataStation.getAltitude() != null 
+					? biodataStation.getAltDatumCd() 
+					: null;
 		} 
 		monitoringLocation.setVdatumIdCode(vDatumIdCode);
 		
 		String drainAreaUnit = biodataStation.getDrainAreaUnit();
 		if (drainAreaUnit == null) {
-			drainAreaUnit = biodataStation.getBiodataDrainAreaVa() != null ? "sq mi" : null;
+			drainAreaUnit = biodataStation.getBiodataDrainAreaVa() != null 
+					? "sq mi" 
+					: null;
 		}
 		monitoringLocation.setDrainAreaUnit(drainAreaUnit);
 
