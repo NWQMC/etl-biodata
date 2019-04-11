@@ -8,10 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * TODO: ALL GENERATED CODE, MAKE TESTS FOR THIS CLASS
- */
 public class MonitoringLocationProcessorTest {
 	
 	public MonitoringLocationProcessorTest() {

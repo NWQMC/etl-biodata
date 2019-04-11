@@ -47,39 +47,39 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 				? String.join(":",biodataML.getCountryCd(), biodataML.getStateCd(), biodataML.getCountyCd())
 				: biodataML.getGovernmentalUnitCode());
 		
-		String elevationUnit = biodataML.getElevationUnit();
-		if (elevationUnit == null) {
+		if (biodataML.getElevationUnit() == null) {
 			monitoringLocation.setElevationUnit(biodataML.getAltDatumCd() != null && biodataML.getAltitude() != null
 					? DEFAULT_ELEVATION_UNIT
 					: null);
+		} else {
+			monitoringLocation.setElevationUnit(biodataML.getElevationUnit());
 		}
-		monitoringLocation.setElevationUnit(elevationUnit);
 		
-		String elevationValue = biodataML.getElevationValue();
-		if (elevationValue == null) {
+		if (biodataML.getElevationValue() == null) {
 			if (biodataML.getAltDatumCd() != null) {
-				elevationValue = biodataML.getAltitude().equals(".") 
+				monitoringLocation.setElevationValue(biodataML.getAltitude().equals(".") 
 						? DEFAULT_ELEVATION_VALUE 
-						: biodataML.getAltitude().trim();
+						: biodataML.getAltitude().trim());
 			}
+		} else {
+			monitoringLocation.setElevationValue(biodataML.getElevationValue());
 		}
-		monitoringLocation.setElevationValue(elevationValue);
 		
-		String vDatumIdCode = biodataML.getVdatumIdCode();
-		if (vDatumIdCode == null) {
-			vDatumIdCode = biodataML.getAltitude() != null 
+		if (biodataML.getVdatumIdCode() == null) {
+			monitoringLocation.setVdatumIdCode(biodataML.getAltitude() != null 
 					? biodataML.getAltDatumCd() 
-					: null;
-		} 
-		monitoringLocation.setVdatumIdCode(vDatumIdCode);
-		
-		String drainAreaUnit = biodataML.getDrainAreaUnit();
-		if (drainAreaUnit == null) {
-			drainAreaUnit = biodataML.getBiodataDrainAreaVa() != null 
-					? DEFAULT_DRAIN_AREA_UNIT 
-					: null;
+					: null);
+		} else {
+			monitoringLocation.setVdatumIdCode(biodataML.getVdatumIdCode());
 		}
-		monitoringLocation.setDrainAreaUnit(drainAreaUnit);
+		
+		if (biodataML.getDrainAreaUnit() == null) {
+			monitoringLocation.setDrainAreaUnit(biodataML.getBiodataDrainAreaVa() != null 
+					? DEFAULT_DRAIN_AREA_UNIT 
+					: null);
+		} else {
+			monitoringLocation.setDrainAreaUnit(biodataML.getDrainAreaUnit());
+		}
 
 		return monitoringLocation;
 	}
