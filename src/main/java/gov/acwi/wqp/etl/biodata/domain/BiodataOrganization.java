@@ -4,20 +4,6 @@ public class BiodataOrganization {
 
 	public BiodataOrganization() {}
 
-	public BiodataOrganization(WqxOrganization wqxOrganization) {
-		if (null != wqxOrganization) {
-			if (null != wqxOrganization.getOrganizationDescription()) {
-				this.organizationIdentifier = wqxOrganization.getOrganizationDescription().getOrganizationIdentifier();
-				this.organizationName = wqxOrganization.getOrganizationDescription().getOrganizationFormalName();
-			}
-			if (null != wqxOrganization.getProject()) {
-				this.projectIdentifier = wqxOrganization.getProject().getProjectIdentifier();
-				this.projectName = wqxOrganization.getProject().getProjectName();
-				this.projectDescriptionText = wqxOrganization.getProject().getProjectDescriptionText();
-			}
-		}
-	}
-
 	private String organizationIdentifier;
 	private String organizationName;
 	private String projectIdentifier;
