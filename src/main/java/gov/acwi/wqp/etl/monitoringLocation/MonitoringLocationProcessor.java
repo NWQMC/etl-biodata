@@ -7,8 +7,14 @@ import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
+import org.postgis.PGgeometry;
+import org.postgis.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
+	
+	private static final Logger LOG = LoggerFactory.getLogger(MonitoringLocation.class);
 
 	public static final String DEFAULT_ELEVATION_UNIT = "feet";
 	public static final String DEFAULT_ELEVATION_VALUE = "0";
@@ -60,6 +66,8 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 				monitoringLocation.setElevationValue(biodataML.getAltitude().equals(".") 
 						? DEFAULT_ELEVATION_VALUE 
 						: biodataML.getAltitude().trim());
+			} else {
+				monitoringLocation.setElevationValue(null);
 			}
 		} else {
 			monitoringLocation.setElevationValue(biodataML.getElevationValue());
@@ -91,5 +99,16 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 			return null;
 		}
 	}
-
+	
+	public static PGgeometry calculateGeom(BigDecimal latitude, BigDecimal longitude, int srid) {
+		Point point = null;
+		try {
+			point = new Point(longitude.doubleValue(), latitude.doubleValue());
+			point.setSrid(srid);
+			LOG.debug("Converted: from lat:{};long{} - to lat:{};long{}", latitude, longitude, point.getY(), point.getX());
+		} catch (Throwable e) {
+			LOG.info("Unable to determine point from coordinates:{}-{}", latitude, longitude);
+		}
+		return new PGgeometry(point);
+	}
 }
