@@ -21,10 +21,6 @@ public class BatchConfiguration {
 	private Flow orgDataFlow;
 
 	@Autowired
-	@Qualifier("projectDataFlow")
-	private Flow projectDataFlow;
-
-	@Autowired
 	@Qualifier("monitoringLocationFlow")
 	private Flow monitoringLocationFlow;
 
@@ -36,7 +32,7 @@ public class BatchConfiguration {
 	@Qualifier("resultFlow")
 	private Flow resultFlow;
 
-//  TODO: are the following three flows needed?
+//  TODO
 //	@Autowired
 //	@Qualifier("createSummariesFlow")
 //	private Flow createSummariesFlow;
@@ -54,19 +50,11 @@ public class BatchConfiguration {
 		return jobBuilderFactory.get("WQP_BIODATA_ETL")
 //				.incrementer(jobIncrementer)
 				.start(orgDataFlow)
-				.next(projectDataFlow)
-//				.next(projectObjectFlow)
 				.next(monitoringLocationFlow)
-//				.next(biologicalHabitatMetricFlow)
-//				.next(monitoringLocationObjectFlow)
 				.next(activityFlow)
-//				.next(activityObjectFlow)
-//				.next(activityMetricFlow)
 				.next(resultFlow)
-//				.next(resultObjectFlow)
-//				.next(projectMlWeightingFlow)
                 
-//              TODO: are the following three flows needed?
+//              TODO:
 //				.next(createSummariesFlow)
 //				.next(createCodesFlow)
 //				.next(databaseFinalizeFlow)
