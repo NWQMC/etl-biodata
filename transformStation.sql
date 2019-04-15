@@ -54,30 +54,20 @@ select /*+ parallel(4) */
        4 data_source_id,
        'BIODATA' data_source,
        biodata_site.biodata_site_id station_id,
--- add this logic back into the processor -CHECK
        nvl(station.site_id, biodata_site.agency_cd || '-' || biodata_site.site_no) site_id,
        station.organization,
--- coalesce -CHECK
        nvl(station.site_type, biodata_site.site_type_long_name) site_type,
--- coalesce -CHECK
        nvl(station.huc, biodata_site.huc_cd) huc,
--- add this logic back into the processor -CHECK
        nvl(station.governmental_unit_code, biodata_site.country_cd || ':' || biodata_site.state_cd || ':' || biodata_site.county_cd) governmental_unit_code,
--- coalesce - CHECK
        nvl(station.geom, sdo_cs.transform(geo_point, 4269)) geom,
--- coalesce - CHECK
        nvl(station.station_name, trim(biodata_site.station_nm)) station_name,
        station.organization_name,
        station.station_type_name,
--- coalesce - CHECK
        nvl(station.latitude, round(biodata_site.dec_latitude , 7)) latitude,
--- coalesce - CHECK
        nvl(station.longitude, round(biodata_site.dec_longitude, 7)) longitude,
        station.map_scale,
        station.geopositioning_method,
--- coalesce - CHECK
        nvl(station.hdatum_id_code, nvl(biodata_site.coord_datum_cd, 'Unknown')) hdatum_id_code,
--- add this logic back into the processor - CHECK
        nvl(station.elevation_value,
             case when biodata_site.alt_datum_cd is not null 
 				then 
@@ -88,7 +78,6 @@ select /*+ parallel(4) */
 				else null 
 			end
           ) elevation_value,
--- add this logic back into the processor - CHECK
        nvl(station.elevation_unit,
            case when biodata_site.altitude is not null and biodata_site.alt_datum_cd is not null 
 				then 'feet' 
@@ -96,18 +85,15 @@ select /*+ parallel(4) */
 			end
           ) elevation_unit,
        station.elevation_method,
--- add this logic back into the processor
        nvl(station.vdatum_id_code,
            case when biodata_site.altitude is not null
 				then biodata_site.alt_datum_cd 
 				else null 
 		   end
           ) vdatum_id_code,
--- coalesce - CHECK
        nvl(station.drain_area_value,
            to_number(biodata_site.drain_area_va)
           ) drain_area_value,
--- add this logic back into the processor
        nvl(station.drain_area_unit,
            nvl2(biodata_site.drain_area_va, 'sq mi', null)
           ) drain_area_unit,
