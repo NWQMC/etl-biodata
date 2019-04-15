@@ -16,23 +16,22 @@ public class BatchConfiguration {
 	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
 
-	@Autowired
-	@Qualifier("orgDataFlow")
-	private Flow orgDataFlow;
+//	@Autowired
+//	@Qualifier("orgDataFlow")
+//	private Flow orgDataFlow;
 
 	@Autowired
 	@Qualifier("monitoringLocationFlow")
 	private Flow monitoringLocationFlow;
 
-	@Autowired
-	@Qualifier("activityFlow")
-	private Flow activityFlow;
+//	@Autowired
+//	@Qualifier("activityFlow")
+//	private Flow activityFlow;
+//
+//	@Autowired
+//	@Qualifier("resultFlow")
+//	private Flow resultFlow;
 
-	@Autowired
-	@Qualifier("resultFlow")
-	private Flow resultFlow;
-
-//  TODO
 //	@Autowired
 //	@Qualifier("createSummariesFlow")
 //	private Flow createSummariesFlow;
@@ -49,12 +48,11 @@ public class BatchConfiguration {
 	public Job wqxEtl() {
 		return jobBuilderFactory.get("WQP_BIODATA_ETL")
 //				.incrementer(jobIncrementer)
-				.start(orgDataFlow)
-				.next(monitoringLocationFlow)
-				.next(activityFlow)
-				.next(resultFlow)
+//				.start(orgDataFlow)
+				.start(monitoringLocationFlow)
+//				.next(activityFlow)
+//				.next(resultFlow)
                 
-//              TODO:
 //				.next(createSummariesFlow)
 //				.next(createCodesFlow)
 //				.next(databaseFinalizeFlow)
