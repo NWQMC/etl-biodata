@@ -67,7 +67,7 @@ public class TransformOrgData {
 				+ " values ("
 				
 				+ " :dataSourceId, :dataSource, :organizationId,"
-				+ " :organization, :organizationName"
+				+ " :organization, :organizationName)"
 		);
 		ItemSqlParameterSourceProvider<OrgData> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
 		itemWriter.setItemSqlParameterSourceProvider(paramProvider);
