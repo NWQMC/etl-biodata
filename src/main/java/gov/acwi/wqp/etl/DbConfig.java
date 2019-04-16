@@ -7,21 +7,24 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DbConfig {
 
 	@Bean
-	@Primary
 	@ConfigurationProperties("spring.datasource-wqp")
+	@Primary
+	@Profile("default")
 	public DataSourceProperties wqpDataSourceProperties() {
 		return new DataSourceProperties();
 	}
 	
 	@Bean
-	@Primary
 	@ConfigurationProperties("spring.datasource-wqp")
+	@Primary
+	@Profile("default")
 	public DataSource wqpDataSource() {
 		return wqpDataSourceProperties().initializeDataSourceBuilder().build();
 	}

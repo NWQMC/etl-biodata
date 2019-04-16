@@ -30,8 +30,8 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		monitoringLocation.setOrganization(biodataML.getOrganization());
 		monitoringLocation.setOrganizationName(biodataML.getOrganizationName());
 		monitoringLocation.setStationTypeName(biodataML.getStationTypeName());
-		monitoringLocation.setLatitude(getBigDecimal(biodataML.getDecLatitude()));
-		monitoringLocation.setLongitude(getBigDecimal(biodataML.getDecLongitude()));
+		monitoringLocation.setLatitude(biodataML.getDecLatitude());
+		monitoringLocation.setLongitude(biodataML.getDecLongitude());
 		monitoringLocation.setGeopositioningMethod(biodataML.getGeopositioningMethod());
 		monitoringLocation.setGeopositionAccyUnit(biodataML.getGeopositionAccyUnit());
 		monitoringLocation.setGeopositionAccyValue(biodataML.getGeopositionAccyValue());
@@ -41,9 +41,20 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		monitoringLocation.setStationName(biodataML.getStationNm());
 		monitoringLocation.setVerticalAccuracyUnit(biodataML.getVerticalAccuracyUnit());
 		monitoringLocation.setVerticalAccuracyValue(biodataML.getVerticalAccuracyValue());
-		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataML.getDrainAreaVa()));
+		monitoringLocation.setDrainAreaValue(biodataML.getDrainAreaVa());
 		monitoringLocation.setGeom(biodataML.getGeoPoint());
 		monitoringLocation.setElevationMethod(biodataML.getElevationMethod());
+		monitoringLocation.setMapScale(biodataML.getMapScale());
+		monitoringLocation.setContribDrainAreaValue(biodataML.getContribDrainAreaValue());
+		monitoringLocation.setContribDrainAreaUnit(biodataML.getContribDrainAreaUnit());
+		monitoringLocation.setNatAqfrName(biodataML.getNatAqfrName());
+		monitoringLocation.setAqfrName(biodataML.getAqfrName());
+		monitoringLocation.setAqfrTypeName(biodataML.getAqfrTypeName());
+		monitoringLocation.setConstructionDate(biodataML.getConstructionDate());
+		monitoringLocation.setWellDepthValue(biodataML.getWellDepthValue());
+		monitoringLocation.setWellDepthUnit(biodataML.getWellDepthUnit());
+		monitoringLocation.setHoleDepthValue(biodataML.getHoleDepthValue());
+		monitoringLocation.setHoleDepthUnit(biodataML.getHoleDepthUnit());
 		
 		monitoringLocation.setSiteId(biodataML.getNwisSiteId() == null
 				? String.join("-", biodataML.getAgencyCd(), biodataML.getSiteNo())
@@ -90,14 +101,6 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		}
 
 		return monitoringLocation;
-	}
-
-	private BigDecimal getBigDecimal(String string) {
-		if (NumberUtils.isCreatable(string)) {
-			return NumberUtils.createBigDecimal(string);
-		} else {
-			return null;
-		}
 	}
 	
 	public static PGgeometry calculateGeom(BigDecimal latitude, BigDecimal longitude, int srid) {
