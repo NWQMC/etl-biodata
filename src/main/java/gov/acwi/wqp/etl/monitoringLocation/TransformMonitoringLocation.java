@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 
 import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
 import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocationRowMapper;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.util.FileCopyUtils;
@@ -31,8 +32,8 @@ public class TransformMonitoringLocation {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	@Qualifier("wqpDataSource")
-	private DataSource wqpDataSource;
+	@Qualifier("dataSourceWqp")
+	private DataSource dataSourceWqp;
 
 	@Autowired
 	@Qualifier("biodataDataSource")
@@ -46,57 +47,27 @@ public class TransformMonitoringLocation {
 	@Qualifier("buildMonitoringLocationIndexesFlow")
 	private Flow buildMonitoringLocationIndexesFlow;
 	
-	@Value("classpath:sql/biodataMonitoringLocation.sql")
-	private Resource sqlResource;
+	@Value("classpath:sql/readBiodataMonitoringLocation.sql")
+	private Resource sqlResourceReader;
+	
+	@Value("classpath:sql/writeMonitoringLocation.sql")
+	private Resource sqlResourceWriter;
 
 	@Bean
-	public JdbcCursorItemReader<BiodataMonitoringLocation> monitoringLocationReader() throws Exception {
+	public JdbcCursorItemReader<BiodataMonitoringLocation> monitoringLocationReader() throws IOException {
 		return new JdbcCursorItemReaderBuilder<BiodataMonitoringLocation>()
 		.dataSource(biodataDataSource)
 		.name("monitoringLocationReader")
-		.sql(new String(FileCopyUtils.copyToByteArray(sqlResource.getInputStream())))
+		.sql(new String(FileCopyUtils.copyToByteArray(sqlResourceReader.getInputStream())))
 		.rowMapper(new BiodataMonitoringLocationRowMapper())
 		.build();
 	}
 
 	@Bean
-	public ItemWriter<MonitoringLocation> monitoringLocationWriter() {
+	public ItemWriter<MonitoringLocation> monitoringLocationWriter() throws IOException {
 		JdbcBatchItemWriter<MonitoringLocation> itemWriter = new JdbcBatchItemWriter<MonitoringLocation>();
-		itemWriter.setDataSource(wqpDataSource);
-		itemWriter.setSql(
-				
-				"insert into station_swap_biodata ( "
-				
-				+ " data_source_id, data_source, station_id,"
-				+ " site_id, organization, site_type,"
-				+ " huc, governmental_unit_code, geom,"
-				+ " station_name, organization_name, station_type_name,"
-				+ " latitude, longitude, map_scale,"
-				+ " geopositioning_method, hdatum_id_code, elevation_value,"
-				+ " elevation_unit, elevation_method, vdatum_id_code,"
-				+ " drain_area_value, drain_area_unit, contrib_drain_area_value,"
-				+ " contrib_drain_area_unit, geoposition_accy_value, geoposition_accy_unit,"
-				+ " vertical_accuracy_value, vertical_accuracy_unit, nat_aqfr_name,"
-				+ " aqfr_name, aqfr_type_name, construction_date,"
-				+ " well_depth_value, well_depth_unit, hole_depth_value,"
-				+ " hole_depth_unit)"
-				
-				+ " values ("
-				
-				+ " :dataSourceId, :dataSource, :stationId,"
-				+ " :siteId, :organization, :siteType,"
-				+ " :huc, :governmentalUnitCode, :geom,"
-				+ " :stationName, :organizationName, :stationTypeName,"
-				+ " :latitude, :longitude, :mapScale,"
-				+ " :geopositioningMethod, :hdatumIdCode, :elevationValue,"
-				+ " :elevationUnit, :elevationMethod, :vdatumIdCode,"
-				+ " :drainAreaValue, :drainAreaUnit, :contribDrainAreaValue,"
-				+ " :contribDrainAreaUnit, :geopositionAccyValue, :geopositionAccyUnit,"
-				+ " :verticalAccuracyValue, :verticalAccuracyUnit, :natAqfrName,"
-				+ " :aqfrName, :aqfrTypeName, :constructionDate,"
-				+ " :wellDepthValue, :wellDepthUnit, :holeDepthValue,"
-				+ " :holeDepthUnit)"
-		);
+		itemWriter.setDataSource(dataSourceWqp);
+		itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(sqlResourceWriter.getInputStream())));
 		ItemSqlParameterSourceProvider<MonitoringLocation> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
 		itemWriter.setItemSqlParameterSourceProvider(paramProvider);
 		return itemWriter;

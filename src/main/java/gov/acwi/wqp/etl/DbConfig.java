@@ -14,35 +14,33 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DbConfig {
 
 	@Bean
-	@ConfigurationProperties("spring.datasource-wqp")
+	@ConfigurationProperties(prefix="spring.datasource-wqp")
 	@Primary
 	@Profile("default")
-	public DataSourceProperties wqpDataSourceProperties() {
+	public DataSourceProperties dataSourceWqpProperties() {
 		return new DataSourceProperties();
 	}
 	
 	@Bean
-	@ConfigurationProperties("spring.datasource-wqp")
 	@Primary
 	@Profile("default")
-	public DataSource wqpDataSource() {
-		return wqpDataSourceProperties().initializeDataSourceBuilder().build();
+	public DataSource dataSourceWqp() {
+		return dataSourceWqpProperties().initializeDataSourceBuilder().build();
 	}
 	
 	@Bean
 	@Primary
 	public JdbcTemplate jdbcTemplateWqp() {
-		return new JdbcTemplate(wqpDataSource());
+		return new JdbcTemplate(dataSourceWqp());
 	}
 
 	@Bean
-	@ConfigurationProperties("spring.datasource-biodata")
+	@ConfigurationProperties(prefix="spring.datasource-biodata")
 	public DataSourceProperties biodataDataSourceProperties() {
 		return new DataSourceProperties();
 	}
 	
 	@Bean
-	@ConfigurationProperties("spring.datasource-biodata")
 	public DataSource biodataDataSource() {
 		return biodataDataSourceProperties().initializeDataSourceBuilder().build();
 	}

@@ -15,17 +15,17 @@ public class BiodataDBTestConfig {
 
 	@Autowired
 	@Qualifier("biodataDataSource")
-	private DataSource dataSourceBiodata;
+	private DataSource biodataDataSource;
 	
 	@Autowired
 	private DatabaseConfigBean dbUnitDatabaseConfig;
+	
 	@Bean
 	public DatabaseDataSourceConnectionFactoryBean biodata() throws SQLException {   
 		DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection = new DatabaseDataSourceConnectionFactoryBean();
 		dbUnitDatabaseConnection.setDatabaseConfig(dbUnitDatabaseConfig);
-		dbUnitDatabaseConnection.setDataSource(dataSourceBiodata);
+		dbUnitDatabaseConnection.setDataSource(biodataDataSource);
 		dbUnitDatabaseConnection.setSchema("biodata");
 		return dbUnitDatabaseConnection;
 	}
-	
 }
