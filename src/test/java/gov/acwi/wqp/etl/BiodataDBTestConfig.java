@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Bean;
 public class BiodataDBTestConfig {
 
 	@Autowired
-	@Qualifier("biodataDataSource")
-	private DataSource biodataDataSource;
+	@Qualifier("dataSourceBiodata")
+	private DataSource dataSourceBiodata;
 	
 	@Autowired
 	private DatabaseConfigBean dbUnitDatabaseConfig;
@@ -24,7 +24,7 @@ public class BiodataDBTestConfig {
 	public DatabaseDataSourceConnectionFactoryBean biodata() throws SQLException {   
 		DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection = new DatabaseDataSourceConnectionFactoryBean();
 		dbUnitDatabaseConnection.setDatabaseConfig(dbUnitDatabaseConfig);
-		dbUnitDatabaseConnection.setDataSource(biodataDataSource);
+		dbUnitDatabaseConnection.setDataSource(dataSourceBiodata);
 		dbUnitDatabaseConnection.setSchema("biodata");
 		return dbUnitDatabaseConnection;
 	}

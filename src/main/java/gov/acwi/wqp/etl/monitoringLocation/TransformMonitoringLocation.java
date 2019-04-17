@@ -36,8 +36,8 @@ public class TransformMonitoringLocation {
 	private DataSource dataSourceWqp;
 
 	@Autowired
-	@Qualifier("biodataDataSource")
-	private DataSource biodataDataSource;
+	@Qualifier("dataSourceBiodata")
+	private DataSource dataSourceBiodata;
 
 	@Autowired
 	@Qualifier("setupMonitoringLocationSwapTableFlow")
@@ -56,7 +56,7 @@ public class TransformMonitoringLocation {
 	@Bean
 	public JdbcCursorItemReader<BiodataMonitoringLocation> monitoringLocationReader() throws IOException {
 		return new JdbcCursorItemReaderBuilder<BiodataMonitoringLocation>()
-		.dataSource(biodataDataSource)
+		.dataSource(dataSourceBiodata)
 		.name("monitoringLocationReader")
 		.sql(new String(FileCopyUtils.copyToByteArray(sqlResourceReader.getInputStream())))
 		.rowMapper(new BiodataMonitoringLocationRowMapper())

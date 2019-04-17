@@ -36,17 +36,17 @@ public class DbConfig {
 
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource-biodata")
-	public DataSourceProperties biodataDataSourceProperties() {
+	public DataSourceProperties dataSourceBiodataProperties() {
 		return new DataSourceProperties();
 	}
 	
 	@Bean
-	public DataSource biodataDataSource() {
-		return biodataDataSourceProperties().initializeDataSourceBuilder().build();
+	public DataSource dataSourceBiodata() {
+		return dataSourceBiodataProperties().initializeDataSourceBuilder().build();
 	}
 	
 	@Bean
 	public JdbcTemplate jdbcTemplateBiodata() {
-		return new JdbcTemplate(biodataDataSource());
+		return new JdbcTemplate(dataSourceBiodata());
 	}
 }
