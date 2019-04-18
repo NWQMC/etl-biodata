@@ -118,12 +118,10 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 	
 	public String processElevationValue(String elevationValue, String altDatumCd, String altitude) {
 		String elevationValueML = elevationValue;
-		if (elevationValueML == null) {
-			if (altDatumCd != null) {
-				elevationValueML = altitude.equals(".") 
-						? DEFAULT_ELEVATION_VALUE 
-						: altitude.trim();
-			} 
+		if (elevationValueML == null && altDatumCd != null) {
+			elevationValueML = ".".equals(altitude) 
+					? DEFAULT_ELEVATION_VALUE 
+					: altitude.trim();
 		}
 		return elevationValueML;
 	}
