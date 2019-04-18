@@ -23,10 +23,6 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 	@Qualifier("monitoringLocationFlow")
 	private Flow monitoringLocationFlow;
 	
-	public static final String STATION_SWAP_BIODATA = "'station_swap_biodata'";
-	public static final String EXPECTED_DATABASE_QUERY_INDEX = BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + STATION_SWAP_BIODATA;
-	public static final String EXPECTED_DATABASE_QUERY_TABLE = BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + STATION_SWAP_BIODATA;
-
 	@Test
 	@DatabaseSetup(		connection="wqp",		value="classpath:/testResult/wqp/station/empty.xml")
 	@DatabaseSetup(		connection="wqp",		value="classpath:/testData/nwis/station/nwisStation.xml")
@@ -53,11 +49,11 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 	@ExpectedDatabase( value="classpath:/testResult/wqp/monitoringLocation/indexes/all.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 				table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
-				query=EXPECTED_DATABASE_QUERY_INDEX)
+				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'station_swap_biodata'")
 	@ExpectedDatabase( connection="pg", value="classpath:/testResult/wqp/monitoringLocation/create.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 				table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
-				query=EXPECTED_DATABASE_QUERY_TABLE)
+				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'station_swap_biodata'")
 	@ExpectedDatabase( value="classpath:/testResult/wqp/station/station_swap_biodata.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void monitoringLocationFlowTest() {
 		Job monitoringLocationFlowTest = jobBuilderFactory.get("monitoringLocationFlowTest")
