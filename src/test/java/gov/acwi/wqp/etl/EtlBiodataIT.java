@@ -14,6 +14,8 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 public class EtlBiodataIT extends BiodataBaseFlowIT {
 
 	@Test
+	
+	// Monitoring Location
 	@DatabaseSetup(		connection="wqp",		value="classpath:/testResult/wqp/station/empty.xml")
 	@DatabaseSetup(		connection="wqp",		value="classpath:/testData/nwis/station/nwisStation.xml")
 	@DatabaseSetup(		connection="biodata",	value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
@@ -28,6 +30,21 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 				table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
 				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'station_swap_biodata'")
 	@ExpectedDatabase( value="classpath:/testResult/wqp/station/station_swap_biodata.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	
+	
+	// Org Data
+	@DatabaseSetup( connection="wqp", value="classpath:/testResult/wqp/orgData/empty.xml")
+	@DatabaseSetup( connection="wqp", value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
+	@ExpectedDatabase( value="classpath:/testResult/wqp/orgData/indexes/all.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+				table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
+				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'org_data_swap_biodata'")
+	@ExpectedDatabase( connection="pg", value="classpath:/testResult/wqp/orgData/create.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+				table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
+				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'org_data_swap_biodata'")
+	@ExpectedDatabase( value="classpath:/testResult/wqp/orgData/orgData.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	
 	public void endToEndTest() {
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchJob(testJobParameters);

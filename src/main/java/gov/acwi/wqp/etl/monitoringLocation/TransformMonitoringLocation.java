@@ -47,10 +47,10 @@ public class TransformMonitoringLocation {
 	@Qualifier("buildMonitoringLocationIndexesFlow")
 	private Flow buildMonitoringLocationIndexesFlow;
 	
-	@Value("classpath:sql/readBiodataMonitoringLocation.sql")
+	@Value("classpath:sql/monitoringLocation/readBiodataMonitoringLocation.sql")
 	private Resource sqlResourceReader;
 	
-	@Value("classpath:sql/writeMonitoringLocation.sql")
+	@Value("classpath:sql/monitoringLocation/writeMonitoringLocation.sql")
 	private Resource sqlResourceWriter;
 
 	@Bean

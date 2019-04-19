@@ -2,6 +2,7 @@ package gov.acwi.wqp.etl.orgData;
 
 import gov.acwi.wqp.etl.biodata.domain.BiodataOrgData;
 import gov.acwi.wqp.etl.biodata.domain.BiodataOrgDataRowMapper;
+import java.io.IOException;
 import javax.sql.DataSource;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -29,8 +30,8 @@ public class TransformOrgData {
 	private StepBuilderFactory stepBuilderFactory;
 	
 	@Autowired
-	@Qualifier("wqpDataSource")
-	private DataSource wqpDataSource;
+	@Qualifier("dataSourceWqp")
+	private DataSource dataSourceWqp;
 	
 	@Autowired
 	@Qualifier("setupOrgDataSwapTableFlow")
@@ -40,40 +41,31 @@ public class TransformOrgData {
 	@Qualifier("buildOrgDataIndexesFlow")
 	private Flow buildOrgDataIndexesFlow;
 	
-	@Value("classpath:sql/biodataOrgData.sql")
-	private Resource sqlResource;
+	@Value("classpath:sql/orgData/readOrgData.sql")
+	private Resource sqlResourceReader;
+	
+	@Value("classpath:sql/orgData/writeOrgData.sql")
+	private Resource sqlResourceWriter;
 	
 	@Bean
 	public JdbcCursorItemReader<BiodataOrgData> orgDataReader() throws Exception {
 		return new JdbcCursorItemReaderBuilder<BiodataOrgData>()
-		.dataSource(wqpDataSource)
+		.dataSource(dataSourceWqp)
 		.name("monitoringLocationReader")
-		.sql(new String(FileCopyUtils.copyToByteArray(sqlResource.getInputStream())))
+		.sql(new String(FileCopyUtils.copyToByteArray(sqlResourceReader.getInputStream())))
 		.rowMapper(new BiodataOrgDataRowMapper())
 		.build();
 	}
 	
 	@Bean
-	public ItemWriter<OrgData> orgDataWriter() {
+	public ItemWriter<OrgData> orgDataWriter() throws IOException {
 		JdbcBatchItemWriter<OrgData> itemWriter = new JdbcBatchItemWriter<OrgData>();
-		itemWriter.setDataSource(wqpDataSource);
-		itemWriter.setSql(
-				
-				"insert into org_data_swap_biodata ( "
-						
-				+ " data_source_id, data_source, organization_id,"
-				+ " organization, organization_name)"
-				
-				+ " values ("
-				
-				+ " :dataSourceId, :dataSource, :organizationId,"
-				+ " :organization, :organizationName)"
-		);
+		itemWriter.setDataSource(dataSourceWqp);
+		itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(sqlResourceWriter.getInputStream())));
 		ItemSqlParameterSourceProvider<OrgData> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
 		itemWriter.setItemSqlParameterSourceProvider(paramProvider);
 		return itemWriter;
 	}
-	
 	
 	@Bean
 	public Step transformOrgDataStep() throws Exception {
