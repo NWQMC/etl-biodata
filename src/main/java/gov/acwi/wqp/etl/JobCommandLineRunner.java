@@ -47,8 +47,10 @@ public class JobCommandLineRunner implements CommandLineRunner {
 					|| ExitStatus.STOPPED.getExitCode().contentEquals(jobExecution.getExitStatus().getExitCode())) {
 				throw new JobExecutionException("Job did not complete as planned.");
 			}
+			System.exit(0);
 		} catch (JobInstanceAlreadyCompleteException e) {
 			LOG.info(e.getLocalizedMessage());
+			System.exit(0);
 		}
 	}
 
