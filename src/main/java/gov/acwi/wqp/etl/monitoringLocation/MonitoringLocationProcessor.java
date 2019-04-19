@@ -2,7 +2,6 @@ package gov.acwi.wqp.etl.monitoringLocation;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
@@ -30,8 +29,8 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		monitoringLocation.setOrganization(biodataML.getOrganization());
 		monitoringLocation.setOrganizationName(biodataML.getOrganizationName());
 		monitoringLocation.setStationTypeName(biodataML.getStationTypeName());
-		monitoringLocation.setLatitude(getBigDecimal(biodataML.getDecLatitude()));
-		monitoringLocation.setLongitude(getBigDecimal(biodataML.getDecLongitude()));
+		monitoringLocation.setLatitude(biodataML.getDecLatitude());
+		monitoringLocation.setLongitude(biodataML.getDecLongitude());
 		monitoringLocation.setGeopositioningMethod(biodataML.getGeopositioningMethod());
 		monitoringLocation.setGeopositionAccyUnit(biodataML.getGeopositionAccyUnit());
 		monitoringLocation.setGeopositionAccyValue(biodataML.getGeopositionAccyValue());
@@ -41,63 +40,106 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		monitoringLocation.setStationName(biodataML.getStationNm());
 		monitoringLocation.setVerticalAccuracyUnit(biodataML.getVerticalAccuracyUnit());
 		monitoringLocation.setVerticalAccuracyValue(biodataML.getVerticalAccuracyValue());
-		monitoringLocation.setDrainAreaValue(getBigDecimal(biodataML.getDrainAreaVa()));
+		monitoringLocation.setDrainAreaValue(biodataML.getDrainAreaVa());
 		monitoringLocation.setGeom(biodataML.getGeoPoint());
 		monitoringLocation.setElevationMethod(biodataML.getElevationMethod());
+		monitoringLocation.setMapScale(biodataML.getMapScale());
+		monitoringLocation.setContribDrainAreaValue(biodataML.getContribDrainAreaValue());
+		monitoringLocation.setContribDrainAreaUnit(biodataML.getContribDrainAreaUnit());
+		monitoringLocation.setNatAqfrName(biodataML.getNatAqfrName());
+		monitoringLocation.setAqfrName(biodataML.getAqfrName());
+		monitoringLocation.setAqfrTypeName(biodataML.getAqfrTypeName());
+		monitoringLocation.setConstructionDate(biodataML.getConstructionDate());
+		monitoringLocation.setWellDepthValue(biodataML.getWellDepthValue());
+		monitoringLocation.setWellDepthUnit(biodataML.getWellDepthUnit());
+		monitoringLocation.setHoleDepthValue(biodataML.getHoleDepthValue());
+		monitoringLocation.setHoleDepthUnit(biodataML.getHoleDepthUnit());
 		
-		monitoringLocation.setSiteId(biodataML.getNwisSiteId() == null
-				? String.join("-", biodataML.getAgencyCd(), biodataML.getSiteNo())
-				: biodataML.getNwisSiteId());
+		monitoringLocation.setSiteId(
+				processSiteId(
+						biodataML.getNwisSiteId(),
+						biodataML.getAgencyCd(),
+						biodataML.getSiteNo()));
 		
-		monitoringLocation.setGovernmentalUnitCode(biodataML.getGovernmentalUnitCode() == null 
-				? String.join(":",biodataML.getCountryCd(), biodataML.getStateCd(), biodataML.getCountyCd())
-				: biodataML.getGovernmentalUnitCode());
+		monitoringLocation.setGovernmentalUnitCode(
+				processGovernmentUnitCode(
+						biodataML.getGovernmentalUnitCode(), 
+						biodataML.getCountryCd(), 
+						biodataML.getStateCd(), 
+						biodataML.getCountyCd()));
+
+		monitoringLocation.setElevationUnit(
+				processElevationUnit(
+						biodataML.getElevationUnit(),
+						biodataML.getAltDatumCd(),
+						biodataML.getAltitude()));
 		
-		if (biodataML.getElevationUnit() == null) {
-			monitoringLocation.setElevationUnit(biodataML.getAltDatumCd() != null && biodataML.getAltitude() != null
-					? DEFAULT_ELEVATION_UNIT
-					: null);
-		} else {
-			monitoringLocation.setElevationUnit(biodataML.getElevationUnit());
-		}
+		monitoringLocation.setElevationValue(
+				processElevationValue(
+						biodataML.getElevationValue(), 
+						biodataML.getAltDatumCd(), 
+						biodataML.getAltitude()));
 		
-		if (biodataML.getElevationValue() == null) {
-			if (biodataML.getAltDatumCd() != null) {
-				monitoringLocation.setElevationValue(biodataML.getAltitude().equals(".") 
-						? DEFAULT_ELEVATION_VALUE 
-						: biodataML.getAltitude().trim());
-			} else {
-				monitoringLocation.setElevationValue(null);
-			}
-		} else {
-			monitoringLocation.setElevationValue(biodataML.getElevationValue());
-		}
+		monitoringLocation.setVdatumIdCode(
+				processVdatumIdCode(
+						biodataML.getVdatumIdCode(),
+						biodataML.getAltitude(),
+						biodataML.getAltDatumCd()));
 		
-		if (biodataML.getVdatumIdCode() == null) {
-			monitoringLocation.setVdatumIdCode(biodataML.getAltitude() != null 
-					? biodataML.getAltDatumCd() 
-					: null);
-		} else {
-			monitoringLocation.setVdatumIdCode(biodataML.getVdatumIdCode());
-		}
-		
-		if (biodataML.getDrainAreaUnit() == null) {
-			monitoringLocation.setDrainAreaUnit(biodataML.getBiodataDrainAreaVa() != null 
-					? DEFAULT_DRAIN_AREA_UNIT 
-					: null);
-		} else {
-			monitoringLocation.setDrainAreaUnit(biodataML.getDrainAreaUnit());
-		}
+		monitoringLocation.setDrainAreaUnit(
+				processDrainAreaUnit(
+						biodataML.getDrainAreaUnit(),
+						biodataML.getBiodataDrainAreaVa()));
 
 		return monitoringLocation;
 	}
-
-	private BigDecimal getBigDecimal(String string) {
-		if (NumberUtils.isCreatable(string)) {
-			return NumberUtils.createBigDecimal(string);
-		} else {
-			return null;
+	
+	public String processSiteId(String nwisSiteId, String agencyCd, String siteNo) {
+		String siteId = nwisSiteId == null
+				? String.join("-", agencyCd, siteNo)
+				: nwisSiteId;
+		return siteId;
+	}
+	
+	public String processGovernmentUnitCode(String governmentUnitCode, String countryCode, String stateCode, String countyCode) {
+		String governmentUnitCodeML = governmentUnitCode == null 
+				? String.join(":", countryCode, stateCode, countyCode)
+				: governmentUnitCode;
+		return governmentUnitCodeML;
+	}
+	
+	public String processElevationUnit(String elevationUnit, String altDatumCd, String altitude) {
+		String elevationUnitML = elevationUnit;
+		if (elevationUnitML == null && altDatumCd != null && altitude != null) {
+			elevationUnitML = DEFAULT_ELEVATION_UNIT;
 		}
+		return elevationUnitML;
+	}
+	
+	public String processElevationValue(String elevationValue, String altDatumCd, String altitude) {
+		String elevationValueML = elevationValue;
+		if (elevationValueML == null && altDatumCd != null) {
+			elevationValueML = ".".equals(altitude) 
+					? DEFAULT_ELEVATION_VALUE 
+					: altitude.trim();
+		}
+		return elevationValueML;
+	}
+	
+	public String processVdatumIdCode(String vDatumIdCode, String altitude, String altDatumCd) {
+		String vDatumIdCodeML = vDatumIdCode;
+		if (vDatumIdCodeML == null && altitude != null) {
+			vDatumIdCodeML = altDatumCd;
+		}
+		return vDatumIdCodeML;
+	}
+	
+	public String processDrainAreaUnit(String drainAreaUnit, String biodataDrainAreaVa) {
+		String drainAreaUnitML = drainAreaUnit;
+		if (drainAreaUnitML == null && biodataDrainAreaVa != null) {
+			drainAreaUnitML = DEFAULT_DRAIN_AREA_UNIT;
+		}
+		return drainAreaUnitML;
 	}
 	
 	public static PGgeometry calculateGeom(BigDecimal latitude, BigDecimal longitude, int srid) {

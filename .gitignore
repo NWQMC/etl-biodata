@@ -3,3 +3,5 @@
 /application.yml
 /.env
 /nbproject/
+.codacy.yml
+

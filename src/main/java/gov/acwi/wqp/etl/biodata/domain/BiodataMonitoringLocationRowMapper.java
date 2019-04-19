@@ -70,8 +70,8 @@ public class BiodataMonitoringLocationRowMapper implements RowMapper<BiodataMoni
 		biodataML.setStationNm(rs.getString(STATION_NM));
 		biodataML.setOrganizationName(rs.getString(ORGANIZATION_NAME));
 		biodataML.setStationTypeName(rs.getString(STATION_TYPE_NAME));
-		biodataML.setDecLatitude(rs.getString(DEC_LATITUDE));
-		biodataML.setDecLongitude(rs.getString(DEC_LONGITUDE));
+		biodataML.setDecLatitude(rs.getBigDecimal(DEC_LATITUDE));
+		biodataML.setDecLongitude(rs.getBigDecimal(DEC_LONGITUDE));
 		biodataML.setMapScale(rs.getString(MAP_SCALE));
 		biodataML.setGeopositioningMethod(rs.getString(GEOPOSITIONING_METHOD));
 		biodataML.setCoordDatumCd(rs.getString(COORD_DATUM_CD));
@@ -81,10 +81,10 @@ public class BiodataMonitoringLocationRowMapper implements RowMapper<BiodataMoni
 		biodataML.setElevationUnit(rs.getString(ELEVATION_UNIT));
 		biodataML.setElevationMethod(rs.getString(ELEVATION_METHOD));
 		biodataML.setVdatumIdCode(rs.getString(VDATUM_ID_CODE));
-		biodataML.setDrainAreaVa(rs.getString(DRAIN_AREA_VA));
+		biodataML.setDrainAreaVa(rs.getBigDecimal(DRAIN_AREA_VA));
 		biodataML.setBiodataDrainAreaVa(rs.getString(BIODATA_DRAIN_AREA_VA));
 		biodataML.setDrainAreaUnit(rs.getString(DRAIN_AREA_UNIT));
-		biodataML.setContribDrainAreaValue(rs.getString(CONTRIB_DRAIN_AREA_VALUE));
+		biodataML.setContribDrainAreaValue(rs.getBigDecimal(CONTRIB_DRAIN_AREA_VALUE));
 		biodataML.setContribDrainAreaUnit(rs.getString(CONTRIB_DRAIN_AREA_UNIT));
 		biodataML.setGeopositionAccyValue(rs.getString(GEOPOSITION_ACCY_VALUE));
 		biodataML.setGeopositionAccyUnit(rs.getString(GEOPOSITION_ACCY_UNIT));
@@ -94,9 +94,9 @@ public class BiodataMonitoringLocationRowMapper implements RowMapper<BiodataMoni
 		biodataML.setAqfrName(rs.getString(AQFR_NAME));
 		biodataML.setAqfrTypeName(rs.getString(AQFR_TYPE_NAME));
 		biodataML.setConstructionDate(rs.getString(CONSTRUCTION_DATE));
-		biodataML.setWellDepthValue(rs.getString(WELL_DEPTH_VALUE));
+		biodataML.setWellDepthValue(rs.getBigDecimal(WELL_DEPTH_VALUE));
 		biodataML.setWellDepthUnit(rs.getString(WELL_DEPTH_UNIT));
-		biodataML.setHoleDepthValue(rs.getString(HOLE_DEPTH_VALUE));
+		biodataML.setHoleDepthValue(rs.getBigDecimal(HOLE_DEPTH_VALUE));
 		biodataML.setHoleDepthUnit(rs.getString(HOLE_DEPTH_UNIT));
 		return biodataML;
 	}

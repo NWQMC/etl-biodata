@@ -7,45 +7,46 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DbConfig {
 
 	@Bean
+	@ConfigurationProperties(prefix="spring.datasource-wqp")
 	@Primary
-	@ConfigurationProperties("spring.datasource-wqp")
-	public DataSourceProperties wqpDataSourceProperties() {
+	@Profile("default")
+	public DataSourceProperties dataSourceWqpProperties() {
 		return new DataSourceProperties();
 	}
 	
 	@Bean
 	@Primary
-	@ConfigurationProperties("spring.datasource-wqp")
-	public DataSource wqpDataSource() {
-		return wqpDataSourceProperties().initializeDataSourceBuilder().build();
+	@Profile("default")
+	public DataSource dataSourceWqp() {
+		return dataSourceWqpProperties().initializeDataSourceBuilder().build();
 	}
 	
 	@Bean
 	@Primary
 	public JdbcTemplate jdbcTemplateWqp() {
-		return new JdbcTemplate(wqpDataSource());
+		return new JdbcTemplate(dataSourceWqp());
 	}
 
 	@Bean
-	@ConfigurationProperties("spring.datasource-biodata")
-	public DataSourceProperties biodataDataSourceProperties() {
+	@ConfigurationProperties(prefix="spring.datasource-biodata")
+	public DataSourceProperties dataSourceBiodataProperties() {
 		return new DataSourceProperties();
 	}
 	
 	@Bean
-	@ConfigurationProperties("spring.datasource-biodata")
-	public DataSource biodataDataSource() {
-		return biodataDataSourceProperties().initializeDataSourceBuilder().build();
+	public DataSource dataSourceBiodata() {
+		return dataSourceBiodataProperties().initializeDataSourceBuilder().build();
 	}
 	
 	@Bean
 	public JdbcTemplate jdbcTemplateBiodata() {
-		return new JdbcTemplate(biodataDataSource());
+		return new JdbcTemplate(dataSourceBiodata());
 	}
 }

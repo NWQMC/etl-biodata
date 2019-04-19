@@ -36,12 +36,23 @@ public class MonitoringLocationProcessorTest {
 	public static final String TEST_ELEVATION_METHOD ="Unknown.";
 	public static final String TEST_VDATUM_ID_CODE ="NGVD29";
 	public static final String TEST_DRAIN_AREA_VALUE = "610";
-	public static final BigDecimal TEST_ML_DRAIN_AREA_VALUE = new BigDecimal(TEST_DRAIN_AREA_VALUE);
+	public static final BigDecimal TEST_DECIMAL_DRAIN_AREA_VALUE = new BigDecimal("610");
 	public static final String TEST_DRAIN_AREA_UNIT ="sq mi";
 	public static final String TEST_GEOPOSITION_ACCY_VALUE ="1";
 	public static final String TEST_GEOPOSITION_ACCY_UNIT ="seconds";
 	public static final String TEST_VERTICAL_ACCURACY_VALUE =".01";
 	public static final String TEST_VERTICAL_ACCURACY_UNIT ="feet";
+	public static final String TEST_MAP_SCALE="testMapScale";
+	public static final BigDecimal TEST_CONTRIB_DRAIN_AREA_VALUE = new BigDecimal("2");
+	public static final String TEST_CONTRIB_DRAIN_AREA_UNIT = "testContribDrainAreaUnit";
+	public static final String TEST_NAT_AQFR_NAME = "testNatAqfrName";
+	public static final String TEST_AQFR_NAME = "testAqfrName";
+	public static final String TEST_AQFR_TYPE_NAME = "testAqfrTypeName";
+	public static final String TEST_CONSTRUCTION_DATE = "testConstructionDate";
+	public static final BigDecimal TEST_WELL_DEPTH_VALUE = new BigDecimal("3");
+	public static final String TEST_WELL_DEPTH_UNIT = "testWellDepthUnit";
+	public static final BigDecimal TEST_HOLE_DEPTH_VALUE = new BigDecimal("4");
+	public static final String TEST_HOLE_DEPTH_UNIT = "testHoleDepthUnit";
 	
 	private BiodataMonitoringLocation biodataML;
 	private MonitoringLocationProcessor mlProcessor;
@@ -66,8 +77,8 @@ public class MonitoringLocationProcessorTest {
 		biodataML.setStationNm(TEST_STATION_NAME);
 		biodataML.setStationTypeName(TEST_STATION_TYPE_NAME);
 		biodataML.setOrganizationName(TEST_ORGANIZATION_NAME);
-		biodataML.setDecLatitude(TEST_LATITUDE);
-		biodataML.setDecLongitude(TEST_LONGITUDE);
+		biodataML.setDecLatitude(TEST_DECIMAL_LATITUDE);
+		biodataML.setDecLongitude(TEST_DECIMAL_LONGITUDE);
 		biodataML.setGeopositioningMethod(TEST_GEOPOSITIONING_METHOD);
 		biodataML.setCoordDatumCd(TEST_HDATUM_ID_CODE);
 		biodataML.setElevationValue(TEST_ELEVATION_VALUE);
@@ -76,13 +87,24 @@ public class MonitoringLocationProcessorTest {
 		biodataML.setAltDatumCd(TEST_VDATUM_ID_CODE);
 		biodataML.setAltitude(TEST_ELEVATION_VALUE);
 		biodataML.setVdatumIdCode(TEST_VDATUM_ID_CODE);
-		biodataML.setDrainAreaVa(TEST_DRAIN_AREA_VALUE);
+		biodataML.setDrainAreaVa(TEST_DECIMAL_DRAIN_AREA_VALUE);
 		biodataML.setBiodataDrainAreaVa(TEST_DRAIN_AREA_VALUE);
 		biodataML.setDrainAreaUnit(TEST_DRAIN_AREA_UNIT);
 		biodataML.setGeopositionAccyValue(TEST_GEOPOSITION_ACCY_VALUE);
 		biodataML.setGeopositionAccyUnit(TEST_GEOPOSITION_ACCY_UNIT);
 		biodataML.setVerticalAccuracyValue(TEST_VERTICAL_ACCURACY_VALUE);
 		biodataML.setVerticalAccuracyUnit(TEST_VERTICAL_ACCURACY_UNIT);
+		biodataML.setMapScale(TEST_MAP_SCALE);
+		biodataML.setContribDrainAreaValue(TEST_CONTRIB_DRAIN_AREA_VALUE);
+		biodataML.setContribDrainAreaUnit(TEST_CONTRIB_DRAIN_AREA_UNIT);
+		biodataML.setNatAqfrName(TEST_NAT_AQFR_NAME);
+		biodataML.setAqfrName(TEST_AQFR_NAME);
+		biodataML.setAqfrTypeName(TEST_AQFR_TYPE_NAME);
+		biodataML.setConstructionDate(TEST_CONSTRUCTION_DATE);
+		biodataML.setWellDepthValue(TEST_WELL_DEPTH_VALUE);
+		biodataML.setWellDepthUnit(TEST_WELL_DEPTH_UNIT);
+		biodataML.setHoleDepthValue(TEST_HOLE_DEPTH_VALUE);
+		biodataML.setHoleDepthUnit(TEST_HOLE_DEPTH_UNIT);
 	}
 	
 	@Test 
@@ -106,7 +128,7 @@ public class MonitoringLocationProcessorTest {
 		assertEquals(TEST_STATION_NAME, actual.getStationName());
 		assertEquals(TEST_VERTICAL_ACCURACY_UNIT, actual.getVerticalAccuracyUnit());
 		assertEquals(TEST_VERTICAL_ACCURACY_VALUE, actual.getVerticalAccuracyValue());
-		assertEquals(TEST_ML_DRAIN_AREA_VALUE, actual.getDrainAreaValue());
+		assertEquals(TEST_DECIMAL_DRAIN_AREA_VALUE, actual.getDrainAreaValue());
 		assertEquals(TEST_GEOM, actual.getGeom());
 		assertEquals(TEST_ELEVATION_METHOD, actual.getElevationMethod());
 		assertEquals(TEST_SITE_ID, actual.getSiteId());
@@ -115,6 +137,17 @@ public class MonitoringLocationProcessorTest {
 		assertEquals(TEST_ELEVATION_VALUE, actual.getElevationValue());
 		assertEquals(TEST_VDATUM_ID_CODE, actual.getVdatumIdCode());
 		assertEquals(TEST_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
+		assertEquals(TEST_MAP_SCALE, actual.getMapScale());
+		assertEquals(TEST_CONTRIB_DRAIN_AREA_VALUE, actual.getContribDrainAreaValue());
+		assertEquals(TEST_CONTRIB_DRAIN_AREA_UNIT, actual.getContribDrainAreaUnit());
+		assertEquals(TEST_NAT_AQFR_NAME, actual.getNatAqfrName());
+		assertEquals(TEST_AQFR_NAME, actual.getAqfrName());
+		assertEquals(TEST_AQFR_TYPE_NAME, actual.getAqfrTypeName());
+		assertEquals(TEST_CONSTRUCTION_DATE, actual.getConstructionDate());
+		assertEquals(TEST_WELL_DEPTH_VALUE, actual.getWellDepthValue());
+		assertEquals(TEST_WELL_DEPTH_UNIT, actual.getWellDepthUnit());
+		assertEquals(TEST_HOLE_DEPTH_VALUE, actual.getHoleDepthValue());
+		assertEquals(TEST_HOLE_DEPTH_UNIT, actual.getHoleDepthUnit());
 	}
 
 	@Test
@@ -191,4 +224,3 @@ public class MonitoringLocationProcessorTest {
 		assertNull(actual.getDrainAreaUnit());
 	}
 }
-
