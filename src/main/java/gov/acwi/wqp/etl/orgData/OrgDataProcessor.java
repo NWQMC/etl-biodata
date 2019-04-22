@@ -1,7 +1,7 @@
 package gov.acwi.wqp.etl.orgData;
 
 import gov.acwi.wqp.etl.Application;
-import gov.acwi.wqp.etl.biodata.domain.BiodataOrgData;
+import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgData;
 import org.springframework.batch.item.ItemProcessor;
 
 public class OrgDataProcessor implements ItemProcessor<BiodataOrgData, OrgData>{

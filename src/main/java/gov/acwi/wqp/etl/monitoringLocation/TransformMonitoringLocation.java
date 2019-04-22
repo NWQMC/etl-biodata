@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
-import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocationRowMapper;
+import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
+import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocationRowMapper;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;

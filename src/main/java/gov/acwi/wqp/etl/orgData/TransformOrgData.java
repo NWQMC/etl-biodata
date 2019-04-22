@@ -1,7 +1,7 @@
 package gov.acwi.wqp.etl.orgData;
 
-import gov.acwi.wqp.etl.biodata.domain.BiodataOrgData;
-import gov.acwi.wqp.etl.biodata.domain.BiodataOrgDataRowMapper;
+import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgData;
+import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgDataRowMapper;
 import java.io.IOException;
 import javax.sql.DataSource;
 import org.springframework.batch.core.Step;

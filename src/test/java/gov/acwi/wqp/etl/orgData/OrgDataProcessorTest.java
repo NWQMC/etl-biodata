@@ -2,7 +2,7 @@ package gov.acwi.wqp.etl.orgData;
 
 import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.BaseProcessorTest;
-import gov.acwi.wqp.etl.biodata.domain.BiodataOrgData;
+import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgData;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

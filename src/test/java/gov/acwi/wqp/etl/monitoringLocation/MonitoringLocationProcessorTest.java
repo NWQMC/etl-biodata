@@ -2,7 +2,7 @@ package gov.acwi.wqp.etl.monitoringLocation;
 
 import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.BaseProcessorTest;
-import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
+import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

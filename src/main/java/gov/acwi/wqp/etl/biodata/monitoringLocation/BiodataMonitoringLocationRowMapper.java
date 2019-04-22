@@ -1,4 +1,4 @@
-package gov.acwi.wqp.etl.biodata.domain;
+package gov.acwi.wqp.etl.biodata.monitoringLocation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

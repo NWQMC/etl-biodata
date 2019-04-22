@@ -4,7 +4,7 @@ package gov.acwi.wqp.etl.monitoringLocation;
 import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
-import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
+import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
 
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
 	

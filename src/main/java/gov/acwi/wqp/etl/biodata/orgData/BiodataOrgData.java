@@ -1,4 +1,4 @@
-package gov.acwi.wqp.etl.biodata.domain;
+package gov.acwi.wqp.etl.biodata.orgData;
 
 public class BiodataOrgData {
 	private Integer organizationId;
