@@ -1,6 +1,6 @@
 package gov.acwi.wqp.etl;
 
-import gov.acwi.wqp.etl.monitoringLocation.MonitoringLocationProcessor;
+import gov.acwi.wqp.etl.monitoringLocation.MonitoringLocation;
 import java.math.BigDecimal;
 import org.postgis.PGgeometry;
 
@@ -28,7 +28,7 @@ public abstract class BaseProcessorTest {
 	public static final BigDecimal TEST_DECIMAL_LATITUDE = new BigDecimal(TEST_LATITUDE);
 	public static final BigDecimal TEST_DECIMAL_LONGITUDE = new BigDecimal(TEST_LONGITUDE);
 	public static final PGgeometry TEST_GEOM = 
-			MonitoringLocationProcessor.calculateGeom(
+			MonitoringLocation.calculateGeom(
 					TEST_DECIMAL_LATITUDE,
 					TEST_DECIMAL_LONGITUDE,
 					4269);

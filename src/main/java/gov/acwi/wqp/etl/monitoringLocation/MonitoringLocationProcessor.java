@@ -141,16 +141,4 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		}
 		return drainAreaUnitML;
 	}
-	
-	public static PGgeometry calculateGeom(BigDecimal latitude, BigDecimal longitude, int srid) {
-		Point point = null;
-		try {
-			point = new Point(longitude.doubleValue(), latitude.doubleValue());
-			point.setSrid(srid);
-			LOG.debug("Converted: from lat:{};long{} - to lat:{};long{}", latitude, longitude, point.getY(), point.getX());
-		} catch (Throwable e) {
-			LOG.info("Unable to determine point from coordinates:{}-{}", latitude, longitude);
-		}
-		return new PGgeometry(point);
-	}
 }
