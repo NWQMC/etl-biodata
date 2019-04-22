@@ -1,1 +1,7 @@
 /.project
+/target/
+/application.yml
+/.env
+/nbproject/
+.codacy.yml
+

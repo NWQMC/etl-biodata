@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: 
+    - it
+  batch:
+    job:
+      enabled: false
+    initialize-schema: always
+
+  datasource-wqp:
+    url: jdbc:postgresql://${WQP_DATABASE_ADDRESS}:${WQP_DATABASE_PORT}/${WQP_DATABASE_NAME}
+    username: ${WQP_SCHEMA_OWNER_USERNAME}
+    password: ${WQP_SCHEMA_OWNER_PASSWORD}
+    hikari:
+      maximumPoolSize: 10
+    initialization-mode: always
+      
+  datasource-biodata:
+    url: jdbc:postgresql://${BIODATA_DATABASE_ADDRESS}:${BIODATA_DATABASE_PORT}/${BIODATA_DATABASE_NAME}
+    username: ${BIODATA_SCHEMA_OWNER_USERNAME}
+    password: ${BIODATA_SCHEMA_OWNER_PASSWORD}
+    hikari:
+      maximumPoolSize: 10
+    initialization-mode: always
+    
+  datasource-nwis:
+    url: jdbc:postgresql://${NWIS_DATABASE_ADDRESS}:${NWIS_DATABASE_PORT}/${NWIS_DATABASE_NAME}
+    username: ${NWIS_SCHEMA_OWNER_USERNAME}
+    password: ${NWIS_SCHEMA_OWNER_PASSWORD}
+    hikari:
+      maximumPoolSize: 10
+    initialization-mode: always
+   
+  liquibase:
+    parameters:
+      WQP_SCHEMA_NAME: ${WQP_SCHEMA_NAME}
+      ETL_OWNER_USERNAME: ${BIODATA_SCHEMA_OWNER_USERNAME}
