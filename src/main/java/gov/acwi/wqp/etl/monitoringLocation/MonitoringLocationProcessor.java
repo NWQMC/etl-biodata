@@ -5,8 +5,6 @@ import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
 	
