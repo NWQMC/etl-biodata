@@ -17,7 +17,7 @@ public class DbConfig {
 	@ConfigurationProperties(prefix="spring.datasource-wqp")
 	@Primary
 	@Profile("default")
-	public DataSourceProperties dataSourceWqpProperties() {
+	public DataSourceProperties dataSourcePropertiesWqp() {
 		return new DataSourceProperties();
 	}
 	
@@ -25,7 +25,7 @@ public class DbConfig {
 	@Primary
 	@Profile("default")
 	public DataSource dataSourceWqp() {
-		return dataSourceWqpProperties().initializeDataSourceBuilder().build();
+		return dataSourcePropertiesWqp().initializeDataSourceBuilder().build();
 	}
 	
 	@Bean

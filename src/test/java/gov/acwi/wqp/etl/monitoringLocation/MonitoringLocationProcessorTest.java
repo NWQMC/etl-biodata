@@ -28,7 +28,7 @@ public class MonitoringLocationProcessorTest {
 	public static final String TEST_LONGITUDE = "-84.8016259";
 	public static final BigDecimal TEST_DECIMAL_LATITUDE = new BigDecimal(TEST_LATITUDE);
 	public static final BigDecimal TEST_DECIMAL_LONGITUDE = new BigDecimal(TEST_LONGITUDE);
-	public static final PGgeometry TEST_GEOM = MonitoringLocationProcessor.calculateGeom(TEST_DECIMAL_LATITUDE,TEST_DECIMAL_LONGITUDE,4269);
+	public static final PGgeometry TEST_GEOM = MonitoringLocation.calculateGeom(TEST_DECIMAL_LATITUDE,TEST_DECIMAL_LONGITUDE,4269);
 	public static final String TEST_GEOPOSITIONING_METHOD ="Interpolated from MAP.";
 	public static final String TEST_HDATUM_ID_CODE ="NAD83";
 	public static final String TEST_ELEVATION_VALUE ="795.4";
