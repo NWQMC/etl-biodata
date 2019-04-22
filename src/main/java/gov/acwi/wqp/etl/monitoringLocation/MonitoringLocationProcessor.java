@@ -1,20 +1,13 @@
 package gov.acwi.wqp.etl.monitoringLocation;
 
-import java.math.BigDecimal;
 
 import org.springframework.batch.item.ItemProcessor;
 
 import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.biodata.domain.BiodataMonitoringLocation;
-import org.postgis.PGgeometry;
-import org.postgis.Point;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
 	
-	private static final Logger LOG = LoggerFactory.getLogger(MonitoringLocation.class);
-
 	public static final String DEFAULT_ELEVATION_UNIT = "feet";
 	public static final String DEFAULT_ELEVATION_VALUE = "0";
 	public static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
