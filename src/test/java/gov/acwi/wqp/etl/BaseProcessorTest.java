@@ -6,16 +6,7 @@ import org.junit.Before;
 import org.postgis.PGgeometry;
 
 public abstract class BaseProcessorTest {
-	
-	protected ConfigurationService configurationService;
-	
-	@Before
-	public void setup() {
-		configurationService = new ConfigurationService();
-		configurationService.setEtlDataSourceId(TEST_DATA_SOURCE_ID);
-		configurationService.setEtlDataSource(TEST_DATA_SOURCE);
-	}
-	
+
 	public static final Integer TEST_DATA_SOURCE_ID = 4;
 	public static final String TEST_DATA_SOURCE = "BIODATA";
 	
@@ -69,4 +60,13 @@ public abstract class BaseProcessorTest {
 	public static final String TEST_WELL_DEPTH_UNIT = "testWellDepthUnit";
 	public static final BigDecimal TEST_HOLE_DEPTH_VALUE = new BigDecimal("4");
 	public static final String TEST_HOLE_DEPTH_UNIT = "testHoleDepthUnit";
+	
+	protected ConfigurationService configurationService;
+	
+	@Before
+	public void setup() {
+		configurationService = new ConfigurationService();
+		configurationService.setEtlDataSourceId(TEST_DATA_SOURCE_ID);
+		configurationService.setEtlDataSource(TEST_DATA_SOURCE);
+	}
 }
