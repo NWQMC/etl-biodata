@@ -24,21 +24,11 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 	private Flow monitoringLocationFlow;
 	
 	@Test
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testData/nwis/station/nwisStation.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_BIODATA,
-			value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_BIODATA,
-			value="classpath:/testData/biodata/station/bioShareSample.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_BIODATA,
-			value="classpath:/testData/biodata/station/bioShareSampleType.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/empty.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testData/nwis/station/nwisStation.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSample.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSampleType.xml")
 	@ExpectedDatabase(
 			connection=CONNECTION_WQP,
 			value="classpath:/testResult/wqp/station/station_swap_biodata.xml",
@@ -54,21 +44,11 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 	}
 
 	@Test
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testData/nwis/station/nwisStation.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_BIODATA,
-			value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_BIODATA,
-			value="classpath:/testData/biodata/station/bioShareSample.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_BIODATA,
-			value="classpath:/testData/biodata/station/bioShareSampleType.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/empty.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testData/nwis/station/nwisStation.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSample.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSampleType.xml")
 	@ExpectedDatabase(
 			value="classpath:/testResult/wqp/monitoringLocation/indexes/all.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,

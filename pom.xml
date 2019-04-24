@@ -131,7 +131,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-				<configuration>
+                <configuration>
                     <environmentVariables>
                         <WQP_DATABASE_ADDRESS>127.0.0.1</WQP_DATABASE_ADDRESS>
                         <WQP_DATABASE_PORT>5434</WQP_DATABASE_PORT>
