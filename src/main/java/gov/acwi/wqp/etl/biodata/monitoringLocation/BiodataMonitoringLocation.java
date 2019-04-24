@@ -1,4 +1,4 @@
-package gov.acwi.wqp.etl.biodata.domain;
+package gov.acwi.wqp.etl.biodata.monitoringLocation;
 
 import java.math.BigDecimal;
 import org.postgis.PGgeometry;

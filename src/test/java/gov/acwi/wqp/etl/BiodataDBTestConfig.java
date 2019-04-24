@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 public class BiodataDBTestConfig {
 
 	@Autowired
-	@Qualifier("dataSourceBiodata")
+	@Qualifier(Application.DATASOURCE_BIODATA_QUALIFIER)
 	private DataSource dataSourceBiodata;
 	
 	@Autowired

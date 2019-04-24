@@ -28,7 +28,7 @@
         vertical_accuracy_value=".01" 
         vertical_accuracy_unit="feet"> 
     </station_swap_biodata>
-    
+
     <station_swap_biodata 
         data_source_id="4" 
         data_source="BIODATA" 
@@ -57,7 +57,7 @@
         vertical_accuracy_value="5" 
         vertical_accuracy_unit="feet"> 
     </station_swap_biodata>
-    
+
     <station_swap_biodata 
         data_source_id="4" 
         data_source="BIODATA" 
@@ -70,6 +70,64 @@
         geom="0101000020AD100000DFC5562BEE2A55C07C46223482D74440" 
         station_name="E BR ST JOSEPH RI AT PIONEER OH" 
         organization_name="USGS Ohio Water Science Center" 
+        station_type_name="Stream" 
+        latitude="41.678106" 
+        longitude="-84.5352274" 
+        geopositioning_method="Interpolated from MAP." 
+        hdatum_id_code="NAD83" 
+        elevation_value="870" 
+        elevation_unit="feet" 
+        elevation_method="Interpolated from topographic map." 
+        vdatum_id_code="NGVD29" 
+        drain_area_value="111" 
+        drain_area_unit="sq mi" 
+        geoposition_accy_value="10" 
+        geoposition_accy_unit="seconds" 
+        vertical_accuracy_value="5" 
+        vertical_accuracy_unit="feet">
+    </station_swap_biodata>
+
+    <station_swap_biodata 
+        data_source_id="4" 
+        data_source="BIODATA" 
+        station_id="135764029" 
+        site_id="USGS-414041084320701" 
+        organization="USGS-WI" 
+        site_type="Stream" 
+        huc="041000030106" 
+        governmental_unit_code="US:55:025" 
+        geom="0101000020AD100000DFC5562BEE2A55C07C46223482D74440" 
+        station_name="E BR ST JOSEPH RI AT PIONEER WI" 
+        organization_name="Test USGS Wisconsin Water Science Center" 
+        station_type_name="Stream" 
+        latitude="41.678106" 
+        longitude="-84.5352274" 
+        geopositioning_method="Interpolated from MAP." 
+        hdatum_id_code="NAD83" 
+        elevation_value="870" 
+        elevation_unit="feet" 
+        elevation_method="Interpolated from topographic map." 
+        vdatum_id_code="NGVD29" 
+        drain_area_value="111" 
+        drain_area_unit="sq mi" 
+        geoposition_accy_value="10" 
+        geoposition_accy_unit="seconds" 
+        vertical_accuracy_value="5" 
+        vertical_accuracy_unit="feet">
+    </station_swap_biodata>
+
+    <station_swap_biodata 
+        data_source_id="4" 
+        data_source="BIODATA" 
+        station_id="135764030" 
+        site_id="USGS-414041084320702" 
+        organization="USGS-MN" 
+        site_type="Stream" 
+        huc="041000030106" 
+        governmental_unit_code="US:27:053" 
+        geom="0101000020AD100000DFC5562BEE2A55C07C46223482D74440" 
+        station_name="E BR ST JOSEPH RI AT PIONEER MN" 
+        organization_name="Test USGS Minnesota Water Science Center" 
         station_type_name="Stream" 
         latitude="41.678106" 
         longitude="-84.5352274" 

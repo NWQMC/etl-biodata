@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<org_data_swap_biodata 
+		data_source_id="4" 
+		data_source="BIODATA" 
+		organization_id="1" 
+		organization="USGS-MN" 
+		organization_name="USGS-MN">
+	</org_data_swap_biodata>
+	<org_data_swap_biodata 
+		data_source_id="4" 
+		data_source="BIODATA" 
+		organization_id="2" 
+		organization="USGS-OH" 
+		organization_name="USGS-OH">
+	</org_data_swap_biodata>
+	<org_data_swap_biodata 
+		data_source_id="4" 
+		data_source="BIODATA" 
+		organization_id="3" 
+		organization="USGS-WI" 
+		organization_name="USGS-WI">
+	</org_data_swap_biodata>
+</dataset>
