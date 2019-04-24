@@ -21,12 +21,8 @@ public class TransformOrgDataIT extends BiodataBaseFlowIT {
 	private Flow orgDataFlow;
 	
 	@Test
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testResult/wqp/orgData/empty.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/orgData/empty.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
 	@ExpectedDatabase(
 			connection=CONNECTION_WQP,
 			value="classpath:/testResult/wqp/orgData/orgData.xml",
@@ -42,12 +38,8 @@ public class TransformOrgDataIT extends BiodataBaseFlowIT {
 	}
 	
 	@Test
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testResult/wqp/orgData/empty.xml")
-	@DatabaseSetup(
-			connection=CONNECTION_WQP,
-			value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/orgData/empty.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
 	@ExpectedDatabase(
 			value="classpath:/testResult/wqp/orgData/indexes/all.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
