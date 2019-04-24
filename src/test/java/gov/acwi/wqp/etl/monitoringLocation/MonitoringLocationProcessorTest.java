@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.monitoringLocation;
 
-import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.BaseProcessorTest;
 import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
 import org.junit.Before;
@@ -15,7 +14,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	@Before
 	public void setUp() {
 		biodataML = new BiodataMonitoringLocation();
-		mlProcessor = new MonitoringLocationProcessor();
+		mlProcessor = new MonitoringLocationProcessor(configurationService);
 		
 		biodataML.setBiodataSiteId(TEST_STATION_ID);
 		biodataML.setNwisSiteId(TEST_SITE_ID);
@@ -66,8 +65,8 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	public void testProcess() throws Exception {
 		MonitoringLocation actual = mlProcessor.process(biodataML);
 		
-		assertEquals(Application.DATA_SOURCE_ID, actual.getDataSourceId());
-		assertEquals(Application.DATA_SOURCE, actual.getDataSource());
+		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
+		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());
 		assertEquals(TEST_STATION_ID, actual.getStationId());
 		assertEquals(TEST_ORGANIZATION, actual.getOrganization());
 		assertEquals(TEST_ORGANIZATION_NAME_2, actual.getOrganizationName());

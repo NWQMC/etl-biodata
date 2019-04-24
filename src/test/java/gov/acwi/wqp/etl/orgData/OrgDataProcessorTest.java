@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.orgData;
 
-import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.BaseProcessorTest;
 import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgData;
 import org.junit.Before;
@@ -15,7 +14,7 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 	@Before
 	public void setUp() {
 		biodataOD = new BiodataOrgData();
-		odProcessor = new OrgDataProcessor();
+		odProcessor = new OrgDataProcessor(configurationService);
 		
 		biodataOD.setOrganization(TEST_ORGANIZATION);
 		biodataOD.setOrganizationId(TEST_ORGANIZATION_ID);
@@ -26,8 +25,8 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 	public void testProcess() throws Exception {
 		OrgData actual = odProcessor.process(biodataOD);
 		
-		assertEquals(Application.DATA_SOURCE_ID, actual.getDataSourceId());
-		assertEquals(Application.DATA_SOURCE, actual.getDataSource());
+		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
+		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());
 		assertEquals(TEST_ORGANIZATION, actual.getOrganization());
 		assertEquals(TEST_ORGANIZATION_ID, actual.getOrganizationId());
 		assertEquals(TEST_ORGANIZATION_NAME_1, actual.getOrganizationName());
@@ -41,8 +40,8 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 		
 		OrgData actual = odProcessor.process(biodataOD);
 		
-		assertEquals(Application.DATA_SOURCE_ID, actual.getDataSourceId());
-		assertEquals(Application.DATA_SOURCE, actual.getDataSource());
+		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
+		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());
 		assertNull(actual.getOrganization());
 		assertNull(actual.getOrganizationId());
 		assertNull(actual.getOrganizationName());

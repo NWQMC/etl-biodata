@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.monitoringLocation;
 
+import gov.acwi.wqp.etl.EtlConstantUtils;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Step;
@@ -21,12 +22,17 @@ import org.springframework.context.annotation.Configuration;
 import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
 import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocationRowMapper;
 import java.io.IOException;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.util.FileCopyUtils;
 
 @Configuration
 public class TransformMonitoringLocation {
+	
+	@Autowired
+	@Qualifier("monitoringLocationProcessor")
+	private ItemProcessor<BiodataMonitoringLocation, MonitoringLocation> processor;
 
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
@@ -40,11 +46,11 @@ public class TransformMonitoringLocation {
 	private DataSource dataSourceBiodata;
 
 	@Autowired
-	@Qualifier("setupMonitoringLocationSwapTableFlow")
+	@Qualifier(EtlConstantUtils.SETUP_MONITORING_LOCATION_SWAP_TABLE_FLOW)
 	private Flow setupMonitoringLocationSwapTableFlow;
 
 	@Autowired
-	@Qualifier("buildMonitoringLocationIndexesFlow")
+	@Qualifier(EtlConstantUtils.BUILD_MONITORING_LOCATION_INDEXES_FLOW)
 	private Flow buildMonitoringLocationIndexesFlow;
 	
 	@Value("classpath:sql/monitoringLocation/readBiodataMonitoringLocation.sql")
@@ -79,7 +85,7 @@ public class TransformMonitoringLocation {
 				.get("transformMonitoringLocationStep")
 				.<BiodataMonitoringLocation, MonitoringLocation>chunk(10)
 				.reader(monitoringLocationReader())
-				.processor(new MonitoringLocationProcessor())
+				.processor(processor)
 				.writer(monitoringLocationWriter())
 				.build();
 	}

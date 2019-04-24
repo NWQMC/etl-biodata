@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.orgData;
 
+import gov.acwi.wqp.etl.EtlConstantUtils;
 import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgData;
 import gov.acwi.wqp.etl.biodata.orgData.BiodataOrgDataRowMapper;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.job.flow.support.SimpleFlow;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.ItemSqlParameterSourceProvider;
@@ -27,6 +29,10 @@ import org.springframework.util.FileCopyUtils;
 public class TransformOrgData {
 	
 	@Autowired
+	@Qualifier("orgDataProcessor")
+	private ItemProcessor<BiodataOrgData, OrgData> processor;
+	
+	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 	
 	@Autowired
@@ -34,11 +40,11 @@ public class TransformOrgData {
 	private DataSource dataSourceWqp;
 	
 	@Autowired
-	@Qualifier("setupOrgDataSwapTableFlow")
+	@Qualifier(EtlConstantUtils.SETUP_ORG_DATA_SWAP_TABLE_FLOW)
 	private Flow setupOrgDataSwapTableFlow;
 		
 	@Autowired
-	@Qualifier("buildOrgDataIndexesFlow")
+	@Qualifier(EtlConstantUtils.BUILD_ORG_DATA_INDEXES_FLOW)
 	private Flow buildOrgDataIndexesFlow;
 	
 	@Value("classpath:sql/orgData/readOrgData.sql")
@@ -73,7 +79,7 @@ public class TransformOrgData {
 				.get("transformOrgDataStep")
 				.<BiodataOrgData, OrgData>chunk(10)
 				.reader(orgDataReader())
-				.processor(new OrgDataProcessor())
+				.processor(processor)
 				.writer(orgDataWriter())
 				.build();
 	}

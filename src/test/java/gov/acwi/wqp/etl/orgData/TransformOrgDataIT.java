@@ -21,9 +21,16 @@ public class TransformOrgDataIT extends BiodataBaseFlowIT {
 	private Flow orgDataFlow;
 	
 	@Test
-	@DatabaseSetup( connection="wqp", value="classpath:/testResult/wqp/orgData/empty.xml")
-	@DatabaseSetup( connection="wqp", value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
-	@ExpectedDatabase( connection="wqp", value="classpath:/testResult/wqp/orgData/orgData.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@DatabaseSetup(
+			connection=CONNECTION_WQP,
+			value="classpath:/testResult/wqp/orgData/empty.xml")
+	@DatabaseSetup(
+			connection=CONNECTION_WQP,
+			value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
+	@ExpectedDatabase(
+			connection=CONNECTION_WQP,
+			value="classpath:/testResult/wqp/orgData/orgData.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void transformOrgDataStepTest() {
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchStep("transformOrgDataStep", testJobParameters);
@@ -35,22 +42,32 @@ public class TransformOrgDataIT extends BiodataBaseFlowIT {
 	}
 	
 	@Test
-	@DatabaseSetup( connection="wqp", value="classpath:/testResult/wqp/orgData/empty.xml")
-	@DatabaseSetup( connection="wqp", value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
-	@ExpectedDatabase( value="classpath:/testResult/wqp/orgData/indexes/all.xml",
+	@DatabaseSetup(
+			connection=CONNECTION_WQP,
+			value="classpath:/testResult/wqp/orgData/empty.xml")
+	@DatabaseSetup(
+			connection=CONNECTION_WQP,
+			value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/orgData/indexes/all.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
-				table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
-				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'org_data_swap_biodata'")
-	@ExpectedDatabase( connection="pg", value="classpath:/testResult/wqp/orgData/create.xml",
+			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'org_data_swap_biodata'")
+	@ExpectedDatabase(
+			connection=CONNECTION_INFORMATION_SCHEMA,
+			value="classpath:/testResult/wqp/orgData/create.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
-				table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
-				query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'org_data_swap_biodata'")
-	@ExpectedDatabase( value="classpath:/testResult/wqp/orgData/orgData.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'org_data_swap_biodata'")
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/orgData/orgData.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void orgDataFlowTest() {
-		Job orgDataFlowTest = jobBuilderFactory.get("orgDataFlowTest")
-					.start(orgDataFlow)
-					.build()
-					.build();
+		Job orgDataFlowTest = jobBuilderFactory
+				.get("orgDataFlowTest")
+				.start(orgDataFlow)
+				.build()
+				.build();
 		jobLauncherTestUtils.setJob(orgDataFlowTest);
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchJob(testJobParameters);

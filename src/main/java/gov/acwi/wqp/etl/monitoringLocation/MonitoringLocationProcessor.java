@@ -3,10 +3,20 @@ package gov.acwi.wqp.etl.monitoringLocation;
 
 import org.springframework.batch.item.ItemProcessor;
 
-import gov.acwi.wqp.etl.Application;
+import gov.acwi.wqp.etl.ConfigurationService;
 import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
+	
+	private final ConfigurationService configurationService;
+	
+	@Autowired
+	public MonitoringLocationProcessor(ConfigurationService configurationService) {
+		this.configurationService = configurationService;
+	}
 	
 	public static final String DEFAULT_ELEVATION_UNIT = "feet";
 	public static final String DEFAULT_ELEVATION_VALUE = "0";
@@ -16,8 +26,8 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 	public MonitoringLocation process(BiodataMonitoringLocation biodataML) throws Exception {
 		MonitoringLocation monitoringLocation = new MonitoringLocation();
 
-		monitoringLocation.setDataSourceId(Application.DATA_SOURCE_ID);
-		monitoringLocation.setDataSource(Application.DATA_SOURCE);
+		monitoringLocation.setDataSourceId(configurationService.getEtlDataSourceId());
+		monitoringLocation.setDataSource(configurationService.getEtlDataSource());
 		monitoringLocation.setStationId(biodataML.getBiodataSiteId());
 		monitoringLocation.setOrganization(biodataML.getOrganization());
 		monitoringLocation.setOrganizationName(biodataML.getOrganizationName());

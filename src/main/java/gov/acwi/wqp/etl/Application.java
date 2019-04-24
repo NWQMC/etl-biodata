@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
-	public static final Integer DATA_SOURCE_ID = 4;
-	public static final String DATA_SOURCE = "BIODATA";
+	public static final String DATASOURCE_BIODATA_QUALIFIER = "dataSourceBiodata";
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
