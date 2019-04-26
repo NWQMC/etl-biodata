@@ -7,20 +7,19 @@ public class BiodataActivity {
 	private Integer stationId;
 	private String siteId;
 	private LocalDateTime eventDate;
-	private String activity;
-	private String sampleMedia; // 'Biological'
+	private String sidno;
+	private String methodCode;
 	private String organization;
 	private String siteType;
 	private String huc;
 	private String governmentalUnitCode;
 	private String organizationName;
 	private Integer activityId;
-	private String activityTypeCode; // 'Field Msr/Obs'
-	private LocalDateTime activityStartTime;
+	private String sampleDataSource;
+	private LocalDateTime sampleCollectionStartTime; // data type is timestamp without time zone in the pg database 
 	private String activityStartTimeZone;
 	private String projectId;
 	private String activityComment;
-	private String assemblageSampledName; // 'Fish/Nekton'
 	private Integer activityReachLength;
 	private String activityReachLengthUnit;
 	private Integer activityPassCount;
@@ -30,6 +29,22 @@ public class BiodataActivity {
 	private String activitySampleCollectMethodDescription;
 	private String sampleCollectEquipmentName;
 	private String activitySampleCollectEquipmentComments;
+
+	public String getSampleDataSource() {
+		return sampleDataSource;
+	}
+
+	public void setSampleDataSource(String sampleDataSource) {
+		this.sampleDataSource = sampleDataSource;
+	}
+
+	public LocalDateTime getSampleCollectionStartTime() {
+		return sampleCollectionStartTime;
+	}
+
+	public void setSampleCollectionStartTime(LocalDateTime sampleCollectionStartTime) {
+		this.sampleCollectionStartTime = sampleCollectionStartTime;
+	}
 
 	public Integer getStationId() {
 		return stationId;
@@ -54,21 +69,17 @@ public class BiodataActivity {
 	public void setEventDate(LocalDateTime eventDate) {
 		this.eventDate = eventDate;
 	}
-
-	public String getActivity() {
-		return activity;
+	public String getSidno() {
+		return sidno;
 	}
-
-	public void setActivity(String activity) {
-		this.activity = activity;
+	public void setSidno(String sidno) {
+		this.sidno = sidno;
 	}
-
-	public String getSampleMedia() {
-		return sampleMedia;
+	public String getMethodCode() {
+		return methodCode;
 	}
-
-	public void setSampleMedia(String sampleMedia) {
-		this.sampleMedia = sampleMedia;
+	public void setMethodCode(String methodCode) {
+		this.methodCode = methodCode;
 	}
 
 	public String getOrganization() {
@@ -119,22 +130,6 @@ public class BiodataActivity {
 		this.activityId = activityId;
 	}
 
-	public String getActivityTypeCode() {
-		return activityTypeCode;
-	}
-
-	public void setActivityTypeCode(String activityTypeCode) {
-		this.activityTypeCode = activityTypeCode;
-	}
-
-	public LocalDateTime getActivityStartTime() {
-		return activityStartTime;
-	}
-
-	public void setActivityStartTime(LocalDateTime activityStartTime) {
-		this.activityStartTime = activityStartTime;
-	}
-
 	public String getActivityStartTimeZone() {
 		return activityStartTimeZone;
 	}
@@ -157,14 +152,6 @@ public class BiodataActivity {
 
 	public void setActivityComment(String activityComment) {
 		this.activityComment = activityComment;
-	}
-
-	public String getAssemblageSampledName() {
-		return assemblageSampledName;
-	}
-
-	public void setAssemblageSampledName(String assemblageSampledName) {
-		this.assemblageSampledName = assemblageSampledName;
 	}
 
 	public Integer getActivityReachLength() {
@@ -238,6 +225,5 @@ public class BiodataActivity {
 	public void setActivitySampleCollectEquipmentComments(String activitySampleCollectEquipmentComments) {
 		this.activitySampleCollectEquipmentComments = activitySampleCollectEquipmentComments;
 	}
-
-	
 }
+

@@ -1,20 +1,17 @@
 select 
 	station.station_id, 
 	station.site_id,
-	trunc(sample.collection_start) event_date,
-	sample.sidno || '-' || effort.method_code activity,
+	sample.collection_start event_date,
+	sample.sidno,
+	effort.method_code,
 	station.organization,
 	station.site_type,
 	station.huc,
 	station.governmental_unit_code,
 	station.organization_name,
 	effort.dw_effort_id activity_id,
-
-	case
-		when sample.data_source = 'BioTDB' 
-			then null
-			else to_char(sample.collection_start, 'hh24:mi:ss')
-	end  activity_start_time,
+	sample.data_source
+	sample.collection_start
 
 	case
 		when sample.data_source = 'BioTDB' 
