@@ -1,6 +1,4 @@
 select
-	4 data_source_id,
-	'BIODATA' data_source,
 	station_nwis.site_id,
 	biodata_site.biodata_site_id,
 	biodata_site.agency_cd, 

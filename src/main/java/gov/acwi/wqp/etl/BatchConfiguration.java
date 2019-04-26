@@ -24,9 +24,9 @@ public class BatchConfiguration {
 	@Qualifier("monitoringLocationFlow")
 	private Flow monitoringLocationFlow;
 
-//	@Autowired
-//	@Qualifier("activityFlow")
-//	private Flow activityFlow;
+	@Autowired
+	@Qualifier("activityFlow")
+	private Flow activityFlow;
 //
 //	@Autowired
 //	@Qualifier("resultFlow")
@@ -50,7 +50,7 @@ public class BatchConfiguration {
 //				.incrementer(jobIncrementer)
 				.start(orgDataFlow)
 				.next(monitoringLocationFlow)
-//				.next(activityFlow)
+				.next(activityFlow)
 //				.next(resultFlow)
                 
 //				.next(createSummariesFlow)
@@ -60,5 +60,4 @@ public class BatchConfiguration {
 				.build()
 				.build();
 	}
-
 }
