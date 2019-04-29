@@ -7,8 +7,7 @@ public class BiodataActivity {
 	private Integer stationId;
 	private String siteId;
 	private LocalDateTime eventDate;
-	private String sidno;
-	private String methodCode;
+	private String activity;
 	private String organization;
 	private String siteType;
 	private String huc;
@@ -17,34 +16,19 @@ public class BiodataActivity {
 	private Integer activityId;
 	private String sampleDataSource;
 	private LocalDateTime sampleCollectionStartTime; // data type is timestamp without time zone in the pg database 
-	private String activityStartTimeZone;
 	private String projectId;
 	private String activityComment;
 	private Integer activityReachLength;
-	private String activityReachLengthUnit;
-	private Integer activityPassCount;
+	private String effortPass;
 	private String sampleCollectMethodId;
 	private String sampleCollectMethodCtx;
 	private String sampleCollectMethodName;
 	private String activitySampleCollectMethodDescription;
-	private String sampleCollectEquipmentName;
-	private String activitySampleCollectEquipmentComments;
-
-	public String getSampleDataSource() {
-		return sampleDataSource;
-	}
-
-	public void setSampleDataSource(String sampleDataSource) {
-		this.sampleDataSource = sampleDataSource;
-	}
-
-	public LocalDateTime getSampleCollectionStartTime() {
-		return sampleCollectionStartTime;
-	}
-
-	public void setSampleCollectionStartTime(LocalDateTime sampleCollectionStartTime) {
-		this.sampleCollectionStartTime = sampleCollectionStartTime;
-	}
+	private String sampleTimeDatum;
+	private String effortGear;
+	private String sampleGearUsed;
+	private Integer dwSampleTypeId;
+	private String effortSubreach;
 
 	public Integer getStationId() {
 		return stationId;
@@ -69,17 +53,13 @@ public class BiodataActivity {
 	public void setEventDate(LocalDateTime eventDate) {
 		this.eventDate = eventDate;
 	}
-	public String getSidno() {
-		return sidno;
+
+	public String getActivity() {
+		return activity;
 	}
-	public void setSidno(String sidno) {
-		this.sidno = sidno;
-	}
-	public String getMethodCode() {
-		return methodCode;
-	}
-	public void setMethodCode(String methodCode) {
-		this.methodCode = methodCode;
+
+	public void setActivity(String activity) {
+		this.activity = activity;
 	}
 
 	public String getOrganization() {
@@ -130,12 +110,20 @@ public class BiodataActivity {
 		this.activityId = activityId;
 	}
 
-	public String getActivityStartTimeZone() {
-		return activityStartTimeZone;
+	public String getSampleDataSource() {
+		return sampleDataSource;
 	}
 
-	public void setActivityStartTimeZone(String activityStartTimeZone) {
-		this.activityStartTimeZone = activityStartTimeZone;
+	public void setSampleDataSource(String sampleDataSource) {
+		this.sampleDataSource = sampleDataSource;
+	}
+
+	public LocalDateTime getSampleCollectionStartTime() {
+		return sampleCollectionStartTime;
+	}
+
+	public void setSampleCollectionStartTime(LocalDateTime sampleCollectionStartTime) {
+		this.sampleCollectionStartTime = sampleCollectionStartTime;
 	}
 
 	public String getProjectId() {
@@ -162,20 +150,12 @@ public class BiodataActivity {
 		this.activityReachLength = activityReachLength;
 	}
 
-	public String getActivityReachLengthUnit() {
-		return activityReachLengthUnit;
+	public String getEffortPass() {
+		return effortPass;
 	}
 
-	public void setActivityReachLengthUnit(String activityReachLengthUnit) {
-		this.activityReachLengthUnit = activityReachLengthUnit;
-	}
-
-	public Integer getActivityPassCount() {
-		return activityPassCount;
-	}
-
-	public void setActivityPassCount(Integer activityPassCount) {
-		this.activityPassCount = activityPassCount;
+	public void setEffortPass(String effortPass) {
+		this.effortPass = effortPass;
 	}
 
 	public String getSampleCollectMethodId() {
@@ -210,20 +190,46 @@ public class BiodataActivity {
 		this.activitySampleCollectMethodDescription = activitySampleCollectMethodDescription;
 	}
 
-	public String getSampleCollectEquipmentName() {
-		return sampleCollectEquipmentName;
+	public String getSampleTimeDatum() {
+		return sampleTimeDatum;
 	}
 
-	public void setSampleCollectEquipmentName(String sampleCollectEquipmentName) {
-		this.sampleCollectEquipmentName = sampleCollectEquipmentName;
+	public void setSampleTimeDatum(String sampleTimeDatum) {
+		this.sampleTimeDatum = sampleTimeDatum;
 	}
 
-	public String getActivitySampleCollectEquipmentComments() {
-		return activitySampleCollectEquipmentComments;
+	public String getEffortGear() {
+		return effortGear;
 	}
 
-	public void setActivitySampleCollectEquipmentComments(String activitySampleCollectEquipmentComments) {
-		this.activitySampleCollectEquipmentComments = activitySampleCollectEquipmentComments;
+	public void setEffortGear(String effortGear) {
+		this.effortGear = effortGear;
 	}
+
+	public String getSampleGearUsed() {
+		return sampleGearUsed;
+	}
+
+	public void setSampleGearUsed(String sampleGearUsed) {
+		this.sampleGearUsed = sampleGearUsed;
+	}
+
+	public Integer getDwSampleTypeId() {
+		return dwSampleTypeId;
+	}
+
+	public void setDwSampleTypeId(Integer dwSampleTypeId) {
+		this.dwSampleTypeId = dwSampleTypeId;
+	}
+
+	public String getEffortSubreach() {
+		return effortSubreach;
+	}
+
+	public void setEffortSubreach(String effortSubreach) {
+		this.effortSubreach = effortSubreach;
+	}
+
+	
 }
 
