@@ -1,6 +1,7 @@
 package gov.acwi.wqp.etl.biodata.activity;
 
 import java.time.LocalDateTime;
+import org.postgis.PGgeometry;
 
 public class BiodataActivity {
 	
@@ -12,6 +13,7 @@ public class BiodataActivity {
 	private String siteType;
 	private String huc;
 	private String governmentalUnitCode;
+	private PGgeometry geom;
 	private String organizationName;
 	private Integer activityId;
 	private String sampleDataSource;
@@ -92,6 +94,14 @@ public class BiodataActivity {
 
 	public void setGovernmentalUnitCode(String governmentalUnitCode) {
 		this.governmentalUnitCode = governmentalUnitCode;
+	}
+
+	public PGgeometry getGeom() {
+		return geom;
+	}
+
+	public void setGeom(PGgeometry geom) {
+		this.geom = geom;
 	}
 
 	public String getOrganizationName() {
@@ -229,7 +239,5 @@ public class BiodataActivity {
 	public void setEffortSubreach(String effortSubreach) {
 		this.effortSubreach = effortSubreach;
 	}
-
-	
 }
 

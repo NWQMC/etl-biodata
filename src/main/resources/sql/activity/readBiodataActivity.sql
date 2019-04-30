@@ -7,6 +7,7 @@ select
 	station.site_type,
 	station.huc,
 	station.governmental_unit_code,
+	station.geom,
 	station.organization_name,
 	effort.dw_effort_id activity_id,
 	sample.data_source
@@ -24,7 +25,7 @@ select
 	sample.gear_used,
 	sample.dw_sample_type_id,
 	effort.subreach
-
+	
 from biodata.effort
 	join biodata.sample
 		on effort.dw_sample_id = sample.dw_sample_id

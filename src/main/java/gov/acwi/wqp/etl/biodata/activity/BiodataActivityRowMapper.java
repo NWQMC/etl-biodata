@@ -1,9 +1,11 @@
 package gov.acwi.wqp.etl.biodata.activity;
 
+import static gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocationRowMapper.GEO_POINT;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.postgis.PGgeometry;
 import org.springframework.jdbc.core.RowMapper;
 
 public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
@@ -16,6 +18,7 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 	public static final String SITE_TYPE = "site_type";
 	public static final String HUC = "huc";
 	public static final String GOVERNMENTAL_UNIT_CODE = "governmental_unit_code";
+	public static final String GEOM = "geom";
 	public static final String ORGANIZATION_NAME = "organization_name";
 	public static final String ACTIVITY_ID = "activity_id";
 	public static final String PROJECT_ID = "project_id";
@@ -53,6 +56,7 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 		biodataActivity.setSiteType(rs.getString(SITE_TYPE));
 		biodataActivity.setHuc(rs.getString(HUC));
 		biodataActivity.setGovernmentalUnitCode(rs.getString(GOVERNMENTAL_UNIT_CODE));
+		biodataActivity.setGeom( (PGgeometry) rs.getObject(GEOM));
 		biodataActivity.setOrganizationName(rs.getString(ORGANIZATION_NAME));
 		biodataActivity.setActivityId(rs.getInt(ACTIVITY_ID));
 		biodataActivity.setSampleDataSource(rs.getString(SAMPLE_DATA_SOURCE));

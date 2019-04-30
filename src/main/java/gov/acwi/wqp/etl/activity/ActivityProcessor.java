@@ -48,6 +48,10 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public Activity process(BiodataActivity bdActivity) throws Exception {
 		Activity activity = new Activity();
 		
+		String gear = bdActivity.getEffortGear() == null
+				? bdActivity.getSampleGearUsed()
+				: bdActivity.getEffortGear();
+		
 		activity.setDataSourceId(configurationService.getEtlDataSourceId());
 		activity.setDataSource(configurationService.getEtlDataSource());
 		
@@ -63,6 +67,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		activity.setSiteType(bdActivity.getSiteType());
 		activity.setHuc(bdActivity.getHuc());
 		activity.setGovernmentalUnitCode(bdActivity.getGovernmentalUnitCode());
+		activity.setGeom(bdActivity.getGeom());
 		activity.setOrganizationName(bdActivity.getOrganizationName());
 		activity.setActivityId(bdActivity.getActivityId());
 		
@@ -95,14 +100,11 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 				bdActivity.getActivitySampleCollectMethodDescription());
 		
 		activity.setSampleCollectEquipName(
-				processSampleCollectEquipName(
-						bdActivity.getEffortGear(),
-						bdActivity.getSampleGearUsed()));
+				processSampleCollectEquipName(gear));
 		
 		activity.setActivitySampleCollectEquipmentComments(
 				processActivitySampleCollectEquipmentComments(
-						bdActivity.getEffortGear(),
-						bdActivity.getSampleGearUsed(),
+						gear,
 						bdActivity.getDwSampleTypeId(),
 						bdActivity.getEffortSubreach(),
 						bdActivity.getEffortPass()));
@@ -138,11 +140,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		return activityPassCount;
 	}
 	
-	public String processSampleCollectEquipName(String effortGear, String sampleGearUsed) {
-		String gear = effortGear == null 
-				? sampleGearUsed 
-				: effortGear;
-		
+	public String processSampleCollectEquipName(String gear) {
 		switch (gear.toLowerCase()) {
 			case BACKPACK : return BACKPACK_ELECTROSHOCK;
 			case TOWED_BARGE : return ELECTROSHOCK_OTHER;
@@ -155,22 +153,17 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		}
 	}
 	
-	public String processActivitySampleCollectEquipmentComments(
-			String effortGear, String sampleGearUsed, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
-		
-		String comments = effortGear == null 
-				? sampleGearUsed 
-				: effortGear;
-
+	public String processActivitySampleCollectEquipmentComments(String comments, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
+		StringBuilder equipmentComments = new StringBuilder(comments);
 		if (DEFAULT_DW_SAMPLE_TYPE_ID.equals(dwSampleTypeId)) {
 			if (null != effortSubreach) {
-				comments += "+" + effortSubreach;
+				equipmentComments.append("+");
+				equipmentComments.append(effortSubreach);
 			}
-			if (null != effortPass) {
-				comments += "+" + effortPass;
-			}
+		} else if (null != effortPass) {
+			equipmentComments.append("+");
+			equipmentComments.append(effortPass);
 		}
-		
-		return comments;
+		return equipmentComments.toString();
 	}
 }
