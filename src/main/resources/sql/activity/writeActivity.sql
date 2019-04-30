@@ -40,7 +40,7 @@ insert into
 		,:sampleMedia
 		,:organization
 		,:siteType
-		;:huc
+		,:huc
 		,:governmentalUnitCode
 		,:geom
 		,:organizationName

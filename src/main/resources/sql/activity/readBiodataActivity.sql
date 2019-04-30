@@ -1,30 +1,30 @@
 select 
-	station.station_id, 
-	station.site_id,
-	sample.collection_start event_date,
-	sample.sidno || '-' || effort.method_code activity,
-	station.organization,
-	station.site_type,
-	station.huc,
-	station.governmental_unit_code,
-	station.geom,
-	station.organization_name,
-	effort.dw_effort_id activity_id,
-	sample.data_source
-	sample.collection_start
-	sample.time_datum,
-	project.project_label project_id,
-	effort.comments activity_comment,
-	sample.reach_length_fished act_reach_length,
-	effort.pass,
-	effort.method_code sample_collect_method_id,
-	sample.sampling_method_reference || ' ' || effort.method_code sample_collect_method_ctx,
-	sample.sampling_method_reference sample_collect_method_name,
-	sample.sampling_method_ref_citation act_sam_collect_meth_desc,
-	effort.gear, 
-	sample.gear_used,
-	sample.dw_sample_type_id,
-	effort.subreach
+	station.station_id 
+	,station.site_id
+	,sample.collection_start event_date
+	,sample.sidno || '-' || effort.method_code activity
+	,station.organization
+	,station.site_type
+	,station.huc
+	,station.governmental_unit_code
+	,station.geom
+	,station.organization_name
+	,effort.dw_effort_id activity_id
+	,sample.data_source
+	,sample.collection_start
+	,sample.time_datum
+	,project.project_label project_id
+	,effort.comments activity_comment
+	,sample.reach_length_fished act_reach_length
+	,effort.pass
+	,effort.method_code sample_collect_method_id
+	,sample.sampling_method_reference || ' ' || effort.method_code sample_collect_method_ctx
+	,sample.sampling_method_reference sample_collect_method_name
+	,sample.sampling_method_ref_citation act_sam_collect_meth_desc
+	,effort.gear 
+	,sample.gear_used
+	,sample.dw_sample_type_id
+	,effort.subreach
 	
 from biodata.effort
 	join biodata.sample

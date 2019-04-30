@@ -20,8 +20,13 @@ public class TransformActivityIT  extends BiodataBaseFlowIT {
 	private Flow activityFlow;
 	
 	@Test
-	@DatabaseSetup( value="classpath:/testResult/wqp/activity/empty.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/empty.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataEffort.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSample.xml")
+	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/station_swap_biodata.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataProject.xml")
 	@ExpectedDatabase(
+			connection=CONNECTION_WQP,
 			value="classpath:/testResult/wqp/activity/activity.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	public void transformActivityStepTest() {
