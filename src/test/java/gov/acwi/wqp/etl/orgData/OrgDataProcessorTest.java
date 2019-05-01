@@ -12,7 +12,7 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 	private OrgDataProcessor odProcessor;
 	
 	@Before
-	public void setUp() {
+	public void setupTestClass() {
 		biodataOD = new BiodataOrgData();
 		odProcessor = new OrgDataProcessor(configurationService);
 		

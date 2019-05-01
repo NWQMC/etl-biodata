@@ -47,16 +47,13 @@ public class BatchConfiguration {
 	@Bean
 	public Job wqxEtl() {
 		return jobBuilderFactory.get("WQP_BIODATA_ETL")
-//				.incrementer(jobIncrementer)
 				.start(orgDataFlow)
 				.next(monitoringLocationFlow)
 				.next(activityFlow)
 //				.next(resultFlow)
-                
 //				.next(createSummariesFlow)
 //				.next(createCodesFlow)
 //				.next(databaseFinalizeFlow)
-                
 				.build()
 				.build();
 	}

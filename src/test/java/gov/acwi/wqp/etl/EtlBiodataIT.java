@@ -16,8 +16,6 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 	@Test
 	
 	// resources from nwis and biodata
-	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/empty.xml")
-	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/empty.xml")
 	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testData/nwis/station/nwisStation.xml")
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareBiodataSite.xml")
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSample.xml")

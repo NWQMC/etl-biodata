@@ -12,7 +12,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	private MonitoringLocationProcessor mlProcessor;
 	
 	@Before
-	public void setUp() {
+	public void setupTestClass() {
 		biodataML = new BiodataMonitoringLocation();
 		mlProcessor = new MonitoringLocationProcessor(configurationService);
 		

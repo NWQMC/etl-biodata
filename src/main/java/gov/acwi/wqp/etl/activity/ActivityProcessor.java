@@ -13,6 +13,11 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	
 	private final ConfigurationService configurationService;
 	
+	@Autowired
+	public ActivityProcessor(ConfigurationService configurationService) {
+		this.configurationService = configurationService;
+	}
+	
 	public static final String DEFAULT_SAMPLE_MEDIA = "Biological";
 	public static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
 	public static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
@@ -38,11 +43,6 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID = 16;
 	
 	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // originall hh24:mi:ss
-	
-	@Autowired
-	public ActivityProcessor(ConfigurationService configurationService) {
-		this.configurationService = configurationService;
-	}
 	
 	@Override
 	public Activity process(BiodataActivity bdActivity) throws Exception {

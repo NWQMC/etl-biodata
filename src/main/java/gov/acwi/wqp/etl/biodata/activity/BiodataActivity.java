@@ -17,7 +17,7 @@ public class BiodataActivity {
 	private String organizationName;
 	private Integer activityId;
 	private String sampleDataSource;
-	private LocalDateTime sampleCollectionStartTime; // data type is timestamp without time zone in the pg database 
+	private LocalDateTime sampleCollectionStartTime; 
 	private String projectId;
 	private String activityComment;
 	private Integer activityReachLength;

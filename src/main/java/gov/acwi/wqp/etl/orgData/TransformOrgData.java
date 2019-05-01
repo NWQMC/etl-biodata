@@ -57,7 +57,7 @@ public class TransformOrgData {
 	public JdbcCursorItemReader<BiodataOrgData> orgDataReader() throws Exception {
 		return new JdbcCursorItemReaderBuilder<BiodataOrgData>()
 		.dataSource(dataSourceWqp)
-		.name("monitoringLocationReader")
+		.name("orgDataReader")
 		.sql(new String(FileCopyUtils.copyToByteArray(sqlResourceReader.getInputStream())))
 		.rowMapper(new BiodataOrgDataRowMapper())
 		.build();
