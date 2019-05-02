@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.biodata.activity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.postgis.PGgeometry;
 
@@ -7,7 +8,6 @@ public class BiodataActivity {
 	
 	private Integer stationId;
 	private String siteId;
-	private LocalDateTime eventDate;
 	private String activity;
 	private String organization;
 	private String siteType;
@@ -46,14 +46,6 @@ public class BiodataActivity {
 
 	public void setSiteId(String siteId) {
 		this.siteId = siteId;
-	}
-
-	public LocalDateTime getEventDate() {
-		return eventDate;
-	}
-
-	public void setEventDate(LocalDateTime eventDate) {
-		this.eventDate = eventDate;
 	}
 
 	public String getActivity() {

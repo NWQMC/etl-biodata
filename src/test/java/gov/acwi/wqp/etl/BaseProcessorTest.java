@@ -2,6 +2,8 @@ package gov.acwi.wqp.etl;
 
 import gov.acwi.wqp.etl.monitoringLocation.MonitoringLocation;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.junit.Before;
 import org.postgis.PGgeometry;
 
@@ -61,6 +63,30 @@ public abstract class BaseProcessorTest {
 	public static final BigDecimal TEST_HOLE_DEPTH_VALUE = new BigDecimal("4");
 	public static final String TEST_HOLE_DEPTH_UNIT = "testHoleDepthUnit";
 	
+	public static final LocalDateTime TEST_SAMPLE_COLLECTION_START_TIME = LocalDateTime.parse("1996-07-22T13:00:00");
+	public static final LocalDate TEST_EVENT_DATE_LOCAL_DATE = TEST_SAMPLE_COLLECTION_START_TIME.toLocalDate();
+	public static final String TEST_SAMPLE_COLLECTION_START_TIME_LOCAL_TIME = TEST_SAMPLE_COLLECTION_START_TIME
+			.toLocalTime()
+			.format(Application.TIME_FORMATTER);
+	
+	public static final String TEST_ACTIVITY = "BDB-000031046-Towed-P1&2";
+	public static final Integer TEST_ACTIVITY_ID = 268023;
+	public static final String TEST_SAMPLE_DATA_SOURCE_BIOTDB = "BioTDB";
+	public static final String TEST_SAMPLE_DATA_SOURCE = "test sample data source";
+	public static final String TEST_PROJECT_ID = "LERI BioTDB";
+	public static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";
+	public static final Integer TEST_ACTIVITY_REACH_LENGTH = 300;
+	public static final String TEST_EFFORT_PASS = "Pass 1 & 2 combined";
+	public static final String TEST_SAMPLE_COLLECT_METHOD_ID = "Towed-P1&2";
+	public static final String TEST_SAMPLE_COLLECT_METHOD_CTX = "NAWQA Fish  Towed-P1&2";
+	public static final String TEST_SAMPLE_COLLECT_METHOD_NAME = "NAWQA Fish ";
+	public static final String TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION = "https://www.nemi.gov/methods/method_summary/12237/";
+	public static final String TEST_SAMPLE_TIME_DATUM = "CDT - Central Daylight Time";
+	public static final String TEST_EFFORT_GEAR = "Towed barge";
+	public static final String TEST_SAMPLE_GEAR_USED = "Towed barge - sample";
+	public static final Integer TEST_DW_SAMPLE_TYPE_ID = 7;
+	public static final String TEST_EFFORT_SUBREACH = "A-B";
+
 	protected ConfigurationService configurationService;
 	
 	@Before

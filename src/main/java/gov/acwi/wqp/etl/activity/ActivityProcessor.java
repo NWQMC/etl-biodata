@@ -1,9 +1,9 @@
 package gov.acwi.wqp.etl.activity;
 
+import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.ConfigurationService;
 import gov.acwi.wqp.etl.biodata.activity.BiodataActivity;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,8 +42,6 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public static final String DEFAULT_REACH_LENGTH_UNIT = "m";
 	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID = 16;
 	
-	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // originall hh24:mi:ss
-	
 	@Override
 	public Activity process(BiodataActivity bdActivity) throws Exception {
 		Activity activity = new Activity();
@@ -61,7 +59,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 
 		activity.setStationId(bdActivity.getStationId());
 		activity.setSiteId(bdActivity.getSiteId());
-		activity.setEventDate(bdActivity.getEventDate().toLocalDate());
+		activity.setEventDate(bdActivity.getSampleCollectionStartTime().toLocalDate());
 		activity.setActivity(bdActivity.getActivity());
 		activity.setOrganization(bdActivity.getOrganization());
 		activity.setSiteType(bdActivity.getSiteType());
@@ -115,7 +113,8 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public String processActivityStartTime(String sampleDataSource, LocalDateTime sampleCollectionStart) {
 		String activityStartTime = SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource) 
 				? null
-				: dateFormatter.format(sampleCollectionStart);
+				: sampleCollectionStart.toLocalTime().format(Application.TIME_FORMATTER);
+
 		return activityStartTime;
 	}
 	

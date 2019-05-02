@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.biodata.activity;
 
-import static gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocationRowMapper.GEO_POINT;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -12,7 +11,6 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 	
 	public static final String STATION_ID = "station_id";
 	public static final String SITE_ID = "site_id";
-	public static final String EVENT_DATE = "event_date";
 	public static final String ACTIVITY = "activity";
 	public static final String ORGANIZATION = "organization";
 	public static final String SITE_TYPE = "site_type";
@@ -47,10 +45,6 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 		
 		biodataActivity.setStationId(rs.getInt(STATION_ID));
 		biodataActivity.setSiteId(rs.getString(SITE_ID));
-		biodataActivity.setEventDate(
-				LocalDateTime.parse(
-						rs.getString(EVENT_DATE),
-						dateTimeFormatter));
 		biodataActivity.setActivity(rs.getString(ACTIVITY));
 		biodataActivity.setOrganization(rs.getString(ORGANIZATION));
 		biodataActivity.setSiteType(rs.getString(SITE_TYPE));
@@ -60,10 +54,7 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 		biodataActivity.setOrganizationName(rs.getString(ORGANIZATION_NAME));
 		biodataActivity.setActivityId(rs.getInt(ACTIVITY_ID));
 		biodataActivity.setSampleDataSource(rs.getString(SAMPLE_DATA_SOURCE));
-		biodataActivity.setSampleCollectionStartTime(
-				LocalDateTime.parse(
-						rs.getString(SAMPLE_COLLECTION_START_TIME), 
-						dateTimeFormatter));
+		biodataActivity.setSampleCollectionStartTime(rs.getTimestamp(SAMPLE_COLLECTION_START_TIME).toLocalDateTime());
 		biodataActivity.setSampleTimeDatum(rs.getString(SAMPLE_TIME_DATUM));
 		biodataActivity.setProjectId(rs.getString(PROJECT_ID));
 		biodataActivity.setActivityComment(rs.getString(ACTIVITY_COMMENT));

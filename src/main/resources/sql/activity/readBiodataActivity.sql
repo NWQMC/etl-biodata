@@ -1,7 +1,6 @@
 select 
 	station.station_id 
 	,station.site_id
-	,sample.collection_start event_date
 	,sample.sidno || '-' || effort.method_code activity
 	,station.organization
 	,station.site_type
