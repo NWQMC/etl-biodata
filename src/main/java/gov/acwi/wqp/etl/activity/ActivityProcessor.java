@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activity>{
-	
+
 	public static final String DEFAULT_SAMPLE_MEDIA = "Biological";
 	public static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
 	public static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
@@ -34,25 +34,25 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public static final String VISUAL_SIGHTING = "Visual Sighting";
 	public static final String DEFAULT_REACH_LENGTH_UNIT = "m";
 	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
-	
+
 	private final ConfigurationService configurationService;
-	
+
 	@Autowired
 	public ActivityProcessor(ConfigurationService configurationService) {
 		this.configurationService = configurationService;
 	}
-	
+
 	@Override
 	public Activity process(BiodataActivity bdActivity) throws Exception {
 		Activity activity = new Activity();
-		
+
 		String gear = bdActivity.getEffortGear() == null
 				? bdActivity.getSampleGearUsed()
 				: bdActivity.getEffortGear();
-		
+
 		activity.setDataSourceId(configurationService.getEtlDataSourceId());
 		activity.setDataSource(configurationService.getEtlDataSource());
-		
+
 		activity.setSampleMedia(DEFAULT_SAMPLE_MEDIA);
 		activity.setActivityTypeCode(DEFAULT_ACTIVITY_TYPE_CODE);
 		activity.setAssemblageSampledName(DEFAULT_ASSEMBLAGE_SAMPLED_NAME);
@@ -68,38 +68,38 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		activity.setGeom(bdActivity.getGeom());
 		activity.setOrganizationName(bdActivity.getOrganizationName());
 		activity.setActivityId(bdActivity.getActivityId());
-		
+
 		activity.setActivityStartTime(
 				processActivityStartTime(
-						bdActivity.getSampleDataSource(), 
+						bdActivity.getSampleDataSource(),
 						bdActivity.getSampleCollectionStartTime()));
-		
+
 		activity.setActStartTimeZone(
 				processActivityStartTimeZone(
 						bdActivity.getSampleDataSource(),
 						bdActivity.getSampleTimeDatum()));
-		
+
 		activity.setProjectId(bdActivity.getProjectId());
 		activity.setActivityComment(bdActivity.getActivityComment());
 		activity.setActivityReachLength(bdActivity.getActivityReachLength());
-		
+
 		activity.setActivityReachLengthUnit(
 				processActivityReachLengthUnit(
 						bdActivity.getActivityReachLength()));
-		
+
 		activity.setActivityPassCount(
 				processActivityPassCount(
 						bdActivity.getEffortPass()));
-		
+
 		activity.setSampleCollectMethodId(bdActivity.getSampleCollectMethodId());
 		activity.setSampleCollectMethodCtx(bdActivity.getSampleCollectMethodCtx());
 		activity.setSampleCollectMethodName(bdActivity.getSampleCollectMethodName());
 		activity.setActivitySampleCollectMethodDescription(
 				bdActivity.getActivitySampleCollectMethodDescription());
-		
+
 		activity.setSampleCollectEquipName(
 				processSampleCollectEquipName(gear));
-		
+
 		activity.setActivitySampleCollectEquipmentComments(
 				processActivitySampleCollectEquipmentComments(
 						gear,
@@ -111,34 +111,29 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	}
 
 	public String processActivityStartTime(String sampleDataSource, LocalDateTime sampleCollectionStart) {
-		String activityStartTime = SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource) 
+		return SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource)
 				? null
 				: sampleCollectionStart.toLocalTime().format(Application.TIME_FORMATTER);
-
-		return activityStartTime;
 	}
-	
+
 	public String processActivityStartTimeZone(String sampleDataSource, String sampleTimeDatum) {
-		String activityStartTimeZone = SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource) 
+		return SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource)
 				? null
 				: sampleTimeDatum;
-		return activityStartTimeZone;
 	}
-	
+
 	public String processActivityReachLengthUnit(Integer activityReachLength) {
-		String activityReachLengthUnit = null == activityReachLength
+		return null == activityReachLength
 				? null
 				: DEFAULT_REACH_LENGTH_UNIT;
-		return activityReachLengthUnit;
 	}
-	
+
 	public Integer processActivityPassCount(String effortPass) {
-		Integer activityPassCount = EFFORT_PASS_1_2_COMBINED.equals(effortPass)
+		return EFFORT_PASS_1_2_COMBINED.equals(effortPass)
 				? EFFORT_PASS_2
 				: EFFORT_PASS_1;
-		return activityPassCount;
 	}
-	
+
 	public String processSampleCollectEquipName(String gear) {
 		switch (gear.toLowerCase()) {
 			case BACKPACK : return BACKPACK_ELECTROSHOCK;
@@ -151,7 +146,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		default: return null;
 		}
 	}
-	
+
 	public String processActivitySampleCollectEquipmentComments(String gear, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
 		StringBuilder equipmentComments = new StringBuilder(gear);
 		if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {

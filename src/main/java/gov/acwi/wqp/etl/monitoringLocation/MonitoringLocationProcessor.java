@@ -98,17 +98,15 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 	}
 	
 	public String processSiteId(String nwisSiteId, String agencyCd, String siteNo) {
-		String siteId = nwisSiteId == null
+		return nwisSiteId == null
 				? String.join("-", agencyCd, siteNo)
 				: nwisSiteId;
-		return siteId;
 	}
 	
 	public String processGovernmentUnitCode(String governmentUnitCode, String countryCode, String stateCode, String countyCode) {
-		String governmentUnitCodeML = governmentUnitCode == null 
+		return governmentUnitCode == null
 				? String.join(":", countryCode, stateCode, countyCode)
 				: governmentUnitCode;
-		return governmentUnitCodeML;
 	}
 	
 	public String processElevationUnit(String elevationUnit, String altDatumCd, String altitude) {
