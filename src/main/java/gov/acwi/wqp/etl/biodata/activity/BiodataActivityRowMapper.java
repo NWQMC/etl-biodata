@@ -36,8 +36,6 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 	public static final String DW_SAMPLE_TYPE_ID = "dw_sample_type_id";
 	public static final String EFFORT_SUBREACH = "subreach";
 	
-	private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	
 	@Override
 	public BiodataActivity mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BiodataActivity biodataActivity = new BiodataActivity();

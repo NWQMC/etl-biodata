@@ -11,13 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activity>{
 	
-	private final ConfigurationService configurationService;
-	
-	@Autowired
-	public ActivityProcessor(ConfigurationService configurationService) {
-		this.configurationService = configurationService;
-	}
-	
 	public static final String DEFAULT_SAMPLE_MEDIA = "Biological";
 	public static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
 	public static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
@@ -41,6 +34,13 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public static final String VISUAL_SIGHTING = "Visual Sighting";
 	public static final String DEFAULT_REACH_LENGTH_UNIT = "m";
 	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
+	
+	private final ConfigurationService configurationService;
+	
+	@Autowired
+	public ActivityProcessor(ConfigurationService configurationService) {
+		this.configurationService = configurationService;
+	}
 	
 	@Override
 	public Activity process(BiodataActivity bdActivity) throws Exception {
