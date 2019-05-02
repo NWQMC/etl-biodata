@@ -1,6 +1,5 @@
 package gov.acwi.wqp.etl.biodata.activity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.postgis.PGgeometry;
 

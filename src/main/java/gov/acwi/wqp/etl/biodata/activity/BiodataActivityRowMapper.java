@@ -2,7 +2,6 @@ package gov.acwi.wqp.etl.biodata.activity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.postgis.PGgeometry;
 import org.springframework.jdbc.core.RowMapper;

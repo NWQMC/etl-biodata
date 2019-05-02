@@ -77,6 +77,7 @@ public abstract class BaseProcessorTest {
 	public static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";
 	public static final Integer TEST_ACTIVITY_REACH_LENGTH = 300;
 	public static final String TEST_EFFORT_PASS = "Pass 1 & 2 combined";
+	public static final String TEST_EFFORT_PASS_2 = "test effort pass 2";
 	public static final String TEST_SAMPLE_COLLECT_METHOD_ID = "Towed-P1&2";
 	public static final String TEST_SAMPLE_COLLECT_METHOD_CTX = "NAWQA Fish  Towed-P1&2";
 	public static final String TEST_SAMPLE_COLLECT_METHOD_NAME = "NAWQA Fish ";
@@ -84,7 +85,7 @@ public abstract class BaseProcessorTest {
 	public static final String TEST_SAMPLE_TIME_DATUM = "CDT - Central Daylight Time";
 	public static final String TEST_EFFORT_GEAR = "Towed barge";
 	public static final String TEST_SAMPLE_GEAR_USED = "Towed barge - sample";
-	public static final Integer TEST_DW_SAMPLE_TYPE_ID = 7;
+	public static final Integer TEST_DW_SAMPLE_TYPE_ID_7 = 7;
 	public static final String TEST_EFFORT_SUBREACH = "A-B";
 
 	protected ConfigurationService configurationService;

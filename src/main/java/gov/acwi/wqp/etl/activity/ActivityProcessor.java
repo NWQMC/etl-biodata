@@ -40,7 +40,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	public static final String SNORKELING = "snorkeling";
 	public static final String VISUAL_SIGHTING = "Visual Sighting";
 	public static final String DEFAULT_REACH_LENGTH_UNIT = "m";
-	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID = 16;
+	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
 	
 	@Override
 	public Activity process(BiodataActivity bdActivity) throws Exception {
@@ -152,9 +152,9 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		}
 	}
 	
-	public String processActivitySampleCollectEquipmentComments(String comments, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
-		StringBuilder equipmentComments = new StringBuilder(comments);
-		if (DEFAULT_DW_SAMPLE_TYPE_ID.equals(dwSampleTypeId)) {
+	public String processActivitySampleCollectEquipmentComments(String gear, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
+		StringBuilder equipmentComments = new StringBuilder(gear);
+		if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {
 			if (null != effortSubreach) {
 				equipmentComments.append("+");
 				equipmentComments.append(effortSubreach);
