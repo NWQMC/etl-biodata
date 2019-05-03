@@ -46,11 +46,9 @@ public abstract class BaseProcessorTest {
 	protected static final String TEST_VDATUM_ID_CODE ="NGVD29";
 	protected static final String TEST_DRAIN_AREA_VALUE = "610";
 	protected static final BigDecimal TEST_DECIMAL_DRAIN_AREA_VALUE = new BigDecimal("610");
-	protected static final String TEST_DRAIN_AREA_UNIT ="sq mi";
 	protected static final String TEST_GEOPOSITION_ACCY_VALUE ="1";
 	protected static final String TEST_GEOPOSITION_ACCY_UNIT ="seconds";
 	protected static final String TEST_VERTICAL_ACCURACY_VALUE =".01";
-	protected static final String TEST_VERTICAL_ACCURACY_UNIT ="feet";
 	protected static final String TEST_MAP_SCALE="testMapScale";
 	protected static final BigDecimal TEST_CONTRIB_DRAIN_AREA_VALUE = new BigDecimal("2");
 	protected static final String TEST_CONTRIB_DRAIN_AREA_UNIT = "testContribDrainAreaUnit";
@@ -71,7 +69,6 @@ public abstract class BaseProcessorTest {
 	
 	protected static final String TEST_ACTIVITY = "BDB-000031046-Towed-P1&2";
 	protected static final Integer TEST_ACTIVITY_ID = 268023;
-	protected static final String TEST_SAMPLE_DATA_SOURCE_BIOTDB = "BioTDB";
 	protected static final String TEST_SAMPLE_DATA_SOURCE = "test sample data source";
 	protected static final String TEST_PROJECT_ID = "LERI BioTDB";
 	protected static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";

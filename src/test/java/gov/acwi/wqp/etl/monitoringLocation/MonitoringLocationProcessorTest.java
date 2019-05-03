@@ -43,11 +43,11 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		biodataML.setVdatumIdCode(TEST_VDATUM_ID_CODE);
 		biodataML.setDrainAreaVa(TEST_DECIMAL_DRAIN_AREA_VALUE);
 		biodataML.setBiodataDrainAreaVa(TEST_DRAIN_AREA_VALUE);
-		biodataML.setDrainAreaUnit(TEST_DRAIN_AREA_UNIT);
+		biodataML.setDrainAreaUnit(MonitoringLocationProcessor.DEFAULT_DRAIN_AREA_UNIT);
 		biodataML.setGeopositionAccyValue(TEST_GEOPOSITION_ACCY_VALUE);
 		biodataML.setGeopositionAccyUnit(TEST_GEOPOSITION_ACCY_UNIT);
 		biodataML.setVerticalAccuracyValue(TEST_VERTICAL_ACCURACY_VALUE);
-		biodataML.setVerticalAccuracyUnit(TEST_VERTICAL_ACCURACY_UNIT);
+		biodataML.setVerticalAccuracyUnit(MonitoringLocationProcessor.DEFAULT_ELEVATION_UNIT);
 		biodataML.setMapScale(TEST_MAP_SCALE);
 		biodataML.setContribDrainAreaValue(TEST_CONTRIB_DRAIN_AREA_VALUE);
 		biodataML.setContribDrainAreaUnit(TEST_CONTRIB_DRAIN_AREA_UNIT);
@@ -80,7 +80,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_HUC, actual.getHuc());
 		assertEquals(TEST_SITE_TYPE, actual.getSiteType());
 		assertEquals(TEST_STATION_NAME, actual.getStationName());
-		assertEquals(TEST_VERTICAL_ACCURACY_UNIT, actual.getVerticalAccuracyUnit());
+		assertEquals(MonitoringLocationProcessor.DEFAULT_ELEVATION_UNIT, actual.getVerticalAccuracyUnit());
 		assertEquals(TEST_VERTICAL_ACCURACY_VALUE, actual.getVerticalAccuracyValue());
 		assertEquals(TEST_DECIMAL_DRAIN_AREA_VALUE, actual.getDrainAreaValue());
 		assertEquals(TEST_GEOM, actual.getGeom());
@@ -90,7 +90,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_ELEVATION_UNIT, actual.getElevationUnit());
 		assertEquals(TEST_ELEVATION_VALUE, actual.getElevationValue());
 		assertEquals(TEST_VDATUM_ID_CODE, actual.getVdatumIdCode());
-		assertEquals(TEST_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
+		assertEquals(MonitoringLocationProcessor.DEFAULT_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
 		assertEquals(TEST_MAP_SCALE, actual.getMapScale());
 		assertEquals(TEST_CONTRIB_DRAIN_AREA_VALUE, actual.getContribDrainAreaValue());
 		assertEquals(TEST_CONTRIB_DRAIN_AREA_UNIT, actual.getContribDrainAreaUnit());
@@ -121,7 +121,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_ELEVATION_UNIT, actual.getElevationUnit());
 		assertEquals(TEST_ELEVATION_VALUE, actual.getElevationValue());
 		assertEquals(TEST_VDATUM_ID_CODE, actual.getVdatumIdCode());
-		assertEquals(TEST_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
+		assertEquals(MonitoringLocationProcessor.DEFAULT_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
 	}
 	
 	@Test

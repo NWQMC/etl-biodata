@@ -92,7 +92,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	
 	@Test 
 	public void testActivityStartTimeAndTimeZoneWithBIOTDB() throws Exception {
-		biodataActivity.setSampleDataSource(TEST_SAMPLE_DATA_SOURCE_BIOTDB);
+		biodataActivity.setSampleDataSource(ActivityProcessor.SAMPLE_DATA_SOURCE_BIOTB);
 		
 		Activity actual = processor.process(biodataActivity);
 

@@ -43,7 +43,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	}
 
 	@Override
-	public Activity process(BiodataActivity bdActivity) throws Exception {
+	public Activity process(BiodataActivity bdActivity) {
 		Activity activity = new Activity();
 
 		String gear = bdActivity.getEffortGear() == null
@@ -70,12 +70,12 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		activity.setActivityId(bdActivity.getActivityId());
 
 		activity.setActivityStartTime(
-				processActivityStartTime(
+				getActivityStartTime(
 						bdActivity.getSampleDataSource(),
 						bdActivity.getSampleCollectionStartTime()));
 
 		activity.setActStartTimeZone(
-				processActivityStartTimeZone(
+				getActivityStartTimeZone(
 						bdActivity.getSampleDataSource(),
 						bdActivity.getSampleTimeDatum()));
 
@@ -84,11 +84,11 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		activity.setActivityReachLength(bdActivity.getActivityReachLength());
 
 		activity.setActivityReachLengthUnit(
-				processActivityReachLengthUnit(
+				getActivityReachLengthUnit(
 						bdActivity.getActivityReachLength()));
 
 		activity.setActivityPassCount(
-				processActivityPassCount(
+				getActivityPassCount(
 						bdActivity.getEffortPass()));
 
 		activity.setSampleCollectMethodId(bdActivity.getSampleCollectMethodId());
@@ -98,10 +98,10 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 				bdActivity.getActivitySampleCollectMethodDescription());
 
 		activity.setSampleCollectEquipName(
-				processSampleCollectEquipName(gear));
+				getSampleCollectEquipName(gear));
 
 		activity.setActivitySampleCollectEquipmentComments(
-				processActivitySampleCollectEquipmentComments(
+				getActivitySampleCollectEquipmentComments(
 						gear,
 						bdActivity.getDwSampleTypeId(),
 						bdActivity.getEffortSubreach(),
@@ -110,44 +110,52 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		return activity;
 	}
 
-	public String processActivityStartTime(String sampleDataSource, LocalDateTime sampleCollectionStart) {
+	private String getActivityStartTime(String sampleDataSource, LocalDateTime sampleCollectionStart) {
 		return SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource)
 				? null
 				: sampleCollectionStart.toLocalTime().format(Application.TIME_FORMATTER);
 	}
 
-	public String processActivityStartTimeZone(String sampleDataSource, String sampleTimeDatum) {
+	private String getActivityStartTimeZone(String sampleDataSource, String sampleTimeDatum) {
 		return SAMPLE_DATA_SOURCE_BIOTB.equals(sampleDataSource)
 				? null
 				: sampleTimeDatum;
 	}
 
-	public String processActivityReachLengthUnit(Integer activityReachLength) {
+	private String getActivityReachLengthUnit(Integer activityReachLength) {
 		return null == activityReachLength
 				? null
 				: DEFAULT_REACH_LENGTH_UNIT;
 	}
 
-	public Integer processActivityPassCount(String effortPass) {
+	private Integer getActivityPassCount(String effortPass) {
 		return EFFORT_PASS_1_2_COMBINED.equals(effortPass)
 				? EFFORT_PASS_2
 				: EFFORT_PASS_1;
 	}
 
-	public String processSampleCollectEquipName(String gear) {
+	private String getSampleCollectEquipName(String gear) {
 		switch (gear.toLowerCase()) {
-			case BACKPACK : return BACKPACK_ELECTROSHOCK;
-			case TOWED_BARGE : return ELECTROSHOCK_OTHER;
-			case BOAT : return BOAT_MOUNTED_ELECTROSHOCK;
-			case MINNOW_SEINE : return MINNOW_SEINE_NET;
-			case BAG_SEINE : return SEINE_NET;
-			case BEACH_SEINE : return BEACH_SEINE_NET;
-			case SNORKELING : return VISUAL_SIGHTING;
-		default: return null;
+			case BACKPACK :
+				return BACKPACK_ELECTROSHOCK;
+			case TOWED_BARGE :
+				return ELECTROSHOCK_OTHER;
+			case BOAT :
+				return BOAT_MOUNTED_ELECTROSHOCK;
+			case MINNOW_SEINE :
+				return MINNOW_SEINE_NET;
+			case BAG_SEINE :
+				return SEINE_NET;
+			case BEACH_SEINE :
+				return BEACH_SEINE_NET;
+			case SNORKELING :
+				return VISUAL_SIGHTING;
+			default:
+				return null;
 		}
 	}
 
-	public String processActivitySampleCollectEquipmentComments(String gear, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
+	private String getActivitySampleCollectEquipmentComments(String gear, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
 		StringBuilder equipmentComments = new StringBuilder(gear);
 		if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {
 			if (null != effortSubreach) {

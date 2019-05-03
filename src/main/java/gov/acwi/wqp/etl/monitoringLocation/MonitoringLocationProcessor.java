@@ -18,9 +18,9 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		this.configurationService = configurationService;
 	}
 	
-	public static final String DEFAULT_ELEVATION_UNIT = "feet";
-	public static final String DEFAULT_ELEVATION_VALUE = "0";
-	public static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
+	static final String DEFAULT_ELEVATION_UNIT = "feet";
+	static final String DEFAULT_ELEVATION_VALUE = "0";
+	static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
 
 	@Override
 	public MonitoringLocation process(BiodataMonitoringLocation biodataML) throws Exception {
@@ -59,57 +59,57 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		monitoringLocation.setHoleDepthUnit(biodataML.getHoleDepthUnit());
 		
 		monitoringLocation.setSiteId(
-				processSiteId(
+				getSiteId(
 						biodataML.getNwisSiteId(),
 						biodataML.getAgencyCd(),
 						biodataML.getSiteNo()));
 		
 		monitoringLocation.setGovernmentalUnitCode(
-				processGovernmentUnitCode(
+				getGovernmentUnitCode(
 						biodataML.getGovernmentalUnitCode(), 
 						biodataML.getCountryCd(), 
 						biodataML.getStateCd(), 
 						biodataML.getCountyCd()));
 
 		monitoringLocation.setElevationUnit(
-				processElevationUnit(
+				getElevationUnit(
 						biodataML.getElevationUnit(),
 						biodataML.getAltDatumCd(),
 						biodataML.getAltitude()));
 		
 		monitoringLocation.setElevationValue(
-				processElevationValue(
+				getElevationValue(
 						biodataML.getElevationValue(), 
 						biodataML.getAltDatumCd(), 
 						biodataML.getAltitude()));
 		
 		monitoringLocation.setVdatumIdCode(
-				processVdatumIdCode(
+				getVdatumIdCode(
 						biodataML.getVdatumIdCode(),
 						biodataML.getAltitude(),
 						biodataML.getAltDatumCd()));
 		
 		monitoringLocation.setDrainAreaUnit(
-				processDrainAreaUnit(
+				getDrainAreaUnit(
 						biodataML.getDrainAreaUnit(),
 						biodataML.getBiodataDrainAreaVa()));
 
 		return monitoringLocation;
 	}
 	
-	public String processSiteId(String nwisSiteId, String agencyCd, String siteNo) {
+	private String getSiteId(String nwisSiteId, String agencyCd, String siteNo) {
 		return nwisSiteId == null
 				? String.join("-", agencyCd, siteNo)
 				: nwisSiteId;
 	}
 	
-	public String processGovernmentUnitCode(String governmentUnitCode, String countryCode, String stateCode, String countyCode) {
+	private String getGovernmentUnitCode(String governmentUnitCode, String countryCode, String stateCode, String countyCode) {
 		return governmentUnitCode == null
 				? String.join(":", countryCode, stateCode, countyCode)
 				: governmentUnitCode;
 	}
 	
-	public String processElevationUnit(String elevationUnit, String altDatumCd, String altitude) {
+	private String getElevationUnit(String elevationUnit, String altDatumCd, String altitude) {
 		String elevationUnitML = elevationUnit;
 		if (elevationUnitML == null && altDatumCd != null && altitude != null) {
 			elevationUnitML = DEFAULT_ELEVATION_UNIT;
@@ -117,7 +117,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		return elevationUnitML;
 	}
 	
-	public String processElevationValue(String elevationValue, String altDatumCd, String altitude) {
+	private String getElevationValue(String elevationValue, String altDatumCd, String altitude) {
 		String elevationValueML = elevationValue;
 		if (elevationValueML == null && altDatumCd != null) {
 			elevationValueML = ".".equals(altitude) 
@@ -127,7 +127,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		return elevationValueML;
 	}
 	
-	public String processVdatumIdCode(String vDatumIdCode, String altitude, String altDatumCd) {
+	private String getVdatumIdCode(String vDatumIdCode, String altitude, String altDatumCd) {
 		String vDatumIdCodeML = vDatumIdCode;
 		if (vDatumIdCodeML == null && altitude != null) {
 			vDatumIdCodeML = altDatumCd;
@@ -135,7 +135,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		return vDatumIdCodeML;
 	}
 	
-	public String processDrainAreaUnit(String drainAreaUnit, String biodataDrainAreaVa) {
+	private String getDrainAreaUnit(String drainAreaUnit, String biodataDrainAreaVa) {
 		String drainAreaUnitML = drainAreaUnit;
 		if (drainAreaUnitML == null && biodataDrainAreaVa != null) {
 			drainAreaUnitML = DEFAULT_DRAIN_AREA_UNIT;
