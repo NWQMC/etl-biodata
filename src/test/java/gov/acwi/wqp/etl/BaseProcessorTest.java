@@ -73,14 +73,12 @@ public abstract class BaseProcessorTest {
 	protected static final String TEST_PROJECT_ID = "LERI BioTDB";
 	protected static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";
 	protected static final Integer TEST_ACTIVITY_REACH_LENGTH = 300;
-	protected static final String TEST_EFFORT_PASS = "Pass 1 & 2 combined";
 	protected static final String TEST_EFFORT_PASS_2 = "test effort pass 2";
 	protected static final String TEST_SAMPLE_COLLECT_METHOD_ID = "Towed-P1&2";
 	protected static final String TEST_SAMPLE_COLLECT_METHOD_CTX = "NAWQA Fish  Towed-P1&2";
 	protected static final String TEST_SAMPLE_COLLECT_METHOD_NAME = "NAWQA Fish ";
 	protected static final String TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION = "https://www.nemi.gov/methods/method_summary/12237/";
 	protected static final String TEST_SAMPLE_TIME_DATUM = "CDT - Central Daylight Time";
-	protected static final String TEST_EFFORT_GEAR = "Towed barge";
 	protected static final String TEST_SAMPLE_GEAR_USED = "Towed barge - sample";
 	protected static final Integer TEST_DW_SAMPLE_TYPE_ID_7 = 7;
 	protected static final String TEST_EFFORT_SUBREACH = "A-B";

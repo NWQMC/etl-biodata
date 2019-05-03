@@ -2,6 +2,30 @@ package gov.acwi.wqp.etl.activity;
 
 import gov.acwi.wqp.etl.BaseProcessorTest;
 import gov.acwi.wqp.etl.biodata.activity.BiodataActivity;
+
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BACKPACK;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BACKPACK_ELECTROSHOCK;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BAG_SEINE;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BEACH_SEINE;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BEACH_SEINE_NET;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BOAT;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.BOAT_MOUNTED_ELECTROSHOCK;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.DEFAULT_ACTIVITY_TYPE_CODE;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.DEFAULT_ASSEMBLAGE_SAMPLED_NAME;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.DEFAULT_DW_SAMPLE_TYPE_ID_16;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.DEFAULT_REACH_LENGTH_UNIT;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.DEFAULT_SAMPLE_MEDIA;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.EFFORT_PASS_1;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.EFFORT_PASS_1_2_COMBINED;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.EFFORT_PASS_2;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.ELECTROSHOCK_OTHER;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.MINNOW_SEINE;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.MINNOW_SEINE_NET;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.SAMPLE_DATA_SOURCE_BIOTB;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.SEINE_NET;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.SNORKELING;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.TOWED_BARGE;
+import static gov.acwi.wqp.etl.activity.ActivityProcessor.VISUAL_SIGHTING;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,13 +56,13 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		biodataActivity.setProjectId(TEST_PROJECT_ID);
 		biodataActivity.setActivityComment(TEST_ACTIVITY_COMMENT);
 		biodataActivity.setActivityReachLength(TEST_ACTIVITY_REACH_LENGTH);
-		biodataActivity.setEffortPass(TEST_EFFORT_PASS);
+		biodataActivity.setEffortPass(EFFORT_PASS_1_2_COMBINED);
 		biodataActivity.setSampleCollectMethodId(TEST_SAMPLE_COLLECT_METHOD_ID);
 		biodataActivity.setSampleCollectMethodCtx(TEST_SAMPLE_COLLECT_METHOD_CTX);
 		biodataActivity.setSampleCollectMethodName(TEST_SAMPLE_COLLECT_METHOD_NAME);
 		biodataActivity.setActivitySampleCollectMethodDescription(TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION);
 		biodataActivity.setSampleTimeDatum(TEST_SAMPLE_TIME_DATUM);
-		biodataActivity.setEffortGear(TEST_EFFORT_GEAR);
+		biodataActivity.setEffortGear(TOWED_BARGE);
 		biodataActivity.setSampleGearUsed(TEST_SAMPLE_GEAR_USED);
 		biodataActivity.setDwSampleTypeId(TEST_DW_SAMPLE_TYPE_ID_7);
 		biodataActivity.setEffortSubreach(TEST_EFFORT_SUBREACH);
@@ -50,9 +74,9 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
 		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());
-		assertEquals(ActivityProcessor.DEFAULT_SAMPLE_MEDIA, actual.getSampleMedia());
-		assertEquals(ActivityProcessor.DEFAULT_ACTIVITY_TYPE_CODE, actual.getActivityTypeCode());
-		assertEquals(ActivityProcessor.DEFAULT_ASSEMBLAGE_SAMPLED_NAME, actual.getAssemblageSampledName());
+		assertEquals(DEFAULT_SAMPLE_MEDIA, actual.getSampleMedia());
+		assertEquals(DEFAULT_ACTIVITY_TYPE_CODE, actual.getActivityTypeCode());
+		assertEquals(DEFAULT_ASSEMBLAGE_SAMPLED_NAME, actual.getAssemblageSampledName());
 		assertEquals(TEST_STATION_ID, actual.getStationId());
 		assertEquals(TEST_SITE_ID, actual.getSiteId());
 		assertEquals(TEST_EVENT_DATE_LOCAL_DATE, actual.getEventDate());
@@ -69,14 +93,14 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_PROJECT_ID, actual.getProjectId());
 		assertEquals(TEST_ACTIVITY_COMMENT, actual.getActivityComment());
 		assertEquals(TEST_ACTIVITY_REACH_LENGTH, actual.getActivityReachLength());
-		assertEquals(ActivityProcessor.DEFAULT_REACH_LENGTH_UNIT, actual.getActivityReachLengthUnit());
-		assertEquals(ActivityProcessor.EFFORT_PASS_2, actual.getActivityPassCount());
+		assertEquals(DEFAULT_REACH_LENGTH_UNIT, actual.getActivityReachLengthUnit());
+		assertEquals(EFFORT_PASS_2, actual.getActivityPassCount());
 		assertEquals(TEST_SAMPLE_COLLECT_METHOD_ID, actual.getSampleCollectMethodId());
 		assertEquals(TEST_SAMPLE_COLLECT_METHOD_CTX, actual.getSampleCollectMethodCtx());
 		assertEquals(TEST_SAMPLE_COLLECT_METHOD_NAME, actual.getSampleCollectMethodName());
 		assertEquals(TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION, actual.getActivitySampleCollectMethodDescription());
-		assertEquals(ActivityProcessor.ELECTROSHOCK_OTHER, actual.getSampleCollectEquipName());
-		assertEquals(TEST_EFFORT_GEAR + "+" + TEST_EFFORT_PASS, actual.getActivitySampleCollectEquipmentComments());	
+		assertEquals(ELECTROSHOCK_OTHER, actual.getSampleCollectEquipName());
+		assertEquals(TOWED_BARGE + "+" + EFFORT_PASS_1_2_COMBINED, actual.getActivitySampleCollectEquipmentComments());
 	}
 	
 	@Test 
@@ -92,7 +116,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	
 	@Test 
 	public void testActivityStartTimeAndTimeZoneWithBIOTDB() throws Exception {
-		biodataActivity.setSampleDataSource(ActivityProcessor.SAMPLE_DATA_SOURCE_BIOTB);
+		biodataActivity.setSampleDataSource(SAMPLE_DATA_SOURCE_BIOTB);
 		
 		Activity actual = processor.process(biodataActivity);
 
@@ -106,49 +130,49 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 
 		Activity actual = processor.process(biodataActivity);
 		
-		assertEquals(ActivityProcessor.EFFORT_PASS_1, actual.getActivityPassCount());
+		assertEquals(EFFORT_PASS_1, actual.getActivityPassCount());
 	}
 	
 	@Test
 	public void testSampleCollectEquipName() throws Exception {
-		biodataActivity.setEffortGear(ActivityProcessor.BACKPACK);
+		biodataActivity.setEffortGear(BACKPACK);
 		Activity actual = processor.process(biodataActivity);
-		assertEquals(ActivityProcessor.BACKPACK_ELECTROSHOCK, actual.getSampleCollectEquipName());
+		assertEquals(BACKPACK_ELECTROSHOCK, actual.getSampleCollectEquipName());
 		
-		biodataActivity.setEffortGear(ActivityProcessor.BOAT);
+		biodataActivity.setEffortGear(BOAT);
 		Activity actual2 = processor.process(biodataActivity);
-		assertEquals(ActivityProcessor.BOAT_MOUNTED_ELECTROSHOCK, actual2.getSampleCollectEquipName());
+		assertEquals(BOAT_MOUNTED_ELECTROSHOCK, actual2.getSampleCollectEquipName());
 		
-		biodataActivity.setEffortGear(ActivityProcessor.MINNOW_SEINE);
+		biodataActivity.setEffortGear(MINNOW_SEINE);
 		Activity actual3 = processor.process(biodataActivity);
-		assertEquals(ActivityProcessor.MINNOW_SEINE_NET, actual3.getSampleCollectEquipName());
+		assertEquals(MINNOW_SEINE_NET, actual3.getSampleCollectEquipName());
 		
-		biodataActivity.setEffortGear(ActivityProcessor.BAG_SEINE);
+		biodataActivity.setEffortGear(BAG_SEINE);
 		Activity actual4 = processor.process(biodataActivity);
-		assertEquals(ActivityProcessor.SEINE_NET, actual4.getSampleCollectEquipName());
+		assertEquals(SEINE_NET, actual4.getSampleCollectEquipName());
 		
-		biodataActivity.setEffortGear(ActivityProcessor.BEACH_SEINE);
+		biodataActivity.setEffortGear(BEACH_SEINE);
 		Activity actual5 = processor.process(biodataActivity);
-		assertEquals(ActivityProcessor.BEACH_SEINE_NET, actual5.getSampleCollectEquipName());
+		assertEquals(BEACH_SEINE_NET, actual5.getSampleCollectEquipName());
 		
-		biodataActivity.setEffortGear(ActivityProcessor.SNORKELING);
+		biodataActivity.setEffortGear(SNORKELING);
 		Activity actual6 = processor.process(biodataActivity);
-		assertEquals(ActivityProcessor.VISUAL_SIGHTING, actual6.getSampleCollectEquipName());
+		assertEquals(VISUAL_SIGHTING, actual6.getSampleCollectEquipName());
 	}
 	
 	@Test
 	public void testActivitySampleCollectEquipmentComments() throws Exception {
 		biodataActivity.setEffortPass(null);
 		Activity actual = processor.process(biodataActivity);
-		assertEquals(TEST_EFFORT_GEAR, actual.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE, actual.getActivitySampleCollectEquipmentComments());
 		
-		biodataActivity.setDwSampleTypeId(ActivityProcessor.DEFAULT_DW_SAMPLE_TYPE_ID_16);
+		biodataActivity.setDwSampleTypeId(DEFAULT_DW_SAMPLE_TYPE_ID_16);
 		Activity actual2 = processor.process(biodataActivity);
-		assertEquals(TEST_EFFORT_GEAR + "+" + TEST_EFFORT_SUBREACH, actual2.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE + "+" + TEST_EFFORT_SUBREACH, actual2.getActivitySampleCollectEquipmentComments());
 		
 		biodataActivity.setEffortSubreach(null);
 		Activity actual3 = processor.process(biodataActivity);
-		assertEquals(TEST_EFFORT_GEAR, actual3.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE, actual3.getActivitySampleCollectEquipmentComments());
 	}
 	
 }

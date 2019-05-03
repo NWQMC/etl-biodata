@@ -11,29 +11,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activity>{
 
-	public static final String DEFAULT_SAMPLE_MEDIA = "Biological";
-	public static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
-	public static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
-	public static final String SAMPLE_DATA_SOURCE_BIOTB = "BioTDB";
-	public static final String EFFORT_PASS_1_2_COMBINED = "Pass 1 & 2 combined";
-	public static final Integer EFFORT_PASS_1 = 1;
-	public static final Integer EFFORT_PASS_2 = 2;
-	public static final String BACKPACK = "backpack";
-	public static final String BACKPACK_ELECTROSHOCK = "Backpack Electroshock";
-	public static final String TOWED_BARGE = "towed barge";
-	public static final String ELECTROSHOCK_OTHER = "Electroshock (Other)";
-	public static final String BOAT = "boat";
-	public static final String BOAT_MOUNTED_ELECTROSHOCK = "Boat-Mounted Electroshock";
-	public static final String MINNOW_SEINE = "minnow seine";
-	public static final String MINNOW_SEINE_NET = "Minnow Seine Net";
-	public static final String BAG_SEINE = "bag seine";
-	public static final String SEINE_NET = "Seine Net";
-	public static final String BEACH_SEINE = "beach seine";
-	public static final String BEACH_SEINE_NET = "Beach Seine Net";
-	public static final String SNORKELING = "snorkeling";
-	public static final String VISUAL_SIGHTING = "Visual Sighting";
-	public static final String DEFAULT_REACH_LENGTH_UNIT = "m";
-	public static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
+	static final String DEFAULT_SAMPLE_MEDIA = "Biological";
+	static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
+	static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
+	static final String SAMPLE_DATA_SOURCE_BIOTB = "BioTDB";
+	static final String EFFORT_PASS_1_2_COMBINED = "Pass 1 & 2 combined";
+	static final Integer EFFORT_PASS_1 = 1;
+	static final Integer EFFORT_PASS_2 = 2;
+	static final String BACKPACK = "backpack";
+	static final String BACKPACK_ELECTROSHOCK = "Backpack Electroshock";
+	static final String TOWED_BARGE = "towed barge";
+	static final String ELECTROSHOCK_OTHER = "Electroshock (Other)";
+	static final String BOAT = "boat";
+	static final String BOAT_MOUNTED_ELECTROSHOCK = "Boat-Mounted Electroshock";
+	static final String MINNOW_SEINE = "minnow seine";
+	static final String MINNOW_SEINE_NET = "Minnow Seine Net";
+	static final String BAG_SEINE = "bag seine";
+	static final String SEINE_NET = "Seine Net";
+	static final String BEACH_SEINE = "beach seine";
+	static final String BEACH_SEINE_NET = "Beach Seine Net";
+	static final String SNORKELING = "snorkeling";
+	static final String VISUAL_SIGHTING = "Visual Sighting";
+	static final String DEFAULT_REACH_LENGTH_UNIT = "m";
+	static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
 
 	private final ConfigurationService configurationService;
 

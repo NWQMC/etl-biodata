@@ -56,7 +56,7 @@ public class TransformActivity {
 	
 	@Value("classpath:sql/activity/writeActivity.sql")
 	private Resource writeActivityResource;
-	
+
 	@Bean
 	public JdbcCursorItemReader<BiodataActivity> activityReader() throws IOException {
 		return new JdbcCursorItemReaderBuilder<BiodataActivity>()
@@ -69,7 +69,7 @@ public class TransformActivity {
 	
 	@Bean
 	public ItemWriter<Activity> activityWriter() throws IOException {
-		JdbcBatchItemWriter<Activity> itemWriter = new JdbcBatchItemWriter<Activity>();
+		JdbcBatchItemWriter<Activity> itemWriter = new JdbcBatchItemWriter<>();
 		itemWriter.setDataSource(dataSourceWqp);
 		itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(writeActivityResource.getInputStream())));
 		ItemSqlParameterSourceProvider<Activity> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();

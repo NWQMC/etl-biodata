@@ -65,7 +65,7 @@ public class TransformOrgData {
 	
 	@Bean
 	public ItemWriter<OrgData> orgDataWriter() throws IOException {
-		JdbcBatchItemWriter<OrgData> itemWriter = new JdbcBatchItemWriter<OrgData>();
+		JdbcBatchItemWriter<OrgData> itemWriter = new JdbcBatchItemWriter<>();
 		itemWriter.setDataSource(dataSourceWqp);
 		itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(sqlResourceWriter.getInputStream())));
 		ItemSqlParameterSourceProvider<OrgData> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
