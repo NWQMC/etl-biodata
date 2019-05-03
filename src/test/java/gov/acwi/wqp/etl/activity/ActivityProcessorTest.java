@@ -69,7 +69,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testProcess() throws Exception {
+	public void testProcess() {
 		Activity actual = processor.process(biodataActivity);
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
@@ -104,7 +104,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test 
-	public void testProcessWithNullValues() throws Exception {
+	public void testProcessWithNullValues() {
 		biodataActivity.setActivityReachLength(null);
 		biodataActivity.setEffortGear(null);
 		
@@ -115,7 +115,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test 
-	public void testActivityStartTimeAndTimeZoneWithBIOTDB() throws Exception {
+	public void testActivityStartTimeAndTimeZoneWithBIOTDB() {
 		biodataActivity.setSampleDataSource(SAMPLE_DATA_SOURCE_BIOTB);
 		
 		Activity actual = processor.process(biodataActivity);
@@ -125,7 +125,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testActivityPassCount() throws Exception {
+	public void testActivityPassCount() {
 		biodataActivity.setEffortPass(TEST_EFFORT_PASS_2);
 
 		Activity actual = processor.process(biodataActivity);
@@ -134,7 +134,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testSampleCollectEquipName() throws Exception {
+	public void testSampleCollectEquipName() {
 		biodataActivity.setEffortGear(BACKPACK);
 		Activity actual = processor.process(biodataActivity);
 		assertEquals(BACKPACK_ELECTROSHOCK, actual.getSampleCollectEquipName());
@@ -161,7 +161,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testActivitySampleCollectEquipmentComments() throws Exception {
+	public void testActivitySampleCollectEquipmentComments() {
 		biodataActivity.setEffortPass(null);
 		Activity actual = processor.process(biodataActivity);
 		assertEquals(TOWED_BARGE, actual.getActivitySampleCollectEquipmentComments());

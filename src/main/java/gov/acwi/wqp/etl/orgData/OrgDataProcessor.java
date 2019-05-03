@@ -17,7 +17,7 @@ public class OrgDataProcessor implements ItemProcessor<BiodataOrgData, OrgData>{
 	}
 	
 	@Override
-	public OrgData process(BiodataOrgData biodataOD) throws Exception {
+	public OrgData process(BiodataOrgData biodataOD) {
 		OrgData orgData = new OrgData();
 		
 		orgData.setDataSourceId(configurationService.getEtlDataSourceId());

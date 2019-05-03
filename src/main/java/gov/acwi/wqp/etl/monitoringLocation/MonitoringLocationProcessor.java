@@ -23,7 +23,7 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 	static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
 
 	@Override
-	public MonitoringLocation process(BiodataMonitoringLocation biodataML) throws Exception {
+	public MonitoringLocation process(BiodataMonitoringLocation biodataML) {
 		MonitoringLocation monitoringLocation = new MonitoringLocation();
 
 		monitoringLocation.setDataSourceId(configurationService.getEtlDataSourceId());

@@ -66,7 +66,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test 
-	public void testProcess() throws Exception {
+	public void testProcess() {
 		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
@@ -109,7 +109,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 
 	@Test
-	public void testProcessWithNullValues() throws Exception {
+	public void testProcessWithNullValues() {
 		
 		biodataMonitoringLocation.setNwisSiteId(null);
 		biodataMonitoringLocation.setGovernmentalUnitCode(null);
@@ -129,7 +129,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testElevationUnitIfAltDatumCdIsNull() throws Exception {
+	public void testElevationUnitIfAltDatumCdIsNull() {
 		biodataMonitoringLocation.setElevationUnit(null);
 		biodataMonitoringLocation.setAltDatumCd(null);
 		
@@ -138,7 +138,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testElevationUnitIfAltitudeIsNull() throws Exception {
+	public void testElevationUnitIfAltitudeIsNull() {
 		biodataMonitoringLocation.setElevationUnit(null);
 		biodataMonitoringLocation.setAltitude(null);
 		
@@ -147,7 +147,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testElevationValueIfAltDatumCdIsNull() throws Exception {
+	public void testElevationValueIfAltDatumCdIsNull() {
 		biodataMonitoringLocation.setElevationValue(null);
 		biodataMonitoringLocation.setAltDatumCd(null);
 		
@@ -156,7 +156,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testElevationValueIfAltitudeIsDecimal() throws Exception {
+	public void testElevationValueIfAltitudeIsDecimal() {
 		biodataMonitoringLocation.setElevationValue(null);
 		biodataMonitoringLocation.setAltitude(".");
 		
@@ -165,7 +165,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testVdatumIdCodeIfAltitudeIsNull() throws Exception {
+	public void testVdatumIdCodeIfAltitudeIsNull() {
 		biodataMonitoringLocation.setVdatumIdCode(null);
 		biodataMonitoringLocation.setAltitude(null);
 		
@@ -174,7 +174,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test
-	public void testDrainAreaUnitIfBiodataDrainAreaVaIsNull() throws Exception {
+	public void testDrainAreaUnitIfBiodataDrainAreaVaIsNull() {
 		biodataMonitoringLocation.setDrainAreaUnit(null);
 		biodataMonitoringLocation.setBiodataDrainAreaVa(null);
 		

@@ -7,33 +7,31 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 	
-	public static final String STATION_ID = "station_id";
-	public static final String SITE_ID = "site_id";
-	public static final String ACTIVITY = "activity";
-	public static final String ORGANIZATION = "organization";
-	public static final String SITE_TYPE = "site_type";
-	public static final String HUC = "huc";
-	public static final String GOVERNMENTAL_UNIT_CODE = "governmental_unit_code";
-	public static final String GEOM = "geom";
-	public static final String ORGANIZATION_NAME = "organization_name";
-	public static final String ACTIVITY_ID = "activity_id";
-	public static final String PROJECT_ID = "project_id";
-	public static final String ACTIVITY_COMMENT = "activity_comment";
-	public static final String ACTIVITY_REACH_LENGTH = "act_reach_length";
-	public static final String EFFORT_PASS = "pass";
-	public static final String SAMPLE_COLLECT_METHOD_ID = "sample_collect_method_id";
-	public static final String SAMPLE_COLLECT_METHOD_CTX = "sample_collect_method_ctx";
-	public static final String SAMPLE_COLLECT_METHOD_NAME = "sample_collect_method_name";
-	public static final String ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION = "act_sam_collect_meth_desc";
-	public static final String SIDNO = "sidno";
-	public static final String METHOD_CODE = "method_code";
-	public static final String SAMPLE_COLLECTION_START_TIME = "collection_start";
-	public static final String SAMPLE_DATA_SOURCE = "data_source";
-	public static final String SAMPLE_TIME_DATUM = "time_datum";
-	public static final String EFFORT_GEAR = "gear";
-	public static final String SAMPLE_GEAR_USED = "gear_used";
-	public static final String DW_SAMPLE_TYPE_ID = "dw_sample_type_id";
-	public static final String EFFORT_SUBREACH = "subreach";
+	private static final String STATION_ID = "station_id";
+	private static final String SITE_ID = "site_id";
+	private static final String ACTIVITY = "activity";
+	private static final String ORGANIZATION = "organization";
+	private static final String SITE_TYPE = "site_type";
+	private static final String HUC = "huc";
+	private static final String GOVERNMENTAL_UNIT_CODE = "governmental_unit_code";
+	private static final String GEOM = "geom";
+	private static final String ORGANIZATION_NAME = "organization_name";
+	private static final String ACTIVITY_ID = "activity_id";
+	private static final String PROJECT_ID = "project_id";
+	private static final String ACTIVITY_COMMENT = "activity_comment";
+	private static final String ACTIVITY_REACH_LENGTH = "act_reach_length";
+	private static final String EFFORT_PASS = "pass";
+	private static final String SAMPLE_COLLECT_METHOD_ID = "sample_collect_method_id";
+	private static final String SAMPLE_COLLECT_METHOD_CTX = "sample_collect_method_ctx";
+	private static final String SAMPLE_COLLECT_METHOD_NAME = "sample_collect_method_name";
+	private static final String ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION = "act_sam_collect_meth_desc";
+	private static final String SAMPLE_COLLECTION_START_TIME = "collection_start";
+	private static final String SAMPLE_DATA_SOURCE = "data_source";
+	private static final String SAMPLE_TIME_DATUM = "time_datum";
+	private static final String EFFORT_GEAR = "gear";
+	private static final String SAMPLE_GEAR_USED = "gear_used";
+	private static final String DW_SAMPLE_TYPE_ID = "dw_sample_type_id";
+	private static final String EFFORT_SUBREACH = "subreach";
 	
 	@Override
 	public BiodataActivity mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 		BaseFlowIT.CONNECTION_INFORMATION_SCHEMA})
 public abstract class BiodataBaseFlowIT extends BaseFlowIT{
 	
-	public static final String CONNECTION_BIODATA = "biodata";
+	protected static final String CONNECTION_BIODATA = "biodata";
 	
 	@Autowired
 	private ConfigurationService configurationService;

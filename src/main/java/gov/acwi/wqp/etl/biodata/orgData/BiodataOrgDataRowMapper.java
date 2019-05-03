@@ -6,9 +6,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class BiodataOrgDataRowMapper implements RowMapper<BiodataOrgData>{
 	
-	public static final String ORGANIZATION_ID = "organization_id";
-	public static final String ORGANIZATION = "organization";
-	public static final String ORGANIZATION_NAME = "organization_name";
+	private static final String ORGANIZATION_ID = "organization_id";
+	private static final String ORGANIZATION = "organization";
+	private static final String ORGANIZATION_NAME = "organization_name";
 	
 	@Override
 	public BiodataOrgData mapRow(ResultSet rs, int rowNum) throws SQLException {

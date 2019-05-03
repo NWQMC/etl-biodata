@@ -22,7 +22,7 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 	}
 	
 	@Test 
-	public void testProcess() throws Exception {
+	public void testProcess() {
 		OrgData actual = processor.process(biodataOrgData);
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
@@ -33,7 +33,7 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 	}
 
 	@Test
-	public void testProcessWithNullValues() throws Exception {
+	public void testProcessWithNullValues() {
 		biodataOrgData.setOrganization(null);
 		biodataOrgData.setOrganizationId(null);
 		biodataOrgData.setOrganizationName(null);
