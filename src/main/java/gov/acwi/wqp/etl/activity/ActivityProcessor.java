@@ -61,9 +61,9 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		activity.setSiteId(bdActivity.getSiteId());
 		activity.setEventDate(bdActivity.getSampleCollectionStartTime().toLocalDate());
 		activity.setActivity(
-				String.join("-"
-				, bdActivity.getSidno()
-				, bdActivity.getSampleCollectMethodId()));
+				String.join("-",
+				bdActivity.getSidno(),
+				bdActivity.getSampleCollectMethodId()));
 		activity.setOrganization(bdActivity.getOrganization());
 		activity.setSiteType(bdActivity.getSiteType());
 		activity.setHuc(bdActivity.getHuc());
