@@ -2,7 +2,12 @@
 <dataset>
     <pg_indexes
         tablename="activity_swap_biodata"
+        indexname="activity_swap_biodata_activity"
+        indexdef="CREATE INDEX activity_swap_biodata_activity ON wqp.activity_swap_biodata USING btree (activity) WITH (fillfactor='100')"
+     />
+    <pg_indexes
+        tablename="activity_swap_biodata"
         indexname="activity_swap_biodata_organization"
         indexdef="CREATE INDEX activity_swap_biodata_organization ON wqp.activity_swap_biodata USING btree (organization) WITH (fillfactor='100')"
-     />
+    />
 </dataset>
