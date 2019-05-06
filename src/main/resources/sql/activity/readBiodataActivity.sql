@@ -1,7 +1,7 @@
 select 
 	station.station_id 
 	,station.site_id
-	,sample.sidno || '-' || effort.method_code activity
+    ,sample.sidno
 	,station.organization
 	,station.site_type
 	,station.huc
@@ -17,7 +17,6 @@ select
 	,sample.reach_length_fished act_reach_length
 	,effort.pass
 	,effort.method_code sample_collect_method_id
-	,sample.sampling_method_reference || ' ' || effort.method_code sample_collect_method_ctx
 	,sample.sampling_method_reference sample_collect_method_name
 	,sample.sampling_method_ref_citation act_sam_collect_meth_desc
 	,effort.gear 

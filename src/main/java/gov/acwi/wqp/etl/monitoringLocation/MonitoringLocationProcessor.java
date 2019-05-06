@@ -18,9 +18,9 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		this.configurationService = configurationService;
 	}
 	
-	static final String DEFAULT_ELEVATION_UNIT = "feet";
-	static final String DEFAULT_ELEVATION_VALUE = "0";
-	static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
+	protected static final String DEFAULT_ELEVATION_UNIT = "feet";
+	protected static final String DEFAULT_ELEVATION_VALUE = "0";
+	protected static final String DEFAULT_DRAIN_AREA_UNIT = "sq mi";
 
 	@Override
 	public MonitoringLocation process(BiodataMonitoringLocation biodataML) {

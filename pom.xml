@@ -138,17 +138,17 @@
                         <WQP_DATABASE_NAME>wqp_db</WQP_DATABASE_NAME>
                         <WQP_SCHEMA_NAME>wqp</WQP_SCHEMA_NAME>
                         <WQP_SCHEMA_OWNER_USERNAME>wqp_core</WQP_SCHEMA_OWNER_USERNAME>
-                        <WQP_SCHEMA_OWNER_PASSWORD>changeme</WQP_SCHEMA_OWNER_PASSWORD>
+                        <WQP_SCHEMA_OWNER_PASSWORD>changeMe</WQP_SCHEMA_OWNER_PASSWORD>
                         <NWIS_DATABASE_ADDRESS>127.0.0.1</NWIS_DATABASE_ADDRESS>
                         <NWIS_DATABASE_PORT>5434</NWIS_DATABASE_PORT>
                         <NWIS_DATABASE_NAME>wqp_db</NWIS_DATABASE_NAME>
                         <NWIS_SCHEMA_OWNER_USERNAME>nwis_ws_star</NWIS_SCHEMA_OWNER_USERNAME>
-                        <NWIS_SCHEMA_OWNER_PASSWORD>changeme</NWIS_SCHEMA_OWNER_PASSWORD>
+                        <NWIS_SCHEMA_OWNER_PASSWORD>changeMe</NWIS_SCHEMA_OWNER_PASSWORD>
                         <BIODATA_DATABASE_ADDRESS>127.0.0.1</BIODATA_DATABASE_ADDRESS>
                         <BIODATA_DATABASE_PORT>5434</BIODATA_DATABASE_PORT>
                         <BIODATA_DATABASE_NAME>wqp_db</BIODATA_DATABASE_NAME>
                         <BIODATA_SCHEMA_OWNER_USERNAME>biodata_owner</BIODATA_SCHEMA_OWNER_USERNAME>
-                        <BIODATA_SCHEMA_OWNER_PASSWORD>changeme</BIODATA_SCHEMA_OWNER_PASSWORD>
+                        <BIODATA_SCHEMA_OWNER_PASSWORD>changeMe</BIODATA_SCHEMA_OWNER_PASSWORD>
                         <BIODATA_SCHEMA_NAME>biodata</BIODATA_SCHEMA_NAME>
                         <ETL_OWNER_USERNAME>wqp_core</ETL_OWNER_USERNAME>
                         <GEO_SCHEMA_NAME>nwis</GEO_SCHEMA_NAME>

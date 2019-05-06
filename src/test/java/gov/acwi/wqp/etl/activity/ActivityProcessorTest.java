@@ -43,7 +43,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		
 		biodataActivity.setStationId(TEST_STATION_ID);
 		biodataActivity.setSiteId(TEST_SITE_ID);
-		biodataActivity.setActivity(TEST_ACTIVITY);
+		biodataActivity.setSidno(TEST_SIDNO);
 		biodataActivity.setOrganization(TEST_ORGANIZATION);
 		biodataActivity.setSiteType(TEST_SITE_TYPE);
 		biodataActivity.setHuc(TEST_HUC);
@@ -58,7 +58,6 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		biodataActivity.setActivityReachLength(TEST_ACTIVITY_REACH_LENGTH);
 		biodataActivity.setEffortPass(EFFORT_PASS_1_2_COMBINED);
 		biodataActivity.setSampleCollectMethodId(TEST_SAMPLE_COLLECT_METHOD_ID);
-		biodataActivity.setSampleCollectMethodCtx(TEST_SAMPLE_COLLECT_METHOD_CTX);
 		biodataActivity.setSampleCollectMethodName(TEST_SAMPLE_COLLECT_METHOD_NAME);
 		biodataActivity.setActivitySampleCollectMethodDescription(TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION);
 		biodataActivity.setSampleTimeDatum(TEST_SAMPLE_TIME_DATUM);
@@ -92,15 +91,15 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_SAMPLE_TIME_DATUM, actual.getActStartTimeZone());
 		assertEquals(TEST_PROJECT_ID, actual.getProjectId());
 		assertEquals(TEST_ACTIVITY_COMMENT, actual.getActivityComment());
-		assertEquals(TEST_ACTIVITY_REACH_LENGTH, actual.getActivityReachLength());
-		assertEquals(DEFAULT_REACH_LENGTH_UNIT, actual.getActivityReachLengthUnit());
-		assertEquals(EFFORT_PASS_2, actual.getActivityPassCount());
+		assertEquals(TEST_ACTIVITY_REACH_LENGTH_STRING, actual.getActReachLength());
+		assertEquals(DEFAULT_REACH_LENGTH_UNIT, actual.getActReachLengthUnit());
+		assertEquals(EFFORT_PASS_2, actual.getActPassCount());
 		assertEquals(TEST_SAMPLE_COLLECT_METHOD_ID, actual.getSampleCollectMethodId());
 		assertEquals(TEST_SAMPLE_COLLECT_METHOD_CTX, actual.getSampleCollectMethodCtx());
 		assertEquals(TEST_SAMPLE_COLLECT_METHOD_NAME, actual.getSampleCollectMethodName());
-		assertEquals(TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION, actual.getActivitySampleCollectMethodDescription());
+		assertEquals(TEST_ACTIVITY_SAMPLE_COLLECT_METHOD_DESCRIPTION, actual.getActSamCollectMethDesc());
 		assertEquals(ELECTROSHOCK_OTHER, actual.getSampleCollectEquipName());
-		assertEquals(TOWED_BARGE + "+" + EFFORT_PASS_1_2_COMBINED, actual.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE + "+" + EFFORT_PASS_1_2_COMBINED, actual.getActSamCollectEquipComments());
 	}
 	
 	@Test 
@@ -110,7 +109,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		
 		Activity actual = processor.process(biodataActivity);
 		
-		assertNull(actual.getActivityReachLengthUnit());
+		assertNull(actual.getActReachLengthUnit());
 		assertNull(actual.getSampleCollectEquipName());
 	}
 	
@@ -130,7 +129,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 
 		Activity actual = processor.process(biodataActivity);
 		
-		assertEquals(EFFORT_PASS_1, actual.getActivityPassCount());
+		assertEquals(EFFORT_PASS_1, actual.getActPassCount());
 	}
 	
 	@Test
@@ -164,15 +163,15 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 	public void testActivitySampleCollectEquipmentComments() {
 		biodataActivity.setEffortPass(null);
 		Activity actual = processor.process(biodataActivity);
-		assertEquals(TOWED_BARGE, actual.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE, actual.getActSamCollectEquipComments());
 		
 		biodataActivity.setDwSampleTypeId(DEFAULT_DW_SAMPLE_TYPE_ID_16);
 		Activity actual2 = processor.process(biodataActivity);
-		assertEquals(TOWED_BARGE + "+" + TEST_EFFORT_SUBREACH, actual2.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE + "+" + TEST_EFFORT_SUBREACH, actual2.getActSamCollectEquipComments());
 		
 		biodataActivity.setEffortSubreach(null);
 		Activity actual3 = processor.process(biodataActivity);
-		assertEquals(TOWED_BARGE, actual3.getActivitySampleCollectEquipmentComments());
+		assertEquals(TOWED_BARGE, actual3.getActSamCollectEquipComments());
 	}
 	
 }

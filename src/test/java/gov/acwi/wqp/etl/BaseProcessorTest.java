@@ -68,11 +68,13 @@ public abstract class BaseProcessorTest {
 			.format(Application.TIME_FORMATTER);
 	
 	protected static final String TEST_ACTIVITY = "BDB-000031046-Towed-P1&2";
+	protected static final String TEST_SIDNO = "BDB-000031046";
 	protected static final Integer TEST_ACTIVITY_ID = 268023;
 	protected static final String TEST_SAMPLE_DATA_SOURCE = "test sample data source";
 	protected static final String TEST_PROJECT_ID = "LERI BioTDB";
 	protected static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";
 	protected static final Integer TEST_ACTIVITY_REACH_LENGTH = 300;
+	protected static final String TEST_ACTIVITY_REACH_LENGTH_STRING = "300";
 	protected static final String TEST_EFFORT_PASS_2 = "test effort pass 2";
 	protected static final String TEST_SAMPLE_COLLECT_METHOD_ID = "Towed-P1&2";
 	protected static final String TEST_SAMPLE_COLLECT_METHOD_CTX = "NAWQA Fish  Towed-P1&2";
