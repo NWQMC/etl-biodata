@@ -35,3 +35,5 @@ spring:
     parameters:
       WQP_SCHEMA_NAME: ${WQP_SCHEMA_NAME}
       ETL_OWNER_USERNAME: ${BIODATA_SCHEMA_OWNER_USERNAME}
+    change-log: db/changelog/db.changelog-biodata.yaml
+
