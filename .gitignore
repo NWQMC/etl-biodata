@@ -4,4 +4,7 @@
 /.env
 /nbproject/
 .codacy.yml
+nb-configuration.xml
+.idea/
+wqp-etl-biodata.iml
 

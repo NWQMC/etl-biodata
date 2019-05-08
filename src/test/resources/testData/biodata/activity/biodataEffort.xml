@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<effort dw_effort_id="266776" data_source="BioTDB" dw_project_id="58" dw_sample_id="20037" method_code="Backpack-P1" gear="Backpack" beginning_time="08:15" ending_time="11:00" pass="Pass 1" model="Smith Root LR24" output_voltage="130" shock_time="3305" biotdb_method_code="11A"></effort>
+	<effort dw_effort_id="266777" data_source="BioTDB" dw_project_id="58" dw_sample_id="20038" method_code="Backpack-P1" gear="Backpack" beginning_time="14:45" ending_time="15:50" pass="Pass 1" model="Smith Root LR24" output_voltage="200" shock_time="3008" biotdb_method_code="11A"></effort>
+	<effort dw_effort_id="267722" data_source="BioTDB" dw_project_id="58" dw_sample_id="20037" method_code="Backpack-P2" gear="Backpack" beginning_time="11:30" ending_time="12:25" pass="Pass 2" model="Smith Root LR24" output_voltage="150" shock_time="3330" biotdb_method_code="11B"></effort>
+	<effort dw_effort_id="267723" data_source="BioTDB" dw_project_id="58" dw_sample_id="20038" method_code="Backpack-P2" gear="Backpack" beginning_time="16:00" ending_time="16:40" pass="Pass 2" model="Smith Root LR24" output_voltage="200" shock_time="2000" biotdb_method_code="11B"></effort>
+	<effort dw_effort_id="268023" data_source="BioTDB" dw_project_id="28" dw_sample_id="10006" method_code="Towed-P1&amp;2" gear="Towed barge" pass="Pass 1 &amp; 2 combined" shock_time="1345" biotdb_method_code="12+AB"></effort>
+	<effort dw_effort_id="268571" data_source="BioTDB" dw_project_id="28" dw_sample_id="20612" method_code="Towed-P1" gear="Towed barge" pass="Pass 1" model="BARGE, SR" output_voltage="60" shock_time="1536" biotdb_method_code="12A"></effort>
+	<effort dw_effort_id="268579" data_source="BioTDB" dw_project_id="28" dw_sample_id="20924" method_code="Towed-P1" gear="Towed barge" comments="~3 amp, 60 Hz" pass="Pass 1" model="2.5 GPP" shock_time="3502" biotdb_method_code="12A"></effort>
+	<effort dw_effort_id="268597" data_source="BioTDB" dw_project_id="28" dw_sample_id="20036" method_code="Towed-P1" gear="Towed barge" pass="Pass 1" shock_time="946" biotdb_method_code="12A"></effort>
+	<effort dw_effort_id="268511" data_source="BioTDB" dw_project_id="28" dw_sample_id="17784" method_code="Towed-P1" gear="Towed barge" comments="~3 amp, 60 Hz" pass="Pass 1" model="2.5 GPP" biotdb_method_code="12A"></effort>
+	<effort dw_effort_id="268623" data_source="BioTDB" dw_project_id="28" dw_sample_id="23275" method_code="Towed-P1" gear="Towed barge" beginning_time="11:30" comments="~3 amp, 60 Hz" pass="Pass 1" model="2.5 GPP" shock_time="1209" biotdb_method_code="12A"></effort>
+	<effort dw_effort_id="268968" data_source="BioTDB" dw_project_id="28" dw_sample_id="17784" method_code="Towed-P2" gear="Towed barge" pass="Pass 2" biotdb_method_code="12B"></effort>
+	<effort dw_effort_id="269026" data_source="BioTDB" dw_project_id="28" dw_sample_id="20924" method_code="Towed-P2" gear="Towed barge" pass="Pass 2" shock_time="2028" biotdb_method_code="12B"></effort>
+	<effort dw_effort_id="269043" data_source="BioTDB" dw_project_id="28" dw_sample_id="20036" method_code="Towed-P2" gear="Towed barge" pass="Pass 2" shock_time="690" biotdb_method_code="12B"></effort>
+	<effort dw_effort_id="269064" data_source="BioTDB" dw_project_id="28" dw_sample_id="23275" method_code="Towed-P2" gear="Towed barge" beginning_time="13:30" pass="Pass 2" model="Smith Root" shock_time="1290" biotdb_method_code="12B"></effort>
+	<effort dw_effort_id="269192" data_source="BioTDB" dw_project_id="28" dw_sample_id="10079" method_code="Boat-P1&amp;2" gear="Boat" pass="Pass 1 &amp; 2 combined" shock_time="1600" biotdb_method_code="13+AB"></effort>
+	<effort dw_effort_id="270316" data_source="BioTDB" dw_project_id="58" dw_sample_id="20037" method_code="MinnowSeine" gear="Minnow Seine" beginning_time="12:40" ending_time="13:00" seine_hauls="5" biotdb_method_code="21A"></effort>
+	<effort dw_effort_id="270662" data_source="BioTDB" dw_project_id="58" dw_sample_id="20038" method_code="MinnowSeine" gear="Minnow Seine" beginning_time="16:40" ending_time="17:00" stationary_set_kicks="3" biotdb_method_code="22A"></effort>
+</dataset>

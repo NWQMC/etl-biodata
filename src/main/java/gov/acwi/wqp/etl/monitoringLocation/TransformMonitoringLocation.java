@@ -71,7 +71,7 @@ public class TransformMonitoringLocation {
 
 	@Bean
 	public ItemWriter<MonitoringLocation> monitoringLocationWriter() throws IOException {
-		JdbcBatchItemWriter<MonitoringLocation> itemWriter = new JdbcBatchItemWriter<MonitoringLocation>();
+		JdbcBatchItemWriter<MonitoringLocation> itemWriter = new JdbcBatchItemWriter<>();
 		itemWriter.setDataSource(dataSourceWqp);
 		itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(sqlResourceWriter.getInputStream())));
 		ItemSqlParameterSourceProvider<MonitoringLocation> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();

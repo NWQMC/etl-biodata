@@ -8,22 +8,22 @@ import static org.junit.Assert.*;
 
 public class OrgDataProcessorTest extends BaseProcessorTest {
 	
-	private BiodataOrgData biodataOD;
-	private OrgDataProcessor odProcessor;
+	private BiodataOrgData biodataOrgData;
+	private OrgDataProcessor processor;
 	
 	@Before
-	public void setUp() {
-		biodataOD = new BiodataOrgData();
-		odProcessor = new OrgDataProcessor(configurationService);
+	public void setupTestClass() {
+		biodataOrgData = new BiodataOrgData();
+		processor = new OrgDataProcessor(configurationService);
 		
-		biodataOD.setOrganization(TEST_ORGANIZATION);
-		biodataOD.setOrganizationId(TEST_ORGANIZATION_ID);
-		biodataOD.setOrganizationName(TEST_ORGANIZATION_NAME_1);
+		biodataOrgData.setOrganization(TEST_ORGANIZATION);
+		biodataOrgData.setOrganizationId(TEST_ORGANIZATION_ID);
+		biodataOrgData.setOrganizationName(TEST_ORGANIZATION_NAME_1);
 	}
 	
 	@Test 
-	public void testProcess() throws Exception {
-		OrgData actual = odProcessor.process(biodataOD);
+	public void testProcess() {
+		OrgData actual = processor.process(biodataOrgData);
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
 		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());
@@ -33,12 +33,12 @@ public class OrgDataProcessorTest extends BaseProcessorTest {
 	}
 
 	@Test
-	public void testProcessWithNullValues() throws Exception {
-		biodataOD.setOrganization(null);
-		biodataOD.setOrganizationId(null);
-		biodataOD.setOrganizationName(null);
+	public void testProcessWithNullValues() {
+		biodataOrgData.setOrganization(null);
+		biodataOrgData.setOrganizationId(null);
+		biodataOrgData.setOrganizationName(null);
 		
-		OrgData actual = odProcessor.process(biodataOD);
+		OrgData actual = processor.process(biodataOrgData);
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
 		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());

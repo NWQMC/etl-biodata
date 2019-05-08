@@ -57,7 +57,7 @@ public class TransformOrgData {
 	public JdbcCursorItemReader<BiodataOrgData> orgDataReader() throws Exception {
 		return new JdbcCursorItemReaderBuilder<BiodataOrgData>()
 		.dataSource(dataSourceWqp)
-		.name("monitoringLocationReader")
+		.name("orgDataReader")
 		.sql(new String(FileCopyUtils.copyToByteArray(sqlResourceReader.getInputStream())))
 		.rowMapper(new BiodataOrgDataRowMapper())
 		.build();
@@ -65,7 +65,7 @@ public class TransformOrgData {
 	
 	@Bean
 	public ItemWriter<OrgData> orgDataWriter() throws IOException {
-		JdbcBatchItemWriter<OrgData> itemWriter = new JdbcBatchItemWriter<OrgData>();
+		JdbcBatchItemWriter<OrgData> itemWriter = new JdbcBatchItemWriter<>();
 		itemWriter.setDataSource(dataSourceWqp);
 		itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(sqlResourceWriter.getInputStream())));
 		ItemSqlParameterSourceProvider<OrgData> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();

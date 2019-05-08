@@ -4,66 +4,70 @@ import gov.acwi.wqp.etl.BaseProcessorTest;
 import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
 import org.junit.Before;
 import org.junit.Test;
+
+import static gov.acwi.wqp.etl.monitoringLocation.MonitoringLocationProcessor.DEFAULT_DRAIN_AREA_UNIT;
+import static gov.acwi.wqp.etl.monitoringLocation.MonitoringLocationProcessor.DEFAULT_ELEVATION_UNIT;
+import static gov.acwi.wqp.etl.monitoringLocation.MonitoringLocationProcessor.DEFAULT_ELEVATION_VALUE;
 import static org.junit.Assert.*;
 
 public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 
-	private BiodataMonitoringLocation biodataML;
-	private MonitoringLocationProcessor mlProcessor;
+	private BiodataMonitoringLocation biodataMonitoringLocation;
+	private MonitoringLocationProcessor processor;
 	
 	@Before
-	public void setUp() {
-		biodataML = new BiodataMonitoringLocation();
-		mlProcessor = new MonitoringLocationProcessor(configurationService);
+	public void setupTestClass() {
+		biodataMonitoringLocation = new BiodataMonitoringLocation();
+		processor = new MonitoringLocationProcessor(configurationService);
 		
-		biodataML.setBiodataSiteId(TEST_STATION_ID);
-		biodataML.setNwisSiteId(TEST_SITE_ID);
-		biodataML.setAgencyCd(TEST_AGENCY_CD);
-		biodataML.setSiteNo(TEST_SITE_NO);
-		biodataML.setOrganization(TEST_ORGANIZATION);
-		biodataML.setSiteTypeLongName(TEST_SITE_TYPE);
-		biodataML.setHucCd(TEST_HUC);
-		biodataML.setGovernmentalUnitCode(TEST_GOVERNMENTAL_UNIT_CODE);
-		biodataML.setCountryCd(TEST_COUNTRY_CD);
-		biodataML.setStateCd(TEST_STATE_CD);
-		biodataML.setCountyCd(TEST_COUNTY_CD);
-		biodataML.setGeoPoint(TEST_GEOM);
-		biodataML.setStationNm(TEST_STATION_NAME);
-		biodataML.setStationTypeName(TEST_STATION_TYPE_NAME);
-		biodataML.setOrganizationName(TEST_ORGANIZATION_NAME_2);
-		biodataML.setDecLatitude(TEST_DECIMAL_LATITUDE);
-		biodataML.setDecLongitude(TEST_DECIMAL_LONGITUDE);
-		biodataML.setGeopositioningMethod(TEST_GEOPOSITIONING_METHOD);
-		biodataML.setCoordDatumCd(TEST_HDATUM_ID_CODE);
-		biodataML.setElevationValue(TEST_ELEVATION_VALUE);
-		biodataML.setElevationUnit(TEST_ELEVATION_UNIT);
-		biodataML.setElevationMethod(TEST_ELEVATION_METHOD);
-		biodataML.setAltDatumCd(TEST_VDATUM_ID_CODE);
-		biodataML.setAltitude(TEST_ELEVATION_VALUE);
-		biodataML.setVdatumIdCode(TEST_VDATUM_ID_CODE);
-		biodataML.setDrainAreaVa(TEST_DECIMAL_DRAIN_AREA_VALUE);
-		biodataML.setBiodataDrainAreaVa(TEST_DRAIN_AREA_VALUE);
-		biodataML.setDrainAreaUnit(TEST_DRAIN_AREA_UNIT);
-		biodataML.setGeopositionAccyValue(TEST_GEOPOSITION_ACCY_VALUE);
-		biodataML.setGeopositionAccyUnit(TEST_GEOPOSITION_ACCY_UNIT);
-		biodataML.setVerticalAccuracyValue(TEST_VERTICAL_ACCURACY_VALUE);
-		biodataML.setVerticalAccuracyUnit(TEST_VERTICAL_ACCURACY_UNIT);
-		biodataML.setMapScale(TEST_MAP_SCALE);
-		biodataML.setContribDrainAreaValue(TEST_CONTRIB_DRAIN_AREA_VALUE);
-		biodataML.setContribDrainAreaUnit(TEST_CONTRIB_DRAIN_AREA_UNIT);
-		biodataML.setNatAqfrName(TEST_NAT_AQFR_NAME);
-		biodataML.setAqfrName(TEST_AQFR_NAME);
-		biodataML.setAqfrTypeName(TEST_AQFR_TYPE_NAME);
-		biodataML.setConstructionDate(TEST_CONSTRUCTION_DATE);
-		biodataML.setWellDepthValue(TEST_WELL_DEPTH_VALUE);
-		biodataML.setWellDepthUnit(TEST_WELL_DEPTH_UNIT);
-		biodataML.setHoleDepthValue(TEST_HOLE_DEPTH_VALUE);
-		biodataML.setHoleDepthUnit(TEST_HOLE_DEPTH_UNIT);
+		biodataMonitoringLocation.setBiodataSiteId(TEST_STATION_ID);
+		biodataMonitoringLocation.setNwisSiteId(TEST_SITE_ID);
+		biodataMonitoringLocation.setAgencyCd(TEST_AGENCY_CD);
+		biodataMonitoringLocation.setSiteNo(TEST_SITE_NO);
+		biodataMonitoringLocation.setOrganization(TEST_ORGANIZATION);
+		biodataMonitoringLocation.setSiteTypeLongName(TEST_SITE_TYPE);
+		biodataMonitoringLocation.setHucCd(TEST_HUC);
+		biodataMonitoringLocation.setGovernmentalUnitCode(TEST_GOVERNMENTAL_UNIT_CODE);
+		biodataMonitoringLocation.setCountryCd(TEST_COUNTRY_CD);
+		biodataMonitoringLocation.setStateCd(TEST_STATE_CD);
+		biodataMonitoringLocation.setCountyCd(TEST_COUNTY_CD);
+		biodataMonitoringLocation.setGeoPoint(TEST_GEOM);
+		biodataMonitoringLocation.setStationNm(TEST_STATION_NAME);
+		biodataMonitoringLocation.setStationTypeName(TEST_STATION_TYPE_NAME);
+		biodataMonitoringLocation.setOrganizationName(TEST_ORGANIZATION_NAME_2);
+		biodataMonitoringLocation.setDecLatitude(TEST_DECIMAL_LATITUDE);
+		biodataMonitoringLocation.setDecLongitude(TEST_DECIMAL_LONGITUDE);
+		biodataMonitoringLocation.setGeopositioningMethod(TEST_GEOPOSITIONING_METHOD);
+		biodataMonitoringLocation.setCoordDatumCd(TEST_HDATUM_ID_CODE);
+		biodataMonitoringLocation.setElevationValue(TEST_ELEVATION_VALUE);
+		biodataMonitoringLocation.setElevationUnit(TEST_ELEVATION_UNIT);
+		biodataMonitoringLocation.setElevationMethod(TEST_ELEVATION_METHOD);
+		biodataMonitoringLocation.setAltDatumCd(TEST_VDATUM_ID_CODE);
+		biodataMonitoringLocation.setAltitude(TEST_ELEVATION_VALUE);
+		biodataMonitoringLocation.setVdatumIdCode(TEST_VDATUM_ID_CODE);
+		biodataMonitoringLocation.setDrainAreaVa(TEST_DECIMAL_DRAIN_AREA_VALUE);
+		biodataMonitoringLocation.setBiodataDrainAreaVa(TEST_DRAIN_AREA_VALUE);
+		biodataMonitoringLocation.setDrainAreaUnit(DEFAULT_DRAIN_AREA_UNIT);
+		biodataMonitoringLocation.setGeopositionAccyValue(TEST_GEOPOSITION_ACCY_VALUE);
+		biodataMonitoringLocation.setGeopositionAccyUnit(TEST_GEOPOSITION_ACCY_UNIT);
+		biodataMonitoringLocation.setVerticalAccuracyValue(TEST_VERTICAL_ACCURACY_VALUE);
+		biodataMonitoringLocation.setVerticalAccuracyUnit(DEFAULT_ELEVATION_UNIT);
+		biodataMonitoringLocation.setMapScale(TEST_MAP_SCALE);
+		biodataMonitoringLocation.setContribDrainAreaValue(TEST_CONTRIB_DRAIN_AREA_VALUE);
+		biodataMonitoringLocation.setContribDrainAreaUnit(TEST_CONTRIB_DRAIN_AREA_UNIT);
+		biodataMonitoringLocation.setNatAqfrName(TEST_NAT_AQFR_NAME);
+		biodataMonitoringLocation.setAqfrName(TEST_AQFR_NAME);
+		biodataMonitoringLocation.setAqfrTypeName(TEST_AQFR_TYPE_NAME);
+		biodataMonitoringLocation.setConstructionDate(TEST_CONSTRUCTION_DATE);
+		biodataMonitoringLocation.setWellDepthValue(TEST_WELL_DEPTH_VALUE);
+		biodataMonitoringLocation.setWellDepthUnit(TEST_WELL_DEPTH_UNIT);
+		biodataMonitoringLocation.setHoleDepthValue(TEST_HOLE_DEPTH_VALUE);
+		biodataMonitoringLocation.setHoleDepthUnit(TEST_HOLE_DEPTH_UNIT);
 	}
 	
 	@Test 
-	public void testProcess() throws Exception {
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+	public void testProcess() {
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		
 		assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
 		assertEquals(TEST_DATA_SOURCE, actual.getDataSource());
@@ -80,7 +84,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_HUC, actual.getHuc());
 		assertEquals(TEST_SITE_TYPE, actual.getSiteType());
 		assertEquals(TEST_STATION_NAME, actual.getStationName());
-		assertEquals(TEST_VERTICAL_ACCURACY_UNIT, actual.getVerticalAccuracyUnit());
+		assertEquals(DEFAULT_ELEVATION_UNIT, actual.getVerticalAccuracyUnit());
 		assertEquals(TEST_VERTICAL_ACCURACY_VALUE, actual.getVerticalAccuracyValue());
 		assertEquals(TEST_DECIMAL_DRAIN_AREA_VALUE, actual.getDrainAreaValue());
 		assertEquals(TEST_GEOM, actual.getGeom());
@@ -90,7 +94,7 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_ELEVATION_UNIT, actual.getElevationUnit());
 		assertEquals(TEST_ELEVATION_VALUE, actual.getElevationValue());
 		assertEquals(TEST_VDATUM_ID_CODE, actual.getVdatumIdCode());
-		assertEquals(TEST_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
+		assertEquals(DEFAULT_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
 		assertEquals(TEST_MAP_SCALE, actual.getMapScale());
 		assertEquals(TEST_CONTRIB_DRAIN_AREA_VALUE, actual.getContribDrainAreaValue());
 		assertEquals(TEST_CONTRIB_DRAIN_AREA_UNIT, actual.getContribDrainAreaUnit());
@@ -105,76 +109,76 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 	}
 
 	@Test
-	public void testProcessWithNullValues() throws Exception {
+	public void testProcessWithNullValues() {
 		
-		biodataML.setNwisSiteId(null);
-		biodataML.setGovernmentalUnitCode(null);
-		biodataML.setElevationUnit(null);
-		biodataML.setElevationValue(null);
-		biodataML.setVdatumIdCode(null);
-		biodataML.setDrainAreaUnit(null);
+		biodataMonitoringLocation.setNwisSiteId(null);
+		biodataMonitoringLocation.setGovernmentalUnitCode(null);
+		biodataMonitoringLocation.setElevationUnit(null);
+		biodataMonitoringLocation.setElevationValue(null);
+		biodataMonitoringLocation.setVdatumIdCode(null);
+		biodataMonitoringLocation.setDrainAreaUnit(null);
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		
 		assertEquals(TEST_SITE_ID, actual.getSiteId());
 		assertEquals(TEST_GOVERNMENTAL_UNIT_CODE, actual.getGovernmentalUnitCode());
 		assertEquals(TEST_ELEVATION_UNIT, actual.getElevationUnit());
 		assertEquals(TEST_ELEVATION_VALUE, actual.getElevationValue());
 		assertEquals(TEST_VDATUM_ID_CODE, actual.getVdatumIdCode());
-		assertEquals(TEST_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
+		assertEquals(DEFAULT_DRAIN_AREA_UNIT, actual.getDrainAreaUnit());
 	}
 	
 	@Test
-	public void testElevationUnitIfAltDatumCdIsNull() throws Exception {
-		biodataML.setElevationUnit(null);
-		biodataML.setAltDatumCd(null);
+	public void testElevationUnitIfAltDatumCdIsNull() {
+		biodataMonitoringLocation.setElevationUnit(null);
+		biodataMonitoringLocation.setAltDatumCd(null);
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		assertNull(actual.getElevationUnit());
 	}
 	
 	@Test
-	public void testElevationUnitIfAltitudeIsNull() throws Exception {
-		biodataML.setElevationUnit(null);
-		biodataML.setAltitude(null);
+	public void testElevationUnitIfAltitudeIsNull() {
+		biodataMonitoringLocation.setElevationUnit(null);
+		biodataMonitoringLocation.setAltitude(null);
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		assertNull(actual.getElevationUnit());
 	}
 	
 	@Test
-	public void testElevationValueIfAltDatumCdIsNull() throws Exception {
-		biodataML.setElevationValue(null);
-		biodataML.setAltDatumCd(null);
+	public void testElevationValueIfAltDatumCdIsNull() {
+		biodataMonitoringLocation.setElevationValue(null);
+		biodataMonitoringLocation.setAltDatumCd(null);
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		assertNull(actual.getElevationValue());
 	}
 	
 	@Test
-	public void testElevationValueIfAltitudeIsDecimal() throws Exception {
-		biodataML.setElevationValue(null);
-		biodataML.setAltitude(".");
+	public void testElevationValueIfAltitudeIsDecimal() {
+		biodataMonitoringLocation.setElevationValue(null);
+		biodataMonitoringLocation.setAltitude(".");
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
-		assertEquals(MonitoringLocationProcessor.DEFAULT_ELEVATION_VALUE, actual.getElevationValue());
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
+		assertEquals(DEFAULT_ELEVATION_VALUE, actual.getElevationValue());
 	}
 	
 	@Test
-	public void testVdatumIdCodeIfAltitudeIsNull() throws Exception {
-		biodataML.setVdatumIdCode(null);
-		biodataML.setAltitude(null);
+	public void testVdatumIdCodeIfAltitudeIsNull() {
+		biodataMonitoringLocation.setVdatumIdCode(null);
+		biodataMonitoringLocation.setAltitude(null);
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		assertNull(actual.getVdatumIdCode());
 	}
 	
 	@Test
-	public void testDrainAreaUnitIfBiodataDrainAreaVaIsNull() throws Exception {
-		biodataML.setDrainAreaUnit(null);
-		biodataML.setBiodataDrainAreaVa(null);
+	public void testDrainAreaUnitIfBiodataDrainAreaVaIsNull() {
+		biodataMonitoringLocation.setDrainAreaUnit(null);
+		biodataMonitoringLocation.setBiodataDrainAreaVa(null);
 		
-		MonitoringLocation actual = mlProcessor.process(biodataML);
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		assertNull(actual.getDrainAreaUnit());
 	}
 }
