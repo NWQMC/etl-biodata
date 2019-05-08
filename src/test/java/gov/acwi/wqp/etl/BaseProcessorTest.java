@@ -72,6 +72,7 @@ public abstract class BaseProcessorTest {
 	protected static final Integer TEST_ACTIVITY_ID = 268023;
 	protected static final String TEST_SAMPLE_DATA_SOURCE = "test sample data source";
 	protected static final String TEST_PROJECT_ID = "LERI BioTDB";
+	protected static final String TEST_PROJECT_NAME = "test project name";
 	protected static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";
 	protected static final Integer TEST_ACTIVITY_REACH_LENGTH = 300;
 	protected static final String TEST_ACTIVITY_REACH_LENGTH_STRING = "300";
