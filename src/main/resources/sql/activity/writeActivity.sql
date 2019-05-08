@@ -51,14 +51,14 @@ insert into
 		,:projectId
 		,:activityComment
 		,:assemblageSampledName
-		,:activityReachLength
-		,:activityReachLengthUnit
-		,:activityPassCount
+		,:actReachLength
+		,:actReachLengthUnit
+		,:actPassCount
 		,:sampleCollectMethodId
 		,:sampleCollectMethodCtx
 		,:sampleCollectMethodName
-		,:activitySampleCollectMethodDescription
+		,:actSamCollectMethDesc
 		,:sampleCollectEquipName
-		,:activitySampleCollectEquipmentComments
+		,:actSamCollectEquipComments
 	)
 

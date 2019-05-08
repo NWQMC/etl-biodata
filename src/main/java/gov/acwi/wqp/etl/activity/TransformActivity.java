@@ -81,7 +81,7 @@ public class TransformActivity {
 	public Step transformActivityStep() throws IOException {
 		return stepBuilderFactory
 				.get("transformActivityStep")
-				.<BiodataActivity, Activity>chunk(10)
+				.<BiodataActivity, Activity>chunk(1000)
 				.reader(activityReader())
 				.processor(processor)
 				.writer(activityWriter())

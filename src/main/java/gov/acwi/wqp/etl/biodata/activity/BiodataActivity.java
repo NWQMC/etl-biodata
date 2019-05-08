@@ -7,7 +7,7 @@ public class BiodataActivity {
 	
 	private Integer stationId;
 	private String siteId;
-	private String activity;
+	private String sidno;
 	private String organization;
 	private String siteType;
 	private String huc;
@@ -22,7 +22,6 @@ public class BiodataActivity {
 	private Integer activityReachLength;
 	private String effortPass;
 	private String sampleCollectMethodId;
-	private String sampleCollectMethodCtx;
 	private String sampleCollectMethodName;
 	private String activitySampleCollectMethodDescription;
 	private String sampleTimeDatum;
@@ -47,12 +46,12 @@ public class BiodataActivity {
 		this.siteId = siteId;
 	}
 
-	public String getActivity() {
-		return activity;
+	public String getSidno() {
+		return sidno;
 	}
 
-	public void setActivity(String activity) {
-		this.activity = activity;
+	public void setSidno(String sidno) {
+		this.sidno = sidno;
 	}
 
 	public String getOrganization() {
@@ -165,14 +164,6 @@ public class BiodataActivity {
 
 	public void setSampleCollectMethodId(String sampleCollectMethodId) {
 		this.sampleCollectMethodId = sampleCollectMethodId;
-	}
-
-	public String getSampleCollectMethodCtx() {
-		return sampleCollectMethodCtx;
-	}
-
-	public void setSampleCollectMethodCtx(String sampleCollectMethodCtx) {
-		this.sampleCollectMethodCtx = sampleCollectMethodCtx;
 	}
 
 	public String getSampleCollectMethodName() {

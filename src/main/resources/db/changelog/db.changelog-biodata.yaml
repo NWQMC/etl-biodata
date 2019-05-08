@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - preConditions:
+    - dbms:
+        type: postgresql
+
+  - include:
+      file: "db.changelog-master.yaml"
+      relativeToChangelogFile: true
+
+  - changeSet:
+      author: ssoper
+      id: "grant.select.on.table.${WQP_SCHEMA_NAME}.station_nwis.to.${ETL_OWNER_USERNAME}"
+      changes:
+        - sql:
+            sql: grant select on table ${WQP_SCHEMA_NAME}.station_nwis to ${ETL_OWNER_USERNAME};
+        - rollback: revoke select on table ${WQP_SCHEMA_NAME}.station_nwis from ${ETL_OWNER_USERNAME};

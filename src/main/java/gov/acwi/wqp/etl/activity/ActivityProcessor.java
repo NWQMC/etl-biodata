@@ -11,29 +11,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activity>{
 
-	static final String DEFAULT_SAMPLE_MEDIA = "Biological";
-	static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
-	static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
-	static final String SAMPLE_DATA_SOURCE_BIOTB = "BioTDB";
-	static final String EFFORT_PASS_1_2_COMBINED = "Pass 1 & 2 combined";
-	static final Integer EFFORT_PASS_1 = 1;
-	static final Integer EFFORT_PASS_2 = 2;
-	static final String BACKPACK = "backpack";
-	static final String BACKPACK_ELECTROSHOCK = "Backpack Electroshock";
-	static final String TOWED_BARGE = "towed barge";
-	static final String ELECTROSHOCK_OTHER = "Electroshock (Other)";
-	static final String BOAT = "boat";
-	static final String BOAT_MOUNTED_ELECTROSHOCK = "Boat-Mounted Electroshock";
-	static final String MINNOW_SEINE = "minnow seine";
-	static final String MINNOW_SEINE_NET = "Minnow Seine Net";
-	static final String BAG_SEINE = "bag seine";
-	static final String SEINE_NET = "Seine Net";
-	static final String BEACH_SEINE = "beach seine";
-	static final String BEACH_SEINE_NET = "Beach Seine Net";
-	static final String SNORKELING = "snorkeling";
-	static final String VISUAL_SIGHTING = "Visual Sighting";
-	static final String DEFAULT_REACH_LENGTH_UNIT = "m";
-	static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
+	protected static final String DEFAULT_SAMPLE_MEDIA = "Biological";
+	protected static final String DEFAULT_ACTIVITY_TYPE_CODE = "Field Msr/Obs";
+	protected static final String DEFAULT_ASSEMBLAGE_SAMPLED_NAME = "Fish/Nekton";
+	protected static final String SAMPLE_DATA_SOURCE_BIOTB = "BioTDB";
+	protected static final String EFFORT_PASS_1_2_COMBINED = "Pass 1 & 2 combined";
+	protected static final Integer EFFORT_PASS_1 = 1;
+	protected static final Integer EFFORT_PASS_2 = 2;
+	protected static final String BACKPACK = "backpack";
+	protected static final String BACKPACK_ELECTROSHOCK = "Backpack Electroshock";
+	protected static final String TOWED_BARGE = "towed barge";
+	protected static final String ELECTROSHOCK_OTHER = "Electroshock (Other)";
+	protected static final String BOAT = "boat";
+	protected static final String BOAT_MOUNTED_ELECTROSHOCK = "Boat-Mounted Electroshock";
+	protected static final String MINNOW_SEINE = "minnow seine";
+	protected static final String MINNOW_SEINE_NET = "Minnow Seine Net";
+	protected static final String BAG_SEINE = "bag seine";
+	protected static final String SEINE_NET = "Seine Net";
+	protected static final String BEACH_SEINE = "beach seine";
+	protected static final String BEACH_SEINE_NET = "Beach Seine Net";
+	protected static final String SNORKELING = "snorkeling";
+	protected static final String VISUAL_SIGHTING = "Visual Sighting";
+	protected static final String DEFAULT_REACH_LENGTH_UNIT = "m";
+	protected static final Integer DEFAULT_DW_SAMPLE_TYPE_ID_16 = 16;
 
 	private final ConfigurationService configurationService;
 
@@ -60,7 +60,10 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 		activity.setStationId(bdActivity.getStationId());
 		activity.setSiteId(bdActivity.getSiteId());
 		activity.setEventDate(bdActivity.getSampleCollectionStartTime().toLocalDate());
-		activity.setActivity(bdActivity.getActivity());
+		activity.setActivity(
+				String.join("-",
+				bdActivity.getSidno(),
+				bdActivity.getSampleCollectMethodId()));
 		activity.setOrganization(bdActivity.getOrganization());
 		activity.setSiteType(bdActivity.getSiteType());
 		activity.setHuc(bdActivity.getHuc());
@@ -81,26 +84,31 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 
 		activity.setProjectId(bdActivity.getProjectId());
 		activity.setActivityComment(bdActivity.getActivityComment());
-		activity.setActivityReachLength(bdActivity.getActivityReachLength());
+		activity.setActReachLength(String.valueOf(bdActivity.getActivityReachLength()));
 
-		activity.setActivityReachLengthUnit(
+		activity.setActReachLengthUnit(
 				getActivityReachLengthUnit(
 						bdActivity.getActivityReachLength()));
 
-		activity.setActivityPassCount(
+		activity.setActPassCount(
 				getActivityPassCount(
 						bdActivity.getEffortPass()));
 
 		activity.setSampleCollectMethodId(bdActivity.getSampleCollectMethodId());
-		activity.setSampleCollectMethodCtx(bdActivity.getSampleCollectMethodCtx());
+		activity.setSampleCollectMethodCtx(
+				String.join(" ",
+				bdActivity.getSampleCollectMethodName(),
+				bdActivity.getSampleCollectMethodId()
+				)
+		);
 		activity.setSampleCollectMethodName(bdActivity.getSampleCollectMethodName());
-		activity.setActivitySampleCollectMethodDescription(
+		activity.setActSamCollectMethDesc(
 				bdActivity.getActivitySampleCollectMethodDescription());
 
 		activity.setSampleCollectEquipName(
 				getSampleCollectEquipName(gear));
 
-		activity.setActivitySampleCollectEquipmentComments(
+		activity.setActSamCollectEquipComments(
 				getActivitySampleCollectEquipmentComments(
 						gear,
 						bdActivity.getDwSampleTypeId(),
