@@ -1,8 +1,6 @@
 package gov.acwi.wqp.etl.projectData;
 
-import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.ConfigurationService;
-import gov.acwi.wqp.etl.EtlConstantUtils;
 import gov.acwi.wqp.etl.biodata.projectData.BiodataProjectData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +18,7 @@ public class ProjectDataProcessor implements ItemProcessor<BiodataProjectData, P
     }
 
     @Override
-    public ProjectData process(BiodataProjectData biodataProjectData) throws Exception {
+    public ProjectData process(BiodataProjectData biodataProjectData) {
         ProjectData projectData = new ProjectData();
 
         projectData.setDataSourceId(configurationService.getEtlDataSourceId());

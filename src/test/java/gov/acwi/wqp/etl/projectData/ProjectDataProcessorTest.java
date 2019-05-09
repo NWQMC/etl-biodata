@@ -27,7 +27,7 @@ public class ProjectDataProcessorTest extends BaseProcessorTest {
     }
 
     @Test
-    public void testProcess() throws Exception {
+    public void testProcess() {
         ProjectData actual = processor.process(biodataProjectData);
 
         assertEquals(TEST_DATA_SOURCE_ID, actual.getDataSourceId());
@@ -41,7 +41,7 @@ public class ProjectDataProcessorTest extends BaseProcessorTest {
     }
 
     @Test
-    public void testProcessWithNullValues() throws Exception {
+    public void testProcessWithNullValues() {
         biodataProjectData.setDwProjectId(null);
         biodataProjectData.setOrganization(null);
         biodataProjectData.setOrganizationName(null);

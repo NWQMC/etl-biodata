@@ -1,7 +1,5 @@
 select distinct
-    activity.data_source_id
-    ,project.dw_project_id
-    ,activity.data_source
+    project.dw_project_id
     ,activity.organization
     ,activity.organization_name
     ,activity.project_id
