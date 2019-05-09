@@ -86,6 +86,10 @@ public abstract class BaseProcessorTest {
 	protected static final Integer TEST_DW_SAMPLE_TYPE_ID_7 = 7;
 	protected static final String TEST_EFFORT_SUBREACH = "A-B";
 
+	protected static final Integer TEST_DW_PROJECT_ID = 28;
+	protected static final String TEST_PROJECT_ABSTRACT = "This is a test project abstract.  It is mapped to the projectData description.";
+
+
 	protected ConfigurationService configurationService;
 	
 	@Before

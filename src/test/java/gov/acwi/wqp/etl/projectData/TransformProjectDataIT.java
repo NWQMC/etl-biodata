@@ -22,11 +22,12 @@ public class TransformProjectDataIT extends BiodataBaseFlowIT {
     private Flow projectDataFlow;
 
     @Test
-    @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/empty.xml")
-    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/project/biodataProject.xml")
+    @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/projectData/empty.xml")
+    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataProject.xml")
+    @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/activity.xml")
     @ExpectedDatabase(
             connection=CONNECTION_WQP,
-            value="classpath:/testRestult/wqp/projectData/project_data_swap_biodata.xml",
+            value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void transformProjectDataStepTest() {
         try {
@@ -39,8 +40,9 @@ public class TransformProjectDataIT extends BiodataBaseFlowIT {
     }
 
     @Test
-    @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/empty.xml")
-    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/project/biodataProject.xml")
+    @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/projectData/empty.xml")
+    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataProject.xml")
+    @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/activity.xml")
     @ExpectedDatabase(
             value="classpath:/testResult/wqp/projectData/indexes/all.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
@@ -53,7 +55,7 @@ public class TransformProjectDataIT extends BiodataBaseFlowIT {
             table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
             query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'project_data_swap_biodata'")
     @ExpectedDatabase(
-            value="classpath:/testRestult/wqp/projectData/project_data_swap_biodata.xml",
+            value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void projectDataFlowTest() {
         Job projectDataFlowTest = jobBuilderFactory
