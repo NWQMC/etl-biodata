@@ -13,6 +13,7 @@ select
 	,sample.collection_start
 	,sample.time_datum
 	,project.project_label project_id
+	,project.project_name
 	,effort.comments activity_comment
 	,sample.reach_length_fished act_reach_length
 	,effort.pass

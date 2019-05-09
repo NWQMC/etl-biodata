@@ -54,6 +54,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		biodataActivity.setSampleDataSource(TEST_SAMPLE_DATA_SOURCE);
 		biodataActivity.setSampleCollectionStartTime(TEST_SAMPLE_COLLECTION_START_TIME);
 		biodataActivity.setProjectId(TEST_PROJECT_ID);
+		biodataActivity.setProjectName(TEST_PROJECT_NAME);
 		biodataActivity.setActivityComment(TEST_ACTIVITY_COMMENT);
 		biodataActivity.setActivityReachLength(TEST_ACTIVITY_REACH_LENGTH);
 		biodataActivity.setEffortPass(EFFORT_PASS_1_2_COMBINED);
@@ -90,6 +91,7 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		assertEquals(TEST_SAMPLE_COLLECTION_START_TIME_LOCAL_TIME, actual.getActivityStartTime());
 		assertEquals(TEST_SAMPLE_TIME_DATUM, actual.getActStartTimeZone());
 		assertEquals(TEST_PROJECT_ID, actual.getProjectId());
+		assertEquals(TEST_PROJECT_NAME, actual.getProjectName());
 		assertEquals(TEST_ACTIVITY_COMMENT, actual.getActivityComment());
 		assertEquals(TEST_ACTIVITY_REACH_LENGTH_STRING, actual.getActReachLength());
 		assertEquals(DEFAULT_REACH_LENGTH_UNIT, actual.getActReachLengthUnit());

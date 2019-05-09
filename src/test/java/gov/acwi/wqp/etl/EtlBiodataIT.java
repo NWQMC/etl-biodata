@@ -42,6 +42,12 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'activity_swap_biodata'")
+	@ExpectedDatabase(
+			connection=CONNECTION_INFORMATION_SCHEMA,
+			value="classpath:/testResult/wqp/projectData/create.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'project_data_swap_biodata'")
 
 	// <dataType>_swap_biodata tables
 	@ExpectedDatabase( 
@@ -52,6 +58,9 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@ExpectedDatabase(
 			value="classpath:/testResult/wqp/activity/activity.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 
 	// indexes
@@ -70,6 +79,11 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'activity_swap_biodata'")
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/projectData/indexes/all.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'project_data_swap_biodata'")
 
 	public void endToEndTest() {
 		try {

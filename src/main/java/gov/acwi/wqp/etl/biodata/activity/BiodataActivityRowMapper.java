@@ -18,6 +18,7 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 	private static final String ORGANIZATION_NAME = "organization_name";
 	private static final String ACTIVITY_ID = "activity_id";
 	private static final String PROJECT_ID = "project_id";
+	private static final String PROJECT_NAME = "project_name";
 	private static final String ACTIVITY_COMMENT = "activity_comment";
 	private static final String ACTIVITY_REACH_LENGTH = "act_reach_length";
 	private static final String EFFORT_PASS = "pass";
@@ -50,6 +51,7 @@ public class BiodataActivityRowMapper implements RowMapper<BiodataActivity> {
 		biodataActivity.setSampleCollectionStartTime(rs.getTimestamp(SAMPLE_COLLECTION_START_TIME).toLocalDateTime());
 		biodataActivity.setSampleTimeDatum(rs.getString(SAMPLE_TIME_DATUM));
 		biodataActivity.setProjectId(rs.getString(PROJECT_ID));
+		biodataActivity.setProjectName(rs.getString(PROJECT_NAME));
 		biodataActivity.setActivityComment(rs.getString(ACTIVITY_COMMENT));
 		biodataActivity.setActivityReachLength(rs.getInt(ACTIVITY_REACH_LENGTH));
 		biodataActivity.setEffortPass(rs.getString(EFFORT_PASS));
