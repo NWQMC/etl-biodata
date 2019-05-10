@@ -1,3 +1,5 @@
 artifactoryPath: "wqp"
 dockerImageName: "etl-biodata"
 gitlabPath: "wma/docker/wqp"
+gitRepoUrl: "https://github.com/abriggs-usgs/etl-biodata.git"
+gitRepoCredentialsId: "Jenkins-GitHub-Read-Write-Token"
