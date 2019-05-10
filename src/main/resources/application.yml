@@ -1,7 +1,4 @@
 spring:
-  profiles:
-    active: 
-    - it
   batch:
     job:
       enabled: false
