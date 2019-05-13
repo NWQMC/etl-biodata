@@ -1,7 +1,7 @@
 version: '3.6'
 
 services:
-  etl-nwis:
+  etl-biodata:
     image: etl-biodata
     build: .
     environment:
