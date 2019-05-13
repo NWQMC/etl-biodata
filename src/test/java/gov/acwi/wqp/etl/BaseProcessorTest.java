@@ -72,6 +72,7 @@ public abstract class BaseProcessorTest {
 	protected static final Integer TEST_ACTIVITY_ID = 268023;
 	protected static final String TEST_SAMPLE_DATA_SOURCE = "test sample data source";
 	protected static final String TEST_PROJECT_ID = "LERI BioTDB";
+	protected static final String TEST_PROJECT_NAME = "test project name";
 	protected static final String TEST_ACTIVITY_COMMENT = "Test comment, what a great activity!";
 	protected static final Integer TEST_ACTIVITY_REACH_LENGTH = 300;
 	protected static final String TEST_ACTIVITY_REACH_LENGTH_STRING = "300";
@@ -84,6 +85,10 @@ public abstract class BaseProcessorTest {
 	protected static final String TEST_SAMPLE_GEAR_USED = "Towed barge - sample";
 	protected static final Integer TEST_DW_SAMPLE_TYPE_ID_7 = 7;
 	protected static final String TEST_EFFORT_SUBREACH = "A-B";
+
+	protected static final Integer TEST_DW_PROJECT_ID = 28;
+	protected static final String TEST_PROJECT_ABSTRACT = "This is a test project abstract.  It is mapped to the projectData description.";
+
 
 	protected ConfigurationService configurationService;
 	

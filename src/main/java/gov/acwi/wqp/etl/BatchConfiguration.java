@@ -27,6 +27,11 @@ public class BatchConfiguration {
 	@Autowired
 	@Qualifier("activityFlow")
 	private Flow activityFlow;
+
+	@Autowired
+	@Qualifier("projectDataFlow")
+	private Flow projectDataFlow;
+
 //
 //	@Autowired
 //	@Qualifier("resultFlow")
@@ -45,11 +50,12 @@ public class BatchConfiguration {
 //	private Flow databaseFinalizeFlow;
 
 	@Bean
-	public Job wqxEtl() {
+	public Job biodataEtl() {
 		return jobBuilderFactory.get("WQP_BIODATA_ETL")
 				.start(orgDataFlow)
 				.next(monitoringLocationFlow)
 				.next(activityFlow)
+				.next(projectDataFlow)
 //				.next(resultFlow)
 //				.next(createSummariesFlow)
 //				.next(createCodesFlow)

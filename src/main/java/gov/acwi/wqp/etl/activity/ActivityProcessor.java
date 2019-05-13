@@ -83,6 +83,7 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 						bdActivity.getSampleTimeDatum()));
 
 		activity.setProjectId(bdActivity.getProjectId());
+		activity.setProjectName(bdActivity.getProjectName());
 		activity.setActivityComment(bdActivity.getActivityComment());
 		activity.setActReachLength(String.valueOf(bdActivity.getActivityReachLength()));
 

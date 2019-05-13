@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <project_data_swap_biodata
+        data_source_id="4"
+        project_id="28"
+        data_source="BIODATA"
+        organization="USGS-OH"
+        organization_name="USGS Ohio Water Science Center"
+        project_identifier="LERI BioTDB"
+        project_name="LERI NAWQA legacy BioTDB data"
+        description="Data for the USGS NAWQA Program Lake Erie-Lake Saint Clair Drainages (LERI) study unit obtained from the BioTDB database system. This project contains data collected using a variety of design objectives.">
+    </project_data_swap_biodata>
+    <project_data_swap_biodata
+        data_source_id="4"
+        project_id="29"
+        data_source="BIODATA"
+        organization="USGS-WI"
+        organization_name="Test USGS Wisconsin Water Science Center"
+        project_identifier="LINJ BioTDB"
+        project_name="LINJ NAWQA legacy BioTDB data"
+        description="Data for the USGS NAWQA Program Long Island-New Jersey Coastal Drainages (LINJ) study unit obtained from the BioTDB database system. This project contains data collected using a variety of design objectives.">
+    </project_data_swap_biodata>
+    <project_data_swap_biodata
+        data_source_id="4"
+        project_id="30"
+        data_source="BIODATA"
+        organization="USGS-MN"
+        organization_name="Test USGS Minnesota Water Science Center"
+        project_identifier="LIRB BioTDB"
+        project_name="LIRB NAWQA legacy BioTDB data"
+        description="Data for the USGS NAWQA Program Lower Illinois River Basin (LIRB) study unit obtained from the BioTDB database system. This project contains data collected using a variety of design objectives.">
+    </project_data_swap_biodata>
+</dataset>

@@ -18,6 +18,7 @@ public class BiodataActivity {
 	private String sampleDataSource;
 	private LocalDateTime sampleCollectionStartTime; 
 	private String projectId;
+	private String projectName;
 	private String activityComment;
 	private Integer activityReachLength;
 	private String effortPass;
@@ -132,6 +133,14 @@ public class BiodataActivity {
 
 	public void setProjectId(String projectId) {
 		this.projectId = projectId;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 	public String getActivityComment() {

@@ -29,6 +29,7 @@ insert into
 		,act_sam_collect_meth_desc
 		,sample_collect_equip_name
 		,act_sam_collect_equip_comments
+		,project_name
 	)
 	values (
 		:dataSourceId
@@ -60,5 +61,6 @@ insert into
 		,:actSamCollectMethDesc
 		,:sampleCollectEquipName
 		,:actSamCollectEquipComments
+		,:projectName
 	)
 
