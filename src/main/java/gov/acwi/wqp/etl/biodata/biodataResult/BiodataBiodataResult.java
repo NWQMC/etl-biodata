@@ -5,13 +5,18 @@ public class BiodataBiodataResult {
     private Integer resultId;
     private Integer dwEffortId;
     private String publishedTaxonName;
+    private Integer groupWeight;
     private Integer rawCount;
     private Integer weight;
+    private String resBioIndividualId;
+    private String unidentifiedSpeciesIdentifier;
     private Integer totalLength;
     private Integer standardLength;
     private Integer fieldSheetPage;
     private Integer fieldSheetLine;
     private String biodataTaxonName;
+    private String characteristic;
+    private Integer resultValue;
 
     public Integer getResultId() {
         return resultId;
@@ -37,6 +42,14 @@ public class BiodataBiodataResult {
         this.publishedTaxonName = publishedTaxonName;
     }
 
+    public Integer getGroupWeight() {
+        return groupWeight;
+    }
+
+    public void setGroupWeight(Integer groupWeight) {
+        this.groupWeight = groupWeight;
+    }
+
     public Integer getRawCount() {
         return rawCount;
     }
@@ -51,6 +64,22 @@ public class BiodataBiodataResult {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public String getResBioIndividualId() {
+        return resBioIndividualId;
+    }
+
+    public void setResBioIndividualId(String resBioIndividualId) {
+        this.resBioIndividualId = resBioIndividualId;
+    }
+
+    public String getUnidentifiedSpeciesIdentifier() {
+        return unidentifiedSpeciesIdentifier;
+    }
+
+    public void setUnidentifiedSpeciesIdentifier(String unidentifiedSpeciesIdentifier) {
+        this.unidentifiedSpeciesIdentifier = unidentifiedSpeciesIdentifier;
     }
 
     public Integer getTotalLength() {
@@ -91,5 +120,21 @@ public class BiodataBiodataResult {
 
     public void setBiodataTaxonName(String biodataTaxonName) {
         this.biodataTaxonName = biodataTaxonName;
+    }
+
+    public String getCharacteristic() {
+        return characteristic;
+    }
+
+    public void setCharacteristic(String characteristic) {
+        this.characteristic = characteristic;
+    }
+
+    public Integer getResultValue() {
+        return resultValue;
+    }
+
+    public void setResultValue(Integer resultValue) {
+        this.resultValue = resultValue;
     }
 }
