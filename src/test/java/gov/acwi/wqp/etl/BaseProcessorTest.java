@@ -89,6 +89,20 @@ public abstract class BaseProcessorTest {
 	protected static final Integer TEST_DW_PROJECT_ID = 28;
 	protected static final String TEST_PROJECT_ABSTRACT = "This is a test project abstract.  It is mapped to the projectData description.";
 
+	protected static final Integer TEST_RESULT_ID = 1;
+	protected static final Integer TEST_DW_EFFORT_ID = 268873;
+	protected static final String TEST_PUBLISHED_TAXON_NAME = "Catostomus commersonii";
+	protected static final Integer TEST_RAW_COUNT = 2;
+	protected static final Integer TEST_WEIGHT = 50;
+	protected static final Integer TEST_TOTAL_LENGTH = 250;
+	protected static final Integer TEST_STANDARD_LENGTH	= 175;
+	protected static final Integer TEST_FIELD_SHEET_PAGE = 3;
+	protected static final Integer TEST_FIELD_SHEET_LINE = 4;
+	protected static final String TEST_BIODATA_TAXON_NAME = "Campostoma anomalum";
+	protected static final String TEST_CHARACTERISTIC = "Length, Total (Fish)";
+	protected static final Integer TEST_RESULT_VALUE	= 250;
+
+
 
 	protected ConfigurationService configurationService;
 	
