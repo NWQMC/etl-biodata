@@ -91,44 +91,14 @@ select activity_swap_biodata.data_source_id,
        result.UnidentifiedSpeciesIdentifier,
        result.group_weight         res_group_summary_ct_wt,
        case
-           when result.group_weight is not null then 'g'
+            when result.group_weight is not null then 'g'
            else null
            end                     res_group_summary_ct_wt_unit,
-from activity_swap_biodata
-         join (
-    select a.*,
-           rownum result_id
-    from (select taxonomic_result.dw_effort_id,
-                 taxon_wide.published_taxon_name,
-                 case
-                     when taxonomic_result.raw_count > 1 and
-                          taxonomic_result.weight > 0
-                         then weight
-                     else null
-                     end    group_weight,
-                 taxonomic_result.raw_count,
-                 taxonomic_result.total_length,
-                 taxonomic_result.standard_length,
-                 taxonomic_result.weight,
-                 taxonomic_result.field_sheet_page ||
-                 nvl2(taxonomic_result.field_sheet_line,
-                      '-' || taxonomic_result.field_sheet_line,
-                      null) res_bio_individual_id,
-                 case
-                     when taxon_wide.biodata_taxon_name = taxon_wide.published_taxon_name
-                         then null
-                     else taxon_wide.biodata_taxon_name
-                     end    UnidentifiedSpeciesIdentifier
-          from biodata.taxonomic_result
-                   join biodata.taxon_wide
-                        on taxonomic_result.taxon_id = taxon_wide.bench_taxon_id
-          where taxonomic_result.biological_community = 'Fish'
-            and taxonomic_result.data_release_category = 'Public') unpivot (result_value for characteristic
-                                         in (raw_count as 'Count',
-                                             total_length as 'Length, Total (Fish)',
-                                             standard_length as 'Fish standard length',
-                                             weight as 'Weight')
-        ) a
-) result
-              on activity_swap_biodata.activity_id = result.dw_effort_id
-order by activity_swap_biodata.station_id;
+from
+    activity_swap_biodata
+        join
+            biodata.result result
+            on
+                activity_swap_biodata.activity_id = result.dw_effort_id
+order by
+    activity_swap_biodata.station_id;
