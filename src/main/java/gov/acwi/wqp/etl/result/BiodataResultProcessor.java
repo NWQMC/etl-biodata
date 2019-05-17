@@ -1,9 +1,11 @@
-package gov.acwi.wqp.etl.biodataResult;
+package gov.acwi.wqp.etl.result;
 
 import gov.acwi.wqp.etl.biodata.biodataResult.BiodataBiodataResult;
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BiodataResultProcessor implements ItemProcessor<BiodataBiodataResult, BiodataBiodataResult> {
 
     @Override

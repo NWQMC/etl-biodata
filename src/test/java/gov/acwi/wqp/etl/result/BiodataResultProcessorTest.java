@@ -1,4 +1,4 @@
-package gov.acwi.wqp.etl.biodataResult;
+package gov.acwi.wqp.etl.result;
 
 import gov.acwi.wqp.etl.BaseProcessorTest;
 import gov.acwi.wqp.etl.biodata.biodataResult.BiodataBiodataResult;
