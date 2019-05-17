@@ -1,5 +1,7 @@
 package gov.acwi.wqp.etl.biodata.result;
 
+import org.postgis.PGgeometry;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -35,6 +37,7 @@ public class BiodataResult {
     private String projectId;
     private String activityConductingOrg;
     private String activityComment;
+    private PGgeometry geom;
     private BigDecimal activityLatitude;
     private BigDecimal activityLongitude;
     private Integer activitySourceMapScale;
@@ -325,6 +328,14 @@ public class BiodataResult {
 
     public void setActivityComment(String activityComment) {
         this.activityComment = activityComment;
+    }
+
+    public PGgeometry getGeom() {
+        return geom;
+    }
+
+    public void setGeom(PGgeometry geom) {
+        this.geom = geom;
     }
 
     public BigDecimal getActivityLatitude() {

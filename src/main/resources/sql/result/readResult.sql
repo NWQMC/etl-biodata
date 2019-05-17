@@ -1,12 +1,9 @@
-select 
-    activity_swap_biodata.data_source_id,-- DNM
-    activity_swap_biodata.data_source,-- DNM
+select
     activity_swap_biodata.station_id,
     activity_swap_biodata.site_id,
     activity_swap_biodata.event_date,
     activity_swap_biodata.activity,
     result.characteristic       characteristic_name,
-    'Biological'                characteristic_type,-- DNM
     activity_swap_biodata.sample_media,
     activity_swap_biodata.organization,
     activity_swap_biodata.site_type,
@@ -32,6 +29,7 @@ select
     activity_swap_biodata.project_id,
     activity_swap_biodata.activity_conducting_org,
     activity_swap_biodata.activity_comment,
+    activity_swap_biodata.geom,
     activity_swap_biodata.activity_latitude,
     activity_swap_biodata.activity_longitude,
     activity_swap_biodata.activity_source_map_scale,
