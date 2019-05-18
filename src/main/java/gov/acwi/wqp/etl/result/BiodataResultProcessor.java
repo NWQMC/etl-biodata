@@ -13,7 +13,6 @@ public class BiodataResultProcessor implements ItemProcessor<BiodataBiodataResul
         BiodataBiodataResult outputBdBiodataResult = new BiodataBiodataResult();
 
 
-        outputBdBiodataResult.setResultId(inputBdBiodataResult.getResultId());
         outputBdBiodataResult.setDwEffortId(inputBdBiodataResult.getDwEffortId());
         outputBdBiodataResult.setPublishedTaxonName(inputBdBiodataResult.getPublishedTaxonName());
 

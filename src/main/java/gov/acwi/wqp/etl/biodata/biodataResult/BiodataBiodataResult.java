@@ -2,7 +2,6 @@ package gov.acwi.wqp.etl.biodata.biodataResult;
 
 public class BiodataBiodataResult {
 
-    private Integer resultId;
     private Integer dwEffortId;
     private String publishedTaxonName;
     private Integer groupWeight;
@@ -17,14 +16,6 @@ public class BiodataBiodataResult {
     private String biodataTaxonName;
     private String characteristic;
     private Integer resultValue;
-
-    public Integer getResultId() {
-        return resultId;
-    }
-
-    public void setResultId(Integer resultId) {
-        this.resultId = resultId;
-    }
 
     public Integer getDwEffortId() {
         return dwEffortId;

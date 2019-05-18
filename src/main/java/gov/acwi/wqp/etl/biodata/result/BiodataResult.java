@@ -38,8 +38,6 @@ public class BiodataResult {
     private String activityConductingOrg;
     private String activityComment;
     private PGgeometry geom;
-    private BigDecimal activityLatitude;
-    private BigDecimal activityLongitude;
     private Integer activitySourceMapScale;
     private String actHorizontalAccuracy;
     private String actHorizontalAccuracyUnit;
@@ -336,22 +334,6 @@ public class BiodataResult {
 
     public void setGeom(PGgeometry geom) {
         this.geom = geom;
-    }
-
-    public BigDecimal getActivityLatitude() {
-        return activityLatitude;
-    }
-
-    public void setActivityLatitude(BigDecimal activityLatitude) {
-        this.activityLatitude = activityLatitude;
-    }
-
-    public BigDecimal getActivityLongitude() {
-        return activityLongitude;
-    }
-
-    public void setActivityLongitude(BigDecimal activityLongitude) {
-        this.activityLongitude = activityLongitude;
     }
 
     public Integer getActivitySourceMapScale() {

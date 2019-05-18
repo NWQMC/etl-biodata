@@ -30,8 +30,6 @@ select
     activity_swap_biodata.activity_conducting_org,
     activity_swap_biodata.activity_comment,
     activity_swap_biodata.geom,
-    activity_swap_biodata.activity_latitude,
-    activity_swap_biodata.activity_longitude,
     activity_swap_biodata.activity_source_map_scale,
     activity_swap_biodata.act_horizontal_accuracy,
     activity_swap_biodata.act_horizontal_accuracy_unit,
@@ -76,12 +74,6 @@ select
     activity_swap_biodata.act_sam_transport_storage_desc,
     result.result_id,
     result.result_value         result_measure_value,
-    case result.characteristic
-        when 'Weight' then 'g'
-        when 'Fish standard length' then 'mm'
-        when 'Length, Total (Fish)' then 'mm'
-        else null
-        end                     result_unit,-- DNM
     'Final'                     result_value_status,-- DNM
     'Actual'                    result_value_type,-- DNM
     'Population Census'         biological_intent,-- DNM

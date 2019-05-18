@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class BiodataBiodataResultRowMapper implements RowMapper<BiodataBiodataResult> {
 
-    private static final String RESULT_ID = "result_id";
     private static final String DW_EFFORT_ID = "dw_effort_id";
     private static final String PUBLISHED_TAXON_NAME = "published_taxon_name";
     private static final String RAW_COUNT = "raw_count";
@@ -23,7 +22,6 @@ public class BiodataBiodataResultRowMapper implements RowMapper<BiodataBiodataRe
 
         BiodataBiodataResult biodataBiodataResult = new BiodataBiodataResult();
 
-        biodataBiodataResult.setResultId(rs.getInt(RESULT_ID));
         biodataBiodataResult.setDwEffortId(rs.getInt(DW_EFFORT_ID));
         biodataBiodataResult.setPublishedTaxonName(rs.getString(PUBLISHED_TAXON_NAME));
         biodataBiodataResult.setRawCount(rs.getInt(RAW_COUNT));

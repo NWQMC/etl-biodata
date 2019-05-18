@@ -16,7 +16,6 @@ public class BiodataResultProcessorTest extends BaseProcessorTest {
         inputBdBiodataResult = new BiodataBiodataResult();
         processor = new BiodataResultProcessor();
 
-        inputBdBiodataResult.setResultId(TEST_RESULT_ID);
         inputBdBiodataResult.setDwEffortId(TEST_DW_EFFORT_ID);
         inputBdBiodataResult.setPublishedTaxonName(TEST_PUBLISHED_TAXON_NAME);
         inputBdBiodataResult.setRawCount(TEST_RAW_COUNT);
@@ -34,7 +33,6 @@ public class BiodataResultProcessorTest extends BaseProcessorTest {
     public void testProcess() {
         BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
 
-        assertEquals(TEST_RESULT_ID, actual.getResultId());
         assertEquals(TEST_DW_EFFORT_ID, actual.getDwEffortId());
         assertEquals(TEST_PUBLISHED_TAXON_NAME, actual.getPublishedTaxonName());
         assertEquals(TEST_WEIGHT, actual.getGroupWeight());

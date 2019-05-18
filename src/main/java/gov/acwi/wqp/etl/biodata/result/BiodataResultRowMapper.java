@@ -123,8 +123,6 @@ public class BiodataResultRowMapper implements RowMapper<BiodataResult> {
         biodataResult.setProjectId(rs.getString(PROJECT_ID));
         biodataResult.setActivityConductingOrg(rs.getString(ACTIVITY_CONDUCTING_ORG));
         biodataResult.setActivityComment(rs.getString(ACTIVITY_COMMENT));
-        biodataResult.setActivityLatitude(rs.getBigDecimal(ACTIVITY_LATITUDE));
-        biodataResult.setActivityLongitude(rs.getBigDecimal(ACTIVITY_LONGITUDE));
         biodataResult.setActivitySourceMapScale(rs.getInt(ACTIVITY_SOURCE_MAP_SCALE));
         biodataResult.setActHorizontalAccuracy(rs.getString(ACT_HORIZONTAL_ACCURACY));
         biodataResult.setActHorizontalAccuracyUnit(rs.getString(ACT_HORIZONTAL_ACCURACY_UNIT));
