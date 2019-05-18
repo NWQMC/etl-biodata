@@ -35,7 +35,6 @@ public class ResultProcessor implements ItemProcessor<BiodataResult, Result> {
         r.setDataSourceId(configurationService.getEtlDataSourceId());
         r.setDataSource(configurationService.getEtlDataSource());
         r.setCharacteristicType(BIOLOGICAL);
-
         r.setStationId(br.getStationId());
         r.setSiteId(br.getSiteId());
         r.setEventDate(br.getEventDate().toLocalDate());

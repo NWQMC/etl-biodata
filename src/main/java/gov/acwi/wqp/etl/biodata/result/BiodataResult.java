@@ -2,7 +2,6 @@ package gov.acwi.wqp.etl.biodata.result;
 
 import org.postgis.PGgeometry;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class BiodataResult {
