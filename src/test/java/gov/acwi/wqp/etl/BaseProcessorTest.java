@@ -162,7 +162,7 @@ public abstract class BaseProcessorTest {
 	protected static final String TEST_UNIDENTIFIED_SPECIES_IDENTIFIER = "unidentified species identifier";
 	protected static final Integer TEST_RES_GROUP_SUMMARY_CT_WT = 50;
 	protected static final String TEST_RES_GROUP_SUMMARY_CT_WT_STRING = TEST_RES_GROUP_SUMMARY_CT_WT.toString();
-	protected static final String TEST_RES_GROUP_SUMMARY_CT_WT_UNIT = "res group summary ct wt unit";
+	protected static final String TEST_RES_GROUP_SUMMARY_CT_WT_UNIT = "g";
 
 	protected ConfigurationService configurationService;
 	

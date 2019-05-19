@@ -3,7 +3,7 @@ select
     activity_swap_biodata.site_id,
     activity_swap_biodata.event_date,
     activity_swap_biodata.activity,
-    result.characteristic       characteristic_name,
+    result.characteristic characteristic_name,
     activity_swap_biodata.sample_media,
     activity_swap_biodata.organization,
     activity_swap_biodata.site_type,
@@ -73,18 +73,11 @@ select
     activity_swap_biodata.thermal_preservative_name,
     activity_swap_biodata.act_sam_transport_storage_desc,
     result.result_id,
-    result.result_value         result_measure_value,
-    'Final'                     result_value_status,-- DNM
-    'Actual'                    result_value_type,-- DNM
-    'Population Census'         biological_intent,-- DNM
+    result.result_value result_measure_value,
     result.res_bio_individual_id,
     result.published_taxon_name sample_tissue_taxonomic_name,
     result.unidentified_species_identifier,
-    result.group_weight         res_group_summary_ct_wt,
-    case
-         when result.group_weight is not null then 'g'
-        else null
-        end                     res_group_summary_ct_wt_unit,
+    result.group_weight res_group_summary_ct_wt
 from
     activity_swap_biodata
         join

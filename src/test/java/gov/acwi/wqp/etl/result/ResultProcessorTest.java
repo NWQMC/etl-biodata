@@ -190,6 +190,15 @@ public class ResultProcessorTest extends BaseProcessorTest {
     }
 
     @Test
+    public void testNullValues() {
+        br.setResGroupSummaryCtWt(null);
+        br.setResultMeasureValue(null);
+        Result actual = p.process(br);
+        assertNull(actual.getResGroupSummaryCtWtUnit());
+        assertNull(actual.getResultMeasureValue());
+    }
+
+    @Test
     public void testResultUnit() {
         br.setCharacteristicName(WEIGHT);
         Result actual = p.process(br);

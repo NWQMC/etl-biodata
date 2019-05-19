@@ -109,7 +109,12 @@ public class ResultProcessor implements ItemProcessor<BiodataResult, Result> {
         r.setThermalPreservativeName(br.getThermalPreservativeName());
         r.setActSamTransportStorageDesc(br.getActSamTransportStorageDesc());
         r.setResultId(br.getResultId());
-        r.setResultMeasureValue(br.getResultMeasureValue().toString());
+
+        r.setResultMeasureValue(
+                getResultMeasureValue(
+                        br.getResultMeasureValue()
+                )
+        );
 
         r.setResultUnit(
                 getResultUnit(
@@ -123,10 +128,26 @@ public class ResultProcessor implements ItemProcessor<BiodataResult, Result> {
         r.setResBioIndividualId(br.getResBioIndividualId());
         r.setSampleTissueTaxonomicName(br.getSampleTissueTaxonomicName());
         r.setUnidentifiedSpeciesIdentifier(br.getUnidentifiedSpeciesIdentifier());
-        r.setResGroupSummaryCtWt(br.getResGroupSummaryCtWt().toString());
-        r.setResGroupSummaryCtWtUnit(br.getResGroupSummaryCtWtUnit());
+
+        r.setResGroupSummaryCtWt(
+                getResGroupSummaryCtWt(
+                        br.getResGroupSummaryCtWt()
+                )
+        );
+
+        r.setResGroupSummaryCtWtUnit(
+                getResGroupSummaryCtWtUnit(
+                        br.getResGroupSummaryCtWt()
+                )
+        );
 
         return r;
+    }
+
+    private String getResultMeasureValue(Integer resultMeasureValue) {
+        return null == resultMeasureValue
+                ? null
+                : resultMeasureValue.toString();
     }
 
     private String getResultUnit(String characteristicName) {
@@ -139,5 +160,17 @@ public class ResultProcessor implements ItemProcessor<BiodataResult, Result> {
             default:
                 return null;
         }
+    }
+
+    private String getResGroupSummaryCtWt(Integer resGroupSummaryCtWt) {
+        return null == resGroupSummaryCtWt
+                ? null
+                : resGroupSummaryCtWt.toString();
+    }
+
+    private String getResGroupSummaryCtWtUnit(Integer resGroupSummaryCtWt) {
+        return null != resGroupSummaryCtWt
+                ? G_UNIT
+                : null;
     }
 }

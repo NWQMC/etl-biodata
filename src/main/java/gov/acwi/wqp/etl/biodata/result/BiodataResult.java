@@ -85,7 +85,6 @@ public class BiodataResult {
     private String sampleTissueTaxonomicName;
     private String unidentifiedSpeciesIdentifier;
     private Integer resGroupSummaryCtWt;
-    private String resGroupSummaryCtWtUnit;
 
     public Integer getStationId() {
         return stationId;
@@ -717,13 +716,5 @@ public class BiodataResult {
 
     public void setResGroupSummaryCtWt(Integer resGroupSummaryCtWt) {
         this.resGroupSummaryCtWt = resGroupSummaryCtWt;
-    }
-
-    public String getResGroupSummaryCtWtUnit() {
-        return resGroupSummaryCtWtUnit;
-    }
-
-    public void setResGroupSummaryCtWtUnit(String resGroupSummaryCtWtUnit) {
-        this.resGroupSummaryCtWtUnit = resGroupSummaryCtWtUnit;
     }
 }
