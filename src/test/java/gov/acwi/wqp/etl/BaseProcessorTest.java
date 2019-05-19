@@ -156,10 +156,12 @@ public abstract class BaseProcessorTest {
 	protected static final String TEST_ACT_SAM_TRANSPORT_STORAGE_DESC = "act sam transport storage desc";
 	protected static final Integer TEST_RESULT_ID = 34;
 	protected static final Integer TEST_RESULT_MEASURE_VALUE = 60;
+	protected static final String TEST_RESULT_MEASURE_VALUE_STRING = TEST_RESULT_MEASURE_VALUE.toString();
 	protected static final String TEST_RES_BIO_INDIVIDUAL_ID = "res bio individual id";
 	protected static final String TEST_SAMPLE_TISSUE_TAXONOMIC_NAME = "sample tissue taxonomic name";
 	protected static final String TEST_UNIDENTIFIED_SPECIES_IDENTIFIER = "unidentified species identifier";
 	protected static final Integer TEST_RES_GROUP_SUMMARY_CT_WT = 50;
+	protected static final String TEST_RES_GROUP_SUMMARY_CT_WT_STRING = TEST_RES_GROUP_SUMMARY_CT_WT.toString();
 	protected static final String TEST_RES_GROUP_SUMMARY_CT_WT_UNIT = "res group summary ct wt unit";
 
 	protected ConfigurationService configurationService;

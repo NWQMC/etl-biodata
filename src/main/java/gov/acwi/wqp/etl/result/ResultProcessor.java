@@ -95,6 +95,7 @@ public class ResultProcessor implements ItemProcessor<BiodataResult, Result> {
         r.setSampleCollectMethodCtx(br.getSampleCollectMethodCtx());
         r.setSampleCollectMethodName(br.getSampleCollectMethodName());
         r.setActSamCollectMethQualType(br.getActSamCollectMethQualType());
+        r.setActSamCollectMethDesc(br.getActSamCollectMethDesc());
         r.setSampleCollectEquipName(br.getSampleCollectEquipName());
         r.setActSamCollectEquipComments(br.getActSamCollectEquipComments());
         r.setActSamPrepMethId(br.getActSamPrepMethId());
