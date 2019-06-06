@@ -18,4 +18,6 @@ from
             taxonomic_result.taxon_id = taxon_wide.bench_taxon_id
 where
     taxonomic_result.biological_community = 'Fish'
-    and taxonomic_result.data_release_category = 'Public';
+    and taxonomic_result.data_release_category = 'Public'
+order by dw_effort_id;
+;

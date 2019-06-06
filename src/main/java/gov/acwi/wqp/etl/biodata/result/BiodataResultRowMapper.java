@@ -171,7 +171,6 @@ public class BiodataResultRowMapper implements RowMapper<BiodataResult> {
         biodataResult.setSampleTissueTaxonomicName(rs.getString(SAMPLE_TISSUE_TAXONOMIC_NAME));
         biodataResult.setUnidentifiedSpeciesIdentifier(rs.getString(UNIDENTIFIED_SPECIES_IDENTIFIER));
         biodataResult.setResGroupSummaryCtWt(rs.getInt(RES_GROUP_SUMMARY_CT_WT));
-        biodataResult.setResGroupSummaryCtWtUnit(rs.getString(RES_GROUP_SUMMARY_CT_WT_UNIT));
 
         return biodataResult;
     }

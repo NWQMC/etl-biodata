@@ -98,7 +98,6 @@ public class ResultProcessorTest extends BaseProcessorTest {
         br.setSampleTissueTaxonomicName(TEST_SAMPLE_TISSUE_TAXONOMIC_NAME);
         br.setUnidentifiedSpeciesIdentifier(TEST_UNIDENTIFIED_SPECIES_IDENTIFIER);
         br.setResGroupSummaryCtWt(TEST_RES_GROUP_SUMMARY_CT_WT);
-        br.setResGroupSummaryCtWtUnit(TEST_RES_GROUP_SUMMARY_CT_WT_UNIT);
     }
 
     @Test

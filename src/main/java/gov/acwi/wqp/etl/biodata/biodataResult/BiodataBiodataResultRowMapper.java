@@ -16,6 +16,8 @@ public class BiodataBiodataResultRowMapper implements RowMapper<BiodataBiodataRe
     private static final String FIELD_SHEET_PAGE = "field_sheet_page";
     private static final String FIELD_SHEET_LINE = "field_sheet_line";
     private static final String BIODATA_TAXON_NAME = "biodata_taxon_name";
+    private static final String CHARACTERISTIC = "characteristic";
+    private static final String RESULT_VALUE = "result_value";
 
     @Override
     public BiodataBiodataResult mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -31,6 +33,8 @@ public class BiodataBiodataResultRowMapper implements RowMapper<BiodataBiodataRe
         biodataBiodataResult.setFieldSheetPage(rs.getInt(FIELD_SHEET_PAGE));
         biodataBiodataResult.setFieldSheetLine(rs.getInt(FIELD_SHEET_LINE));
         biodataBiodataResult.setBiodataTaxonName(rs.getString(BIODATA_TAXON_NAME));
+        biodataBiodataResult.setCharacteristic(rs.getString(CHARACTERISTIC));
+        biodataBiodataResult.setResultValue(rs.getInt(RESULT_VALUE));
 
         return biodataBiodataResult;
     }
