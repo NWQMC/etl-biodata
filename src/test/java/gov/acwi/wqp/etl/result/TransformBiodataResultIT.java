@@ -11,6 +11,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -21,15 +22,21 @@ public class TransformBiodataResultIT extends BiodataBaseFlowIT {
     @Qualifier("setupBiodataResultTableFlow")
     private Flow biodataResultFlow;
 
+    @Autowired
+    @Qualifier("jdbcTemplateBiodata")
+    private JdbcTemplate jdbcTemplateBiodata;
+
     @Test
+    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testResult/biodata/result/empty.xml")
     @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonomicResult.xml")
     @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonWide.xml")
     @ExpectedDatabase(
             connection=CONNECTION_BIODATA,
-            value="classpath:/testData/biodata/result/result.xml",
+            value="classpath:/testResult/biodata/result/result.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void transformBiodataResultStepTest() {
         try {
+            jdbcTemplateBiodata.execute("truncate table biodata.result restart identity");
             JobExecution jobExecution = jobLauncherTestUtils.launchStep("transformBiodataResultStep", testJobParameters);
             assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
         } catch (Exception e) {
@@ -39,11 +46,12 @@ public class TransformBiodataResultIT extends BiodataBaseFlowIT {
     }
 
     @Test
+    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testResult/biodata/result/empty.xml")
     @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonomicResult.xml")
     @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonWide.xml")
     @ExpectedDatabase(
             connection=CONNECTION_BIODATA,
-            value="classpath:/testData/biodata/result/result.xml",
+            value="classpath:/testResult/biodata/result/result.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void biodataResultFlowTest() {
         Job biodataResultFlowTest = jobBuilderFactory

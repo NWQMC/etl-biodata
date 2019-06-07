@@ -22,7 +22,9 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/station/bioShareSampleType.xml")
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataEffort.xml")
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataProject.xml")
-	
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonomicResult.xml")
+	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonWide.xml")
+
 	// base tables
 	@ExpectedDatabase( 
 			connection=CONNECTION_INFORMATION_SCHEMA, 
@@ -48,6 +50,12 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'project_data_swap_biodata'")
+	@ExpectedDatabase(
+			connection=CONNECTION_INFORMATION_SCHEMA,
+			value="classpath:/testResult/wqp/result/create.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'result_swap_biodata'")
 
 	// <dataType>_swap_biodata tables
 	@ExpectedDatabase( 
@@ -62,6 +70,9 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 	@ExpectedDatabase(
 			value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/result/result_swap_biodata.xml",
+			assertionMode= DatabaseAssertionMode.NON_STRICT_UNORDERED)
 
 	// indexes
 	@ExpectedDatabase( 
@@ -84,6 +95,11 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'project_data_swap_biodata'")
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/result/indexes/all.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'result_swap_biodata'")
 
 	public void endToEndTest() {
 		try {

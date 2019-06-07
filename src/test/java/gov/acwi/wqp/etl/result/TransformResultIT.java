@@ -24,7 +24,7 @@ public class TransformResultIT extends BiodataBaseFlowIT {
     @Test
     @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/result/empty.xml")
     @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/activity.xml")
-    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/result.xml")
+    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testResult/biodata/result/result.xml")
     @ExpectedDatabase(
             connection=CONNECTION_WQP,
             value="classpath:/testResult/wqp/result/result_swap_biodata.xml",
@@ -43,7 +43,7 @@ public class TransformResultIT extends BiodataBaseFlowIT {
     @Test
     @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/result/empty.xml")
     @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/activity.xml")
-    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/result.xml")
+    @DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testResult/biodata/result/result.xml")
     @ExpectedDatabase(
             value="classpath:/testResult/wqp/result/indexes/all.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
