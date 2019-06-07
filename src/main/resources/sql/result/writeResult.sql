@@ -175,7 +175,7 @@ values(
     ,:biologicalIntent
     ,:resBioIndividualId
     ,:sampleTissueTaxonomicName
-    ,:unidentifiedspeciesidentifier
+    ,:unidentifiedSpeciesIdentifier
     ,:resGroupSummaryCtWt
     ,:resGroupSummaryCtWtUnit
 )
