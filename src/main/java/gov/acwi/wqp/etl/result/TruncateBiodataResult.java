@@ -17,9 +17,6 @@ public class TruncateBiodataResult implements Tasklet {
 
     private final JdbcTemplate jdbcTemplate;
 
-//    @Value("${BIODATA_SCHEMA_NAME}")
-//    private String biodataSchemaName;
-
     @Autowired
     public TruncateBiodataResult(@Qualifier("jdbcTemplateBiodata") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
