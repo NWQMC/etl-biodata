@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.biodata.result;
 
+import org.postgis.PGgeometry;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -37,8 +38,7 @@ public class BiodataResultRowMapper implements RowMapper<BiodataResult> {
     private static final String PROJECT_ID = "project_id";
     private static final String ACTIVITY_CONDUCTING_ORG = "activity_conducting_org";
     private static final String ACTIVITY_COMMENT = "activity_comment";
-    private static final String ACTIVITY_LATITUDE = "activity_latitude";
-    private static final String ACTIVITY_LONGITUDE = "activity_longitude";
+    private static final String GEOM = "geom";
     private static final String ACTIVITY_SOURCE_MAP_SCALE = "activity_source_map_scale";
     private static final String ACT_HORIZONTAL_ACCURACY = "act_horizontal_accuracy";
     private static final String ACT_HORIZONTAL_ACCURACY_UNIT = "act_horizontal_accuracy_unit";
@@ -87,7 +87,6 @@ public class BiodataResultRowMapper implements RowMapper<BiodataResult> {
     private static final String SAMPLE_TISSUE_TAXONOMIC_NAME = "sample_tissue_taxonomic_name";
     private static final String UNIDENTIFIED_SPECIES_IDENTIFIER = "unidentified_species_identifier";
     private static final String RES_GROUP_SUMMARY_CT_WT = "res_group_summary_ct_wt";
-    private static final String RES_GROUP_SUMMARY_CT_WT_UNIT = "res_group_summary_ct_wt_unit";
 
     @Override
     public BiodataResult mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -103,6 +102,7 @@ public class BiodataResultRowMapper implements RowMapper<BiodataResult> {
         biodataResult.setSiteType(rs.getString(SITE_TYPE));
         biodataResult.setHuc(rs.getString(HUC));
         biodataResult.setGovernmentalUnitCode(rs.getString(GOVERNMENTAL_UNIT_CODE));
+        biodataResult.setGeom( (PGgeometry) rs.getObject(GEOM));
         biodataResult.setOrganizationName(rs.getString(ORGANIZATION_NAME));
         biodataResult.setActivityId(rs.getInt(ACTIVITY_ID));
         biodataResult.setActivityTypeCode(rs.getString(ACTIVITY_TYPE_CODE));

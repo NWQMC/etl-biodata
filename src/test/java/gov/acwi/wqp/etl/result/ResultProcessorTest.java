@@ -4,8 +4,15 @@ package gov.acwi.wqp.etl.result;
 import gov.acwi.wqp.etl.BaseProcessorTest;
 import gov.acwi.wqp.etl.biodata.result.BiodataResult;
 
-import static gov.acwi.wqp.etl.result.ResultProcessor.*;
-import static org.junit.Assert.*;
+import static gov.acwi.wqp.etl.result.ResultProcessor.G_UNIT;
+import static gov.acwi.wqp.etl.result.ResultProcessor.WEIGHT;
+import static gov.acwi.wqp.etl.result.ResultProcessor.FISH_STANDARD_LENGTH;
+import static gov.acwi.wqp.etl.result.ResultProcessor.MM_UNIT;
+import static gov.acwi.wqp.etl.result.ResultProcessor.LENGTH_TOTAL_FISH;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+
 import org.junit.Before;
 import org.junit.Test;
 
