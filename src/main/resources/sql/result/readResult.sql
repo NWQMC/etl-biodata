@@ -81,7 +81,7 @@ select
 from
     activity_swap_biodata
         join
-            biodata.result result
+            biodata.result
             on
                 activity_swap_biodata.activity_id = result.dw_effort_id
 order by

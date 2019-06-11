@@ -41,7 +41,7 @@ public class TransformBiodataResult {
     @Qualifier(Application.DATASOURCE_BIODATA_QUALIFIER)
     private DataSource dataSourceBiodata;
 
-    // Truncate the biodata.result table before populating so we can restart the unique row number identity
+    // Truncate and reset the biodata.result table
     @Autowired
     @Qualifier("truncateBiodataResult")
     private Tasklet truncateBiodataResult;
@@ -94,7 +94,7 @@ public class TransformBiodataResult {
     @Bean
     public Flow setupBiodataResultTableFlow() throws IOException {
         return new FlowBuilder<SimpleFlow>("setupBiodataResultTableFlow")
-                // This is to truncate the biodata.result table prior to populating it
+                // This is to truncate and reset the biodata.result table
                 .start(truncateBiodataResultStep())
                 // This is to set up the biodata.result table
                 .next(transformBiodataResultStep())
