@@ -144,23 +144,27 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	}
 
 	private String getSampleCollectEquipName(String gear) {
-		switch (gear.toLowerCase()) {
-			case BACKPACK :
-				return BACKPACK_ELECTROSHOCK;
-			case TOWED_BARGE :
-				return ELECTROSHOCK_OTHER;
-			case BOAT :
-				return BOAT_MOUNTED_ELECTROSHOCK;
-			case MINNOW_SEINE :
-				return MINNOW_SEINE_NET;
-			case BAG_SEINE :
-				return SEINE_NET;
-			case BEACH_SEINE :
-				return BEACH_SEINE_NET;
-			case SNORKELING :
-				return VISUAL_SIGHTING;
-			default:
-				return null;
+		if (gear == null) {
+			return null;
+		} else {
+			switch (gear.toLowerCase()) {
+				case BACKPACK:
+					return BACKPACK_ELECTROSHOCK;
+				case TOWED_BARGE:
+					return ELECTROSHOCK_OTHER;
+				case BOAT:
+					return BOAT_MOUNTED_ELECTROSHOCK;
+				case MINNOW_SEINE:
+					return MINNOW_SEINE_NET;
+				case BAG_SEINE:
+					return SEINE_NET;
+				case BEACH_SEINE:
+					return BEACH_SEINE_NET;
+				case SNORKELING:
+					return VISUAL_SIGHTING;
+				default:
+					return null;
+			}
 		}
 	}
 
