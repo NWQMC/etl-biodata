@@ -26,18 +26,18 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/result/taxonWide.xml")
 
 	// base tables
+	@ExpectedDatabase(
+			connection=CONNECTION_INFORMATION_SCHEMA,
+			value="classpath:/testResult/wqp/monitoringLocation/create.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'station_swap_biodata'")
 	@ExpectedDatabase( 
 			connection=CONNECTION_INFORMATION_SCHEMA, 
 			value="classpath:/testResult/wqp/orgData/create.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'org_data_swap_biodata'")
-	@ExpectedDatabase( 
-			connection=CONNECTION_INFORMATION_SCHEMA, 
-			value="classpath:/testResult/wqp/monitoringLocation/create.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
-			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
-			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'station_swap_biodata'")
 	@ExpectedDatabase(
 			connection=CONNECTION_INFORMATION_SCHEMA,
 			value="classpath:/testResult/wqp/activity/create.xml",
@@ -58,11 +58,11 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'result_swap_biodata'")
 
 	// <dataType>_swap_biodata tables
-	@ExpectedDatabase( 
-			value="classpath:/testResult/wqp/orgData/orgData.xml", 
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/station/station_swap_biodata.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@ExpectedDatabase( 
-			value="classpath:/testResult/wqp/station/station_swap_biodata.xml", 
+			value="classpath:/testResult/wqp/orgData/orgData.xml", 
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@ExpectedDatabase(
 			value="classpath:/testResult/wqp/activity/activity.xml",
@@ -75,16 +75,16 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			assertionMode= DatabaseAssertionMode.NON_STRICT_UNORDERED)
 
 	// indexes
+	@ExpectedDatabase(
+			value="classpath:/testResult/wqp/monitoringLocation/indexes/all.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
+			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'station_swap_biodata'")
 	@ExpectedDatabase( 
 			value="classpath:/testResult/wqp/orgData/indexes/all.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'org_data_swap_biodata'")
-	@ExpectedDatabase( 
-			value="classpath:/testResult/wqp/monitoringLocation/indexes/all.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
-			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
-			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'station_swap_biodata'")
 	@ExpectedDatabase(
 			value="classpath:/testResult/wqp/activity/indexes/all.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
