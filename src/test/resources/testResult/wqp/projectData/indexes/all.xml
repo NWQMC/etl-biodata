@@ -7,7 +7,7 @@
     </pg_indexes>
     <pg_indexes
             tablename="project_data_swap_biodata"
-            indexname="project_data_swap_biodata_identifier"
-            indexdef="CREATE INDEX project_data_swap_biodata_identifier ON wqp.project_data_swap_biodata USING btree (project_identifier) WITH (fillfactor='100')">
+            indexname="project_data_swap_biodata_project_identifier"
+            indexdef="CREATE INDEX project_data_swap_biodata_project_identifier ON wqp.project_data_swap_biodata USING btree (project_identifier) WITH (fillfactor='100')">
     </pg_indexes>
 </dataset>

@@ -7,4 +7,6 @@
 nb-configuration.xml
 .idea/
 wqp-etl-biodata.iml
+/application-it.yml
+
 

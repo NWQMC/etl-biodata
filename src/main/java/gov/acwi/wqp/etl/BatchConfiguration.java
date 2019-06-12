@@ -32,10 +32,9 @@ public class BatchConfiguration {
 	@Qualifier("projectDataFlow")
 	private Flow projectDataFlow;
 
-//
-//	@Autowired
-//	@Qualifier("resultFlow")
-//	private Flow resultFlow;
+	@Autowired
+	@Qualifier("resultFlow")
+	private Flow resultFlow;
 
 //	@Autowired
 //	@Qualifier("createSummariesFlow")
@@ -56,7 +55,7 @@ public class BatchConfiguration {
 				.next(monitoringLocationFlow)
 				.next(activityFlow)
 				.next(projectDataFlow)
-//				.next(resultFlow)
+				.next(resultFlow)
 //				.next(createSummariesFlow)
 //				.next(createCodesFlow)
 //				.next(databaseFinalizeFlow)
