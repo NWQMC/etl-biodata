@@ -1,7 +1,7 @@
 package gov.acwi.wqp.etl.result;
 
 import gov.acwi.wqp.etl.BaseProcessorTest;
-import gov.acwi.wqp.etl.biodata.biodataResult.BiodataBiodataResult;
+import gov.acwi.wqp.etl.biodata.result.BiodataEffortTaxonomy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,30 +11,30 @@ import static org.junit.Assert.assertNull;
 
 public class BiodataResultProcessorTest extends BaseProcessorTest {
 
-    private BiodataBiodataResult inputBdBiodataResult;
+    private BiodataEffortTaxonomy biodataEffortTaxonomy;
     private BiodataResultProcessor processor;
 
     @Before
     public void setupTestClass() {
-        inputBdBiodataResult = new BiodataBiodataResult();
+        biodataEffortTaxonomy = new BiodataEffortTaxonomy();
         processor = new BiodataResultProcessor();
 
-        inputBdBiodataResult.setDwEffortId(TEST_DW_EFFORT_ID);
-        inputBdBiodataResult.setPublishedTaxonName(TEST_PUBLISHED_TAXON_NAME);
-        inputBdBiodataResult.setRawCount(TEST_RAW_COUNT);
-        inputBdBiodataResult.setWeight(TEST_WEIGHT);
-        inputBdBiodataResult.setTotalLength(TEST_TOTAL_LENGTH);
-        inputBdBiodataResult.setStandardLength(TEST_STANDARD_LENGTH);
-        inputBdBiodataResult.setFieldSheetPage(TEST_FIELD_SHEET_PAGE);
-        inputBdBiodataResult.setFieldSheetLine(TEST_FIELD_SHEET_LINE);
-        inputBdBiodataResult.setBiodataTaxonName(TEST_BIODATA_TAXON_NAME);
-        inputBdBiodataResult.setCharacteristic(TEST_CHARACTERISTIC);
-        inputBdBiodataResult.setResultValue(TEST_RESULT_VALUE);
+        biodataEffortTaxonomy.setDwEffortId(TEST_DW_EFFORT_ID);
+        biodataEffortTaxonomy.setPublishedTaxonName(TEST_PUBLISHED_TAXON_NAME);
+        biodataEffortTaxonomy.setRawCount(TEST_RAW_COUNT);
+        biodataEffortTaxonomy.setWeight(TEST_WEIGHT);
+        biodataEffortTaxonomy.setTotalLength(TEST_TOTAL_LENGTH);
+        biodataEffortTaxonomy.setStandardLength(TEST_STANDARD_LENGTH);
+        biodataEffortTaxonomy.setFieldSheetPage(TEST_FIELD_SHEET_PAGE);
+        biodataEffortTaxonomy.setFieldSheetLine(TEST_FIELD_SHEET_LINE);
+        biodataEffortTaxonomy.setBiodataTaxonName(TEST_BIODATA_TAXON_NAME);
+        biodataEffortTaxonomy.setCharacteristic(TEST_CHARACTERISTIC);
+        biodataEffortTaxonomy.setResultValue(TEST_RESULT_VALUE);
     }
 
     @Test
     public void testProcess() {
-        BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
+        BiodataEffortTaxonomy actual = processor.process(biodataEffortTaxonomy);
 
         assertEquals(TEST_DW_EFFORT_ID, actual.getDwEffortId());
         assertEquals(TEST_PUBLISHED_TAXON_NAME, actual.getPublishedTaxonName());
@@ -54,45 +54,45 @@ public class BiodataResultProcessorTest extends BaseProcessorTest {
 
     @Test
     public void testProcessWithNullValues() {
-        inputBdBiodataResult.setFieldSheetLine(null);
+        biodataEffortTaxonomy.setFieldSheetLine(null);
 
-        BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
+        BiodataEffortTaxonomy actual = processor.process(biodataEffortTaxonomy);
 
         assertNull(actual.getResBioIndividualId());
     }
 
     @Test
     public void testGroupWeightWithZeroRawCount() {
-        inputBdBiodataResult.setRawCount(0);
+        biodataEffortTaxonomy.setRawCount(0);
 
-        BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
+        BiodataEffortTaxonomy actual = processor.process(biodataEffortTaxonomy);
 
         assertNull(actual.getGroupWeight());
     }
 
     @Test
     public void testGroupWeightWithZeroWeight() {
-        inputBdBiodataResult.setWeight(0);
+        biodataEffortTaxonomy.setWeight(0);
 
-        BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
+        BiodataEffortTaxonomy actual = processor.process(biodataEffortTaxonomy);
 
         assertNull(actual.getGroupWeight());
     }
 
     @Test
     public void testUnidentifiedSpeciesIdentifierWithSameBiodataTaxonNames() {
-        inputBdBiodataResult.setPublishedTaxonName(TEST_BIODATA_TAXON_NAME);
+        biodataEffortTaxonomy.setPublishedTaxonName(TEST_BIODATA_TAXON_NAME);
 
-        BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
+        BiodataEffortTaxonomy actual = processor.process(biodataEffortTaxonomy);
 
         assertNull(actual.getUnidentifiedSpeciesIdentifier());
     }
 
     @Test
     public void testUnidentifiedSpeciesIdentifierWithSamePublishedTaxonNames() {
-        inputBdBiodataResult.setBiodataTaxonName(TEST_PUBLISHED_TAXON_NAME);
+        biodataEffortTaxonomy.setBiodataTaxonName(TEST_PUBLISHED_TAXON_NAME);
 
-        BiodataBiodataResult actual = processor.process(inputBdBiodataResult);
+        BiodataEffortTaxonomy actual = processor.process(biodataEffortTaxonomy);
 
         assertNull(actual.getUnidentifiedSpeciesIdentifier());
     }

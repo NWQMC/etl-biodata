@@ -1,55 +1,55 @@
 package gov.acwi.wqp.etl.result;
 
-import gov.acwi.wqp.etl.biodata.biodataResult.BiodataBiodataResult;
+import gov.acwi.wqp.etl.biodata.result.BiodataEffortTaxonomy;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BiodataResultProcessor implements ItemProcessor<BiodataBiodataResult, BiodataBiodataResult> {
+public class BiodataResultProcessor implements ItemProcessor<BiodataEffortTaxonomy, BiodataEffortTaxonomy> {
 
     @Override
-    public BiodataBiodataResult process(BiodataBiodataResult inputBdBiodataResult) {
-        BiodataBiodataResult outputBdBiodataResult = new BiodataBiodataResult();
+    public BiodataEffortTaxonomy process(BiodataEffortTaxonomy biodataEffortTaxonomy) {
+        BiodataEffortTaxonomy biodataResult = new BiodataEffortTaxonomy();
 
 
-        outputBdBiodataResult.setDwEffortId(inputBdBiodataResult.getDwEffortId());
-        outputBdBiodataResult.setPublishedTaxonName(inputBdBiodataResult.getPublishedTaxonName());
+        biodataResult.setDwEffortId(biodataEffortTaxonomy.getDwEffortId());
+        biodataResult.setPublishedTaxonName(biodataEffortTaxonomy.getPublishedTaxonName());
 
-        outputBdBiodataResult.setGroupWeight(
+        biodataResult.setGroupWeight(
                 getGroupWeight(
-                        inputBdBiodataResult.getRawCount()
-                        ,inputBdBiodataResult.getWeight()
+                        biodataEffortTaxonomy.getRawCount()
+                        ,biodataEffortTaxonomy.getWeight()
                 )
         );
 
-        outputBdBiodataResult.setRawCount(inputBdBiodataResult.getRawCount());
-        outputBdBiodataResult.setWeight(inputBdBiodataResult.getWeight());
+        biodataResult.setRawCount(biodataEffortTaxonomy.getRawCount());
+        biodataResult.setWeight(biodataEffortTaxonomy.getWeight());
 
-        outputBdBiodataResult.setResBioIndividualId(
+        biodataResult.setResBioIndividualId(
                 getResBioIndividualId(
-                        inputBdBiodataResult.getFieldSheetPage()
-                        ,inputBdBiodataResult.getFieldSheetLine()
+                        biodataEffortTaxonomy.getFieldSheetPage()
+                        ,biodataEffortTaxonomy.getFieldSheetLine()
                 )
         );
 
-        outputBdBiodataResult.setUnidentifiedSpeciesIdentifier(
+        biodataResult.setUnidentifiedSpeciesIdentifier(
                 getUnidentifiedSpeciesIdentifier(
-                        inputBdBiodataResult.getBiodataTaxonName()
-                        ,inputBdBiodataResult.getPublishedTaxonName()
+                        biodataEffortTaxonomy.getBiodataTaxonName()
+                        ,biodataEffortTaxonomy.getPublishedTaxonName()
                 )
         );
 
-        outputBdBiodataResult.setTotalLength(inputBdBiodataResult.getTotalLength());
-        outputBdBiodataResult.setStandardLength(inputBdBiodataResult.getStandardLength());
-        outputBdBiodataResult.setFieldSheetPage(inputBdBiodataResult.getFieldSheetPage());
-        outputBdBiodataResult.setFieldSheetLine(inputBdBiodataResult.getFieldSheetLine());
-        outputBdBiodataResult.setBiodataTaxonName(inputBdBiodataResult.getBiodataTaxonName());
-        outputBdBiodataResult.setCharacteristic(inputBdBiodataResult.getCharacteristic());
-        outputBdBiodataResult.setResultValue(inputBdBiodataResult.getResultValue());
+        biodataResult.setTotalLength(biodataEffortTaxonomy.getTotalLength());
+        biodataResult.setStandardLength(biodataEffortTaxonomy.getStandardLength());
+        biodataResult.setFieldSheetPage(biodataEffortTaxonomy.getFieldSheetPage());
+        biodataResult.setFieldSheetLine(biodataEffortTaxonomy.getFieldSheetLine());
+        biodataResult.setBiodataTaxonName(biodataEffortTaxonomy.getBiodataTaxonName());
+        biodataResult.setCharacteristic(biodataEffortTaxonomy.getCharacteristic());
+        biodataResult.setResultValue(biodataEffortTaxonomy.getResultValue());
 
 
-        return outputBdBiodataResult;
+        return biodataResult;
     }
 
     private Integer getGroupWeight(Integer rawCount, Integer weight) {

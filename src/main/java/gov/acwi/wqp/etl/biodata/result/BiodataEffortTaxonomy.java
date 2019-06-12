@@ -1,6 +1,6 @@
-package gov.acwi.wqp.etl.biodata.biodataResult;
+package gov.acwi.wqp.etl.biodata.result;
 
-public class BiodataBiodataResult {
+public class BiodataEffortTaxonomy {
 
     private Integer dwEffortId;
     private String publishedTaxonName;

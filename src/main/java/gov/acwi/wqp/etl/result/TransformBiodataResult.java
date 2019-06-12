@@ -1,8 +1,8 @@
 package gov.acwi.wqp.etl.result;
 
 import gov.acwi.wqp.etl.Application;
-import gov.acwi.wqp.etl.biodata.biodataResult.BiodataBiodataResult;
-import gov.acwi.wqp.etl.biodata.biodataResult.BiodataBiodataResultRowMapper;
+import gov.acwi.wqp.etl.biodata.result.BiodataEffortTaxonomy;
+import gov.acwi.wqp.etl.biodata.result.BiodataEffortTaxonomyRowMapper;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.builder.FlowBuilder;
@@ -32,7 +32,7 @@ public class TransformBiodataResult {
 
     @Autowired
     @Qualifier("biodataResultProcessor")
-    private ItemProcessor<BiodataBiodataResult, BiodataBiodataResult> processor;
+    private ItemProcessor<BiodataEffortTaxonomy, BiodataEffortTaxonomy> processor;
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
@@ -53,21 +53,21 @@ public class TransformBiodataResult {
     private Resource writeBiodataResultResource;
 
     @Bean
-    public JdbcCursorItemReader<BiodataBiodataResult> biodataResultReader() throws IOException {
-        return new JdbcCursorItemReaderBuilder<BiodataBiodataResult>()
+    public JdbcCursorItemReader<BiodataEffortTaxonomy> biodataResultReader() throws IOException {
+        return new JdbcCursorItemReaderBuilder<BiodataEffortTaxonomy>()
                 .dataSource(dataSourceBiodata)
                 .name("biodataResultReader")
                 .sql(new String(FileCopyUtils.copyToByteArray(readBiodataResultResource.getInputStream())))
-                .rowMapper(new BiodataBiodataResultRowMapper())
+                .rowMapper(new BiodataEffortTaxonomyRowMapper())
                 .build();
     }
 
     @Bean
-    public ItemWriter<BiodataBiodataResult> biodataResultWriter() throws IOException {
-        JdbcBatchItemWriter<BiodataBiodataResult> itemWriter = new JdbcBatchItemWriter<>();
+    public ItemWriter<BiodataEffortTaxonomy> biodataResultWriter() throws IOException {
+        JdbcBatchItemWriter<BiodataEffortTaxonomy> itemWriter = new JdbcBatchItemWriter<>();
         itemWriter.setDataSource(dataSourceBiodata);
         itemWriter.setSql(new String(FileCopyUtils.copyToByteArray(writeBiodataResultResource.getInputStream())));
-        ItemSqlParameterSourceProvider<BiodataBiodataResult> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
+        ItemSqlParameterSourceProvider<BiodataEffortTaxonomy> paramProvider = new BeanPropertyItemSqlParameterSourceProvider<>();
         itemWriter.setItemSqlParameterSourceProvider(paramProvider);
         return itemWriter;
     }
@@ -76,7 +76,7 @@ public class TransformBiodataResult {
     public Step transformBiodataResultStep() throws IOException {
         return stepBuilderFactory
                 .get("transformBiodataResultStep")
-                .<BiodataBiodataResult, BiodataBiodataResult>chunk(1000)
+                .<BiodataEffortTaxonomy, BiodataEffortTaxonomy>chunk(1000)
                 .reader(biodataResultReader())
                 .processor(processor)
                 .writer(biodataResultWriter())
