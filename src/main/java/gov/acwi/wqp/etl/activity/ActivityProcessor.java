@@ -169,16 +169,20 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	}
 
 	private String getActivitySampleCollectEquipmentComments(String gear, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
-		StringBuilder equipmentComments = new StringBuilder(gear);
-		if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {
-			if (null != effortSubreach) {
+		if (gear == null) {
+			return null;
+		} else {
+			StringBuilder equipmentComments = new StringBuilder(gear);
+			if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {
+				if (null != effortSubreach) {
+					equipmentComments.append("+");
+					equipmentComments.append(effortSubreach);
+				}
+			} else if (null != effortPass) {
 				equipmentComments.append("+");
-				equipmentComments.append(effortSubreach);
+				equipmentComments.append(effortPass);
 			}
-		} else if (null != effortPass) {
-			equipmentComments.append("+");
-			equipmentComments.append(effortPass);
+			return equipmentComments.toString();
 		}
-		return equipmentComments.toString();
 	}
 }
