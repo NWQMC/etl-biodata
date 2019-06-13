@@ -181,4 +181,21 @@ public class MonitoringLocationProcessorTest extends BaseProcessorTest {
 		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
 		assertNull(actual.getDrainAreaUnit());
 	}
+
+	@Test
+	public void testUseBiodataDrainAreaValueIfNwisDrainAreaVaIsNull() {
+		biodataMonitoringLocation.setDrainAreaVa(null);
+
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
+		assertEquals(TEST_DECIMAL_DRAIN_AREA_VALUE, actual.getDrainAreaValue());
+	}
+
+	@Test
+	public void testNullDrainAreaVaIfBothNwisAndBiodataDrainAreaValuesAreNull() {
+		biodataMonitoringLocation.setDrainAreaVa(null);
+		biodataMonitoringLocation.setBiodataDrainAreaVa(null);
+
+		MonitoringLocation actual = processor.process(biodataMonitoringLocation);
+		assertNull(actual.getDrainAreaValue());
+	}
 }
