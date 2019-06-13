@@ -144,37 +144,45 @@ public class ActivityProcessor implements ItemProcessor<BiodataActivity, Activit
 	}
 
 	private String getSampleCollectEquipName(String gear) {
-		switch (gear.toLowerCase()) {
-			case BACKPACK :
-				return BACKPACK_ELECTROSHOCK;
-			case TOWED_BARGE :
-				return ELECTROSHOCK_OTHER;
-			case BOAT :
-				return BOAT_MOUNTED_ELECTROSHOCK;
-			case MINNOW_SEINE :
-				return MINNOW_SEINE_NET;
-			case BAG_SEINE :
-				return SEINE_NET;
-			case BEACH_SEINE :
-				return BEACH_SEINE_NET;
-			case SNORKELING :
-				return VISUAL_SIGHTING;
-			default:
-				return null;
+		if (gear == null) {
+			return null;
+		} else {
+			switch (gear.toLowerCase()) {
+				case BACKPACK:
+					return BACKPACK_ELECTROSHOCK;
+				case TOWED_BARGE:
+					return ELECTROSHOCK_OTHER;
+				case BOAT:
+					return BOAT_MOUNTED_ELECTROSHOCK;
+				case MINNOW_SEINE:
+					return MINNOW_SEINE_NET;
+				case BAG_SEINE:
+					return SEINE_NET;
+				case BEACH_SEINE:
+					return BEACH_SEINE_NET;
+				case SNORKELING:
+					return VISUAL_SIGHTING;
+				default:
+					return null;
+			}
 		}
 	}
 
 	private String getActivitySampleCollectEquipmentComments(String gear, Integer dwSampleTypeId, String effortSubreach, String effortPass) {
-		StringBuilder equipmentComments = new StringBuilder(gear);
-		if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {
-			if (null != effortSubreach) {
+		if (gear == null) {
+			return null;
+		} else {
+			StringBuilder equipmentComments = new StringBuilder(gear);
+			if (DEFAULT_DW_SAMPLE_TYPE_ID_16.equals(dwSampleTypeId)) {
+				if (null != effortSubreach) {
+					equipmentComments.append("+");
+					equipmentComments.append(effortSubreach);
+				}
+			} else if (null != effortPass) {
 				equipmentComments.append("+");
-				equipmentComments.append(effortSubreach);
+				equipmentComments.append(effortPass);
 			}
-		} else if (null != effortPass) {
-			equipmentComments.append("+");
-			equipmentComments.append(effortPass);
+			return equipmentComments.toString();
 		}
-		return equipmentComments.toString();
 	}
 }

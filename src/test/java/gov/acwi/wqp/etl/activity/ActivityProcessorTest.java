@@ -159,6 +159,11 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		biodataActivity.setEffortGear(SNORKELING);
 		Activity actual6 = processor.process(biodataActivity);
 		assertEquals(VISUAL_SIGHTING, actual6.getSampleCollectEquipName());
+
+		biodataActivity.setSampleGearUsed(null);
+		biodataActivity.setEffortGear(null);
+		Activity actual7 = processor.process(biodataActivity);
+		assertNull(actual7.getSampleCollectEquipName());
 	}
 	
 	@Test
@@ -174,6 +179,11 @@ public class ActivityProcessorTest extends BaseProcessorTest {
 		biodataActivity.setEffortSubreach(null);
 		Activity actual3 = processor.process(biodataActivity);
 		assertEquals(TOWED_BARGE, actual3.getActSamCollectEquipComments());
+
+		biodataActivity.setSampleGearUsed(null);
+		biodataActivity.setEffortGear(null);
+		Activity actual4 = processor.process(biodataActivity);
+		assertNull(actual4.getActSamCollectEquipComments());
 	}
 	
 }

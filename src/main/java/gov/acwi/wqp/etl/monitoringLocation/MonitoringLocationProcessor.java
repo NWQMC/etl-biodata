@@ -8,6 +8,8 @@ import gov.acwi.wqp.etl.biodata.monitoringLocation.BiodataMonitoringLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitoringLocation, MonitoringLocation>{
 	
@@ -43,7 +45,12 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 		monitoringLocation.setStationName(biodataML.getStationNm());
 		monitoringLocation.setVerticalAccuracyUnit(biodataML.getVerticalAccuracyUnit());
 		monitoringLocation.setVerticalAccuracyValue(biodataML.getVerticalAccuracyValue());
-		monitoringLocation.setDrainAreaValue(biodataML.getDrainAreaVa());
+
+		monitoringLocation.setDrainAreaValue(
+				getDrainAreaVa(
+						biodataML.getDrainAreaVa(),
+						biodataML.getBiodataDrainAreaVa()));
+
 		monitoringLocation.setGeom(biodataML.getGeoPoint());
 		monitoringLocation.setElevationMethod(biodataML.getElevationMethod());
 		monitoringLocation.setMapScale(biodataML.getMapScale());
@@ -96,7 +103,17 @@ public class MonitoringLocationProcessor implements ItemProcessor<BiodataMonitor
 
 		return monitoringLocation;
 	}
-	
+
+	private BigDecimal getDrainAreaVa(BigDecimal drainAreaVa, String biodataDrainAreaVa) {
+		BigDecimal drainAreaVaML = drainAreaVa;
+		if (drainAreaVaML == null) {
+			drainAreaVaML = biodataDrainAreaVa == null
+					? null
+					: new BigDecimal(biodataDrainAreaVa);
+		}
+		return drainAreaVaML;
+	}
+
 	private String getSiteId(String nwisSiteId, String agencyCd, String siteNo) {
 		return nwisSiteId == null
 				? String.join("-", agencyCd, siteNo)
