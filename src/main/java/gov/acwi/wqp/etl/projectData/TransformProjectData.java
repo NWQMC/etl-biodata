@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.projectData;
 
+import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.EtlConstantUtils;
 import gov.acwi.wqp.etl.biodata.projectData.BiodataProjectData;
 import gov.acwi.wqp.etl.biodata.projectData.BiodataProjectDataRowMapper;
@@ -41,7 +42,7 @@ public class TransformProjectData {
     private DataSource dataSourceWqp;
 
     @Autowired
-    @Qualifier("dataSourceBiodata")
+    @Qualifier(Application.DATASOURCE_BIODATA_QUALIFIER)
     private DataSource dataSourceBiodata;
 
     @Autowired

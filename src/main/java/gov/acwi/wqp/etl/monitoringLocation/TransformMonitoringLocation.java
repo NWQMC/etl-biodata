@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.monitoringLocation;
 
+import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.EtlConstantUtils;
 import javax.sql.DataSource;
 
@@ -42,7 +43,7 @@ public class TransformMonitoringLocation {
 	private DataSource dataSourceWqp;
 
 	@Autowired
-	@Qualifier("dataSourceBiodata")
+	@Qualifier(Application.DATASOURCE_BIODATA_QUALIFIER)
 	private DataSource dataSourceBiodata;
 
 	@Autowired
