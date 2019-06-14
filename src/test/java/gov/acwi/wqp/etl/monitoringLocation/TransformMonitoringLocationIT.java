@@ -71,7 +71,7 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 			value="classpath:/testResult/wqp/station/station_swap_biodata.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@ExpectedDatabase(
-			value="classpath:/testResult/analyze/monitoringLocation.xml",
+			value="classpath:/testResult/biodata/analyze/monitoringLocation.xml",
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
 			table=EXPECTED_DATABASE_TABLE_CHECK_ANALYZE,
 			query=EXPECTED_DATABASE_QUERY_ANALYZE)

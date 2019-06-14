@@ -48,8 +48,8 @@ public class TransformActivity {
 	private Flow setupActivitySwapTableFlow;
 
 	@Autowired
-	@Qualifier(EtlConstantUtils.BUILD_ACTIVITY_INDEXES_FLOW)
-	private Flow buildActivityIndexesFlow;
+	@Qualifier(EtlConstantUtils.AFTER_LOAD_ACTIVITY_FLOW)
+	private Flow afterLoadActivityFlow;
 	
 	@Value("classpath:sql/activity/readBiodataActivity.sql")
 	private Resource readActivityResource;
@@ -93,7 +93,7 @@ public class TransformActivity {
 		return new FlowBuilder<SimpleFlow>("activityFlow")
 				.start(setupActivitySwapTableFlow)
 				.next(transformActivityStep())
-				.next(buildActivityIndexesFlow)
+				.next(afterLoadActivityFlow)
 				.build();
 	}	
 }
