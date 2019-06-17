@@ -26,7 +26,11 @@ public class TransformActivityIT  extends BiodataBaseFlowIT {
 	@Autowired
 	@Qualifier("activityFlow")
 	private Flow activityFlow;
-	
+
+    private Job setupFlowTestJob() {
+        return jobBuilderFactory.get("activityFlowTest").start(activityFlow).build().build();
+    }
+
 	@Test
 	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/activity/empty.xml")
 	@DatabaseSetup( connection=CONNECTION_BIODATA, value="classpath:/testData/biodata/activity/biodataEffort.xml")
@@ -89,12 +93,8 @@ public class TransformActivityIT  extends BiodataBaseFlowIT {
 			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX_PK + TABLE_NAME)
 	public void activityFlowTest() {
-		Job activityFlowTest = jobBuilderFactory
-				.get("activityFlowTest")
-				.start(activityFlow)
-				.build()
-				.build();
-		jobLauncherTestUtils.setJob(activityFlowTest);
+		jobLauncherTestUtils.setJob(setupFlowTestJob());
+		jdbcTemplate.execute("select add_monitoring_location_primary_key('biodata', 'wqp', 'station')");
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchJob(testJobParameters);
 			assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
