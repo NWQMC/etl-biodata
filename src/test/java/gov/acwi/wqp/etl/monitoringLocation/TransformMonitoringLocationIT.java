@@ -29,6 +29,10 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 	@Autowired
 	@Qualifier("monitoringLocationFlow")
 	private Flow monitoringLocationFlow;
+
+	private Job setupFlowTestJob() {
+		return jobBuilderFactory.get("monitoringLocationFlowTest").start(monitoringLocationFlow).build().build();
+	}
 	
 	@Test
 	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/station/empty.xml")
@@ -91,12 +95,7 @@ public class TransformMonitoringLocationIT extends BiodataBaseFlowIT {
 			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX_PK + TABLE_NAME)
 	public void monitoringLocationFlowTest() {
-		Job monitoringLocationFlowTest = jobBuilderFactory
-				.get("monitoringLocationFlowTest")
-				.start(monitoringLocationFlow)
-				.build()
-				.build();
-		jobLauncherTestUtils.setJob(monitoringLocationFlowTest);
+		jobLauncherTestUtils.setJob(setupFlowTestJob());
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchJob(testJobParameters);
 			assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());

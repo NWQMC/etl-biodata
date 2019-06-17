@@ -22,6 +22,10 @@ public class TransformOrgDataIT extends BiodataBaseFlowIT {
 	@Autowired
 	@Qualifier("orgDataFlow")
 	private Flow orgDataFlow;
+
+	private Job setupFlowTestJob() {
+		return jobBuilderFactory.get("orgDataFlowTest").start(orgDataFlow).build().build();
+	}
 	
 	@Test
 	@DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/orgData/empty.xml")
@@ -68,12 +72,7 @@ public class TransformOrgDataIT extends BiodataBaseFlowIT {
 			table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX_PK + TABLE_NAME)
 	public void orgDataFlowTest() {
-		Job orgDataFlowTest = jobBuilderFactory
-				.get("orgDataFlowTest")
-				.start(orgDataFlow)
-				.build()
-				.build();
-		jobLauncherTestUtils.setJob(orgDataFlowTest);
+		jobLauncherTestUtils.setJob(setupFlowTestJob());
 		try {
 			JobExecution jobExecution = jobLauncherTestUtils.launchJob(testJobParameters);
 			assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
