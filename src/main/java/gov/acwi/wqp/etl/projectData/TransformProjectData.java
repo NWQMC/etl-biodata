@@ -50,8 +50,8 @@ public class TransformProjectData {
     private Flow setupProjectDataSwapTableFlow;
 
     @Autowired
-    @Qualifier(EtlConstantUtils.BUILD_PROJECT_DATA_INDEXES_FLOW)
-    private Flow buildProjectDataIndexesFlow;
+    @Qualifier(EtlConstantUtils.AFTER_LOAD_PROJECT_DATA_FLOW)
+    private Flow afterLoadProjectDataFlow;
 
     @Value("classpath:sql/projectData/readBiodataProjectData.sql")
     private Resource sqlResourceReader;
@@ -95,7 +95,7 @@ public class TransformProjectData {
         return new FlowBuilder<SimpleFlow>("projectDataFlow")
                 .start(setupProjectDataSwapTableFlow)
                 .next(transformProjectDataStep())
-                .next(buildProjectDataIndexesFlow)
+                .next(afterLoadProjectDataFlow)
                 .build();
     }
 }
