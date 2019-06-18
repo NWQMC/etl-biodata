@@ -17,9 +17,20 @@ import static org.junit.Assert.fail;
 
 public class TransformProjectDataIT extends BiodataBaseFlowIT {
 
+    public static final String TABLE_NAME = "'project_data_swap_biodata'";
+    public static final String EXPECTED_DATABASE_QUERY_ANALYZE = BASE_EXPECTED_DATABASE_QUERY_ANALYZE + TABLE_NAME;
+    public static final String EXPECTED_DATABASE_QUERY_PRIMARY_KEY = BASE_EXPECTED_DATABASE_QUERY_PRIMARY_KEY
+            + EQUALS_QUERY + TABLE_NAME;
+    public static final String EXPECTED_DATABASE_QUERY_FOREIGN_KEY = BASE_EXPECTED_DATABASE_QUERY_FOREIGN_KEY
+            + EQUALS_QUERY + TABLE_NAME;
+
     @Autowired
     @Qualifier("projectDataFlow")
     private Flow projectDataFlow;
+
+    private Job setupFlowTestJob() {
+        return jobBuilderFactory.get("projectDataFlowTest").start(projectDataFlow).build().build();
+    }
 
     @Test
     @DatabaseSetup( connection=CONNECTION_WQP, value="classpath:/testResult/wqp/projectData/empty.xml")
@@ -47,23 +58,38 @@ public class TransformProjectDataIT extends BiodataBaseFlowIT {
             value="classpath:/testResult/wqp/projectData/indexes/all.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
             table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
-            query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + "'project_data_swap_biodata'")
+            query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX + TABLE_NAME)
     @ExpectedDatabase(
             connection=CONNECTION_INFORMATION_SCHEMA,
             value="classpath:/testResult/wqp/projectData/create.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
             table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
-            query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'project_data_swap_biodata'")
+            query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + TABLE_NAME)
     @ExpectedDatabase(
             value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml",
             assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+    @ExpectedDatabase(
+            value="classpath:/testResult/biodata/analyze/projectData.xml",
+            assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+            table=EXPECTED_DATABASE_TABLE_CHECK_ANALYZE,
+            query=EXPECTED_DATABASE_QUERY_ANALYZE)
+    @ExpectedDatabase(
+            value="classpath:/testResult/biodata/projectData/primaryKey.xml",
+            assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+            table=EXPECTED_DATABASE_TABLE_CHECK_PRIMARY_KEY,
+            query=EXPECTED_DATABASE_QUERY_PRIMARY_KEY)
+    @ExpectedDatabase(
+            value="classpath:/testResult/biodata/projectData/foreignKey.xml",
+            assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+            table=EXPECTED_DATABASE_TABLE_CHECK_FOREIGN_KEY,
+            query=EXPECTED_DATABASE_QUERY_FOREIGN_KEY)
+    @ExpectedDatabase(
+            value="classpath:/testResult/biodata/projectData/indexes/pk.xml",
+            assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED,
+            table=EXPECTED_DATABASE_TABLE_CHECK_INDEX,
+            query=BASE_EXPECTED_DATABASE_QUERY_CHECK_INDEX_PK + TABLE_NAME)
     public void projectDataFlowTest() {
-        Job projectDataFlowTest = jobBuilderFactory
-                .get("projectDataFlowTest")
-                .start(projectDataFlow)
-                .build()
-                .build();
-        jobLauncherTestUtils.setJob(projectDataFlowTest);
+        jobLauncherTestUtils.setJob(setupFlowTestJob());
         try {
             JobExecution jobExecution = jobLauncherTestUtils.launchJob(testJobParameters);
             assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());

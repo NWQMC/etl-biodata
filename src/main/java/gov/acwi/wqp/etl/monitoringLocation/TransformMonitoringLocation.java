@@ -1,5 +1,6 @@
 package gov.acwi.wqp.etl.monitoringLocation;
 
+import gov.acwi.wqp.etl.Application;
 import gov.acwi.wqp.etl.EtlConstantUtils;
 import javax.sql.DataSource;
 
@@ -42,7 +43,7 @@ public class TransformMonitoringLocation {
 	private DataSource dataSourceWqp;
 
 	@Autowired
-	@Qualifier("dataSourceBiodata")
+	@Qualifier(Application.DATASOURCE_BIODATA_QUALIFIER)
 	private DataSource dataSourceBiodata;
 
 	@Autowired
@@ -50,8 +51,8 @@ public class TransformMonitoringLocation {
 	private Flow setupMonitoringLocationSwapTableFlow;
 
 	@Autowired
-	@Qualifier(EtlConstantUtils.BUILD_MONITORING_LOCATION_INDEXES_FLOW)
-	private Flow buildMonitoringLocationIndexesFlow;
+	@Qualifier(EtlConstantUtils.AFTER_LOAD_MONITORING_LOCATION_FLOW)
+	private Flow afterLoadMonitoringLocationFlow;
 	
 	@Value("classpath:sql/monitoringLocation/readBiodataMonitoringLocation.sql")
 	private Resource sqlResourceReader;
@@ -95,7 +96,7 @@ public class TransformMonitoringLocation {
 		return new FlowBuilder<SimpleFlow>("monitoringLocationFlow")
 				.start(setupMonitoringLocationSwapTableFlow)
 				.next(transformMonitoringLocationStep())
-				.next(buildMonitoringLocationIndexesFlow)
+				.next(afterLoadMonitoringLocationFlow)
 				.build();
 	}
 }

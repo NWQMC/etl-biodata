@@ -57,22 +57,12 @@ public class EtlBiodataIT extends BiodataBaseFlowIT {
 			table=EXPECTED_DATABASE_TABLE_CHECK_TABLE,
 			query=BASE_EXPECTED_DATABASE_QUERY_CHECK_TABLE + "'result_swap_biodata'")
 
-	// <dataType>_swap_biodata tables
-	@ExpectedDatabase(
-			value="classpath:/testResult/wqp/station/station_swap_biodata.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
-	@ExpectedDatabase( 
-			value="classpath:/testResult/wqp/orgData/orgData.xml", 
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
-	@ExpectedDatabase(
-			value="classpath:/testResult/wqp/activity/activity.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
-	@ExpectedDatabase(
-			value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml",
-			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
-	@ExpectedDatabase(
-			value="classpath:/testResult/wqp/result/result_swap_biodata.xml",
-			assertionMode= DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	// Biodata base data
+	@ExpectedDatabase(value="classpath:/testResult/wqp/station/station_swap_biodata.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@ExpectedDatabase(value="classpath:/testResult/wqp/orgData/orgData.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@ExpectedDatabase(value="classpath:/testResult/wqp/activity/activity.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@ExpectedDatabase(value="classpath:/testResult/wqp/projectData/project_data_swap_biodata.xml", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	@ExpectedDatabase(value="classpath:/testResult/wqp/result/result_swap_biodata.xml", assertionMode= DatabaseAssertionMode.NON_STRICT_UNORDERED)
 
 	// indexes
 	@ExpectedDatabase(
